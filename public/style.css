@@ -694,7 +694,7 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   .trx-table {
     font-size: 0.98em;
     min-width: 530px; /* agar mudah discroll di HP */
-  },
+  }
   .product-table thead,
   .trx-table thead,
   .product-table td,
@@ -779,4 +779,11 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
     font-size: 1em;
     padding: 10px 0;
   }
+}
+
+/* New style to limit dropdown height for trx-product */
+#trx-product {
+  max-height: 200px; /* Approx height to show about 10 items */
+  overflow-y: auto;
+  display: block;
 }
