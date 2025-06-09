@@ -66,14 +66,28 @@
     "id": 10,
     "name": "Minyak Kita 2 L",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 33500,
     "stock": 0
   },
   {
     "id": 11,
     "name": "Minyak Kita 1 L",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 16500,
+    "stock": 0
+  },
+  {
+    "id": 12,
+    "name": "Aqua Besar",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0
+  },
+  {
+    "id": 13,
+    "name": "Aqua Kecil",
+    "buy_price": 0,
+    "sell_price": 3000,
     "stock": 0
   }
 ]

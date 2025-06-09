@@ -305,6 +305,8 @@ function renderProductTable() {
             <input type="checkbox" id="pagination-toggle" ${productPaginationEnabled ? 'checked' : ''} onchange="toggleProductPagination(this.checked)">
             Enable Pagination
         </label>
+        <input type="file" id="import-excel-file" accept=".xlsx,.xls" style="margin-left: 8px;">
+        <button class="btn-small" style="margin-left: 4px;" onclick="importProductsFromExcel()">Import Excel</button>
         <div class="product-action-toolbar">
             <button class="btn-export" onclick="exportProductsExcel()">Export Excel</button>
             <button class="btn-small del" style="margin-left:8px;" onclick="deleteAllProducts()">&#128465; Hapus Semua</button>
@@ -414,7 +416,7 @@ async function saveProduct() {
     try {
         const res = await fetch('/api/products');
         const products = await res.json();
-const nameExists = products.some(p => p.name.toLowerCase() === name.toLowerCase() && String(p.id) !== String(editingProductId));
+        const nameExists = products.some(p => p.name.toLowerCase() === name.toLowerCase() && String(p.id) !== String(editingProductId));
         if (nameExists) {
             document.getElementById('addprod-msg').innerText = 'Nama produk sudah ada!';
             return;
@@ -466,6 +468,59 @@ const nameExists = products.some(p => p.name.toLowerCase() === name.toLowerCase(
             }
         });
     }
+}
+
+async function importProductsFromExcel() {
+    const fileInput = document.getElementById('import-excel-file');
+    if (!fileInput.files || fileInput.files.length === 0) {
+        alert('Pilih file Excel terlebih dahulu.');
+        return;
+    }
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[firstSheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+
+        // Validate and map data to product format
+        const productsToImport = jsonData.map(row => ({
+            name: row['Nama Produk'] || row['name'] || '',
+            buy_price: parseInt(row['Harga Beli'] || row['buy_price'] || 0),
+            sell_price: parseInt(row['Harga Jual'] || row['sell_price'] || 0),
+            stock: parseInt(row['Stok'] || row['stock'] || 0)
+        })).filter(p => p.name.trim() !== '');
+
+        if (productsToImport.length === 0) {
+            alert('File Excel tidak berisi data produk yang valid.');
+            return;
+        }
+
+        // Send products to backend API to add/update
+        try {
+            for (const product of productsToImport) {
+                await fetch('/api/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+            }
+            alert('Import produk berhasil.');
+            fileInput.value = '';
+            loadProducts();
+        } catch (error) {
+            alert('Gagal mengimpor produk: ' + error.message);
+        }
+    };
+
+    reader.onerror = function() {
+        alert('Gagal membaca file.');
+    };
+
+    reader.readAsArrayBuffer(file);
 }
 
 function editProduct(id, name, buy_price, sell_price, stock) {
