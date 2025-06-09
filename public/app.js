@@ -306,7 +306,7 @@ function renderProductTable() {
             Enable Pagination
         </label>
         <input type="file" id="import-excel-file" accept=".xlsx,.xls" style="margin-left: 8px;">
-        <button class="btn-small" style="margin-left: 4px;" onclick="importProductsFromExcel()">Import Excel</button>
+        <button class="btn-small" style="margin-left: 4px;" title="Buat Excel dengan Header 'NAMA PRODUK, HARGA BELI, HARGA JUAL, STOK'" onclick="importProductsFromExcel()">Import Excel</button>
         <div class="product-action-toolbar">
             <button class="btn-export" onclick="exportProductsExcel()">Export Excel</button>
             <button class="btn-small del" style="margin-left:8px;" onclick="deleteAllProducts()">&#128465; Hapus Semua</button>
