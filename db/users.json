@@ -10,5 +10,11 @@
     "username": "kasir",
     "password": "$2b$10$Ylyw3vB5HWexH/q2vaJPJORYBI6XEx6iPebW34vRTl/0gqFxIHFGC",
     "role": "kasir"
+  },
+  {
+    "id": 3,
+    "username": "ratih",
+    "password": "$2b$10$RP9ih8zTR.4Q4GVQjWieau8WN9i/krmjec4LVuQYiWyhECx/T.Hd6",
+    "role": "admin"
   }
 ]
