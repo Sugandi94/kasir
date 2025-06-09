@@ -33,28 +33,35 @@
                 <!-- User Management Page -->
                 <section id="page-user" class="page" style="display:none;">
                     <h3>Kelola User</h3>
+                    <button id="toggle-user-form-btn" onclick="toggleUserForm()">Tambah User Baru</button>
+                    <div id="user-form-container" style="display:none; margin-top: 10px;">
+                        <h4 id="user-form-title">Tambah User Baru</h4>
+                        <input id="newuser" placeholder="Username">
+                        <input id="newpass" type="password" placeholder="Password">
+                        <select id="newrole">
+                            <option value="kasir">Kasir</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <button onclick="saveUser()" id="user-save-btn">Tambah</button>
+                        <button onclick="cancelEditUser()" id="user-cancel-btn" style="display:none;">Batal</button>
+                        <div id="adduser-msg"></div>
+                    </div>
                     <div id="user-list"></div>
-                    <h4 id="user-form-title">Tambah User Baru</h4>
-                    <input id="newuser" placeholder="Username">
-                    <input id="newpass" type="password" placeholder="Password">
-                    <select id="newrole">
-                        <option value="kasir">Kasir</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                    <button onclick="saveUser()" id="user-save-btn">Tambah</button>
-                    <button onclick="cancelEditUser()" id="user-cancel-btn" style="display:none;">Batal</button>
-                    <div id="adduser-msg"></div>
                 </section>
                 <!-- Produk Management Page -->
                 <section id="page-produk" class="page" style="display:none;">
-                    <h3 id="product-form-title">Tambah Produk</h3>
-                    <input id="prodname" placeholder="Nama Produk">
-                    <input id="prodbuy" type="number" placeholder="Harga Beli">
-                    <input id="prodsell" type="number" placeholder="Harga Jual">
-                    <input id="prodstock" type="number" placeholder="Stok">
-                    <button onclick="saveProduct()" id="product-save-btn">Tambah</button>
-                    <button onclick="cancelEditProduct()" id="product-cancel-btn" style="display:none;">Batal</button>
-                    <div id="addprod-msg"></div>
+                    <h3>Kelola Produk</h3>
+                    <button id="toggle-product-form-btn" onclick="toggleProductForm()">Tambah Produk</button>
+                    <div id="product-form-container" style="display:none; margin-top: 10px;">
+                        <h3 id="product-form-title">Tambah Produk</h3>
+                        <input id="prodname" placeholder="Nama Produk">
+                        <input id="prodbuy" type="number" placeholder="Harga Beli">
+                        <input id="prodsell" type="number" placeholder="Harga Jual">
+                        <input id="prodstock" type="number" placeholder="Stok">
+                        <button onclick="saveProduct()" id="product-save-btn">Tambah</button>
+                        <button onclick="cancelEditProduct()" id="product-cancel-btn" style="display:none;">Batal</button>
+                        <div id="addprod-msg"></div>
+                    </div>
                     <div id="product-list"></div>
                 </section>
                 <!-- Transaksi Penjualan Page -->

@@ -25,26 +25,28 @@ function clearSession() {
     localStorage.removeItem('kasirku_user');
 }
 
-// Authentication
-function login() {
-    fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            username: document.getElementById('username').value,
-            password: document.getElementById('password').value
-        })
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) {
-            currentUser = data.user;
-            saveSession(currentUser);
-            showDashboard();
-        } else {
-            document.getElementById('login-msg').innerText = data.message;
-        }
-    });
+function toggleUserForm() {
+    const formContainer = document.getElementById('user-form-container');
+    const toggleBtn = document.getElementById('toggle-user-form-btn');
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        toggleBtn.innerText = 'Sembunyikan Form';
+    } else {
+        formContainer.style.display = 'none';
+        toggleBtn.innerText = 'Tambah User Baru';
+    }
+}
+
+function toggleProductForm() {
+    const formContainer = document.getElementById('product-form-container');
+    const toggleBtn = document.getElementById('toggle-product-form-btn');
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        toggleBtn.innerText = 'Sembunyikan Form';
+    } else {
+        formContainer.style.display = 'none';
+        toggleBtn.innerText = 'Tambah Produk';
+    }
 }
 
 function showDashboard() {
