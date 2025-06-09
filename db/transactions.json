@@ -173,5 +173,26 @@
       }
     ],
     "total": 435000
+  },
+  {
+    "id": 13,
+    "date": "2025-06-09T20:34:09.150Z",
+    "items": [
+      {
+        "product_id": "12",
+        "name": "Aqua Besar",
+        "qty": 2,
+        "price": 5000,
+        "subtotal": 10000
+      },
+      {
+        "product_id": "8",
+        "name": "Tepung Roti",
+        "qty": 2,
+        "price": 8000,
+        "subtotal": 16000
+      }
+    ],
+    "total": 26000
   }
 ]

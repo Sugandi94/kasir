@@ -53,7 +53,7 @@
     "name": "Tepung Roti",
     "buy_price": 8000,
     "sell_price": 8000,
-    "stock": 25
+    "stock": 23
   },
   {
     "id": 9,
@@ -81,20 +81,13 @@
     "name": "Aqua Besar",
     "buy_price": 52000,
     "sell_price": 5000,
-    "stock": 0
+    "stock": -2
   },
   {
     "id": 13,
     "name": "Aqua Kecil",
     "buy_price": 46000,
     "sell_price": 3000,
-    "stock": 0
-  },
-  {
-    "id": 14,
-    "name": "a",
-    "buy_price": 0,
-    "sell_price": 0,
     "stock": 0
   }
 ]
