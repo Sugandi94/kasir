@@ -498,7 +498,7 @@ async function saveProduct() {
             document.getElementById('addprod-msg').innerText = res.success ? 'Produk berhasil diupdate' : (res.message || 'Gagal update');
             if (res.success) {
                 resetProductForm();
-                loadProducts();
+                location.reload();
             }
         }).catch(() => {
             document.getElementById('addprod-msg').innerText = 'Error update data.';
@@ -514,7 +514,7 @@ async function saveProduct() {
             document.getElementById('addprod-msg').innerText = res.success ? 'Produk berhasil ditambah' : (res.message || 'Gagal tambah');
             if (res.success) {
                 resetProductForm();
-                loadProducts();
+                location.reload();
             }
         });
     }
@@ -607,7 +607,7 @@ function deleteProduct(id) {
             document.getElementById('addprod-msg').innerText = res.success ? 'Produk berhasil dihapus' : (res.message || 'Gagal hapus produk');
             if (res.success) {
                 resetProductForm();
-                loadProducts();
+                location.reload();
             }
         })
         .catch(() => {
