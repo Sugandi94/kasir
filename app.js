@@ -187,7 +187,8 @@ app.post('/api/transactions', (req, res) => {
     for (let item of items) {
         const prod = products.find(p => String(p.id) === String(item.product_id));
         if (!prod) return res.json({ success: false, message: `Produk dengan id ${item.product_id} tidak ditemukan.` });
-        if (prod.stock < item.qty) return res.json({ success: false, message: `Stok produk ${prod.name} kurang.` });
+        // Hapus validasi stok agar transaksi tetap bisa disimpan walau stok kurang
+        // if (prod.stock < item.qty) return res.json({ success: false, message: `Stok produk ${prod.name} kurang.` });
 
         // LOGIKA: Pakai harga keranjang jika berbeda dari database, jika tidak pakai harga database
         let finalPrice = parseInt(prod.sell_price);

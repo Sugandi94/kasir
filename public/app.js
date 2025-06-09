@@ -239,6 +239,12 @@ function resetUserForm() {
 }
 
 // Produk Management
+function toProperCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
 function loadProducts() {
     fetch('/api/products').then(r => r.json()).then(products => {
         let html = `
@@ -267,11 +273,11 @@ function loadProducts() {
             html += `
                 <tr>
                     <td>${i + 1}</td>
-                    <td>${p.name}</td>
+                    <td>${toProperCase(p.name)}</td>
                     <td>Rp${Number(p.buy_price).toLocaleString('id-ID')}</td>
                     <td>Rp${Number(p.sell_price).toLocaleString('id-ID')}</td>
                     <td>${p.stock}</td>
-                    <td style="text-align:center;">
+                    <td style="text-align:left;">
                         <div class="product-row-actions">
                             <button class="btn-small edit" title="Edit" onclick="editProduct('${p.id}', \`${p.name.replace(/`/g, '\\`')}\`, '${p.buy_price}', '${p.sell_price}', '${p.stock}')">&#9998;</button>
                             <button class="btn-small del" title="Hapus" onclick="deleteProduct('${p.id}')">&#128465;</button>
@@ -303,14 +309,39 @@ function deleteAllProducts() {
         });
 }
 
-function saveProduct() {
+async function saveProduct() {
     const name = document.getElementById('prodname').value.trim();
-    const buy_price = parseInt(document.getElementById('prodbuy').value);
-    const sell_price = parseInt(document.getElementById('prodsell').value);
-    const stock = parseInt(document.getElementById('prodstock').value);
+    const buy_price_raw = document.getElementById('prodbuy').value.trim();
+    const sell_price_raw = document.getElementById('prodsell').value.trim();
+    const stock_raw = document.getElementById('prodstock').value.trim();
 
-    if (!name || isNaN(buy_price) || isNaN(sell_price) || isNaN(stock)) {
-        document.getElementById('addprod-msg').innerText = 'Nama, harga beli, harga jual, dan stok harus diisi!';
+    if (!name) {
+        document.getElementById('addprod-msg').innerText = 'Nama produk wajib diisi!';
+        return;
+    }
+
+    // Validasi nama produk sudah ada
+    try {
+        const res = await fetch('/api/products');
+        const products = await res.json();
+const nameExists = products.some(p => p.name.toLowerCase() === name.toLowerCase() && String(p.id) !== String(editingProductId));
+        if (nameExists) {
+            document.getElementById('addprod-msg').innerText = 'Nama produk sudah ada!';
+            return;
+        }
+    } catch (e) {
+        document.getElementById('addprod-msg').innerText = 'Gagal memeriksa nama produk.';
+        return;
+    }
+
+    const buy_price = buy_price_raw === '' ? 0 : parseInt(buy_price_raw);
+    const sell_price = sell_price_raw === '' ? 0 : parseInt(sell_price_raw);
+    const stock = stock_raw === '' ? 0 : parseInt(stock_raw);
+
+    if ((buy_price_raw !== '' && isNaN(buy_price)) ||
+        (sell_price_raw !== '' && isNaN(sell_price)) ||
+        (stock_raw !== '' && isNaN(stock))) {
+        document.getElementById('addprod-msg').innerText = 'Harga beli, harga jual, dan stok harus berupa angka jika diisi!';
         return;
     }
 
@@ -494,8 +525,10 @@ function createProductAutocomplete() {
 // Transaksi
 function loadTrxProducts() {
     fetch('/api/products').then(r => r.json()).then(products => {
-        let opt = products.filter(p=>p.stock>0)
-            .map(p=>`<option value="${p.id}" data-price="${p.sell_price}">${p.name}</option>`).join('');
+        // Tampilkan semua produk tanpa filter stok
+        let opt = products
+            .map(p => `<option value="${p.id}" data-price="${p.sell_price}">${p.name}</option>`)
+            .join('');
         document.getElementById('trx-product').innerHTML = opt;
         updateTrxPrice();
         createProductAutocomplete(); // Tambahkan fitur autocomplete
@@ -527,6 +560,7 @@ function addTrxItem() {
         trxItems.push({ product_id: prodId, name: prodName, qty, price });
     }
     renderTrxItems();
+    document.getElementById('trx-msg').innerText = '';
 }
 
 // ... kode di atas tetap ...
@@ -641,6 +675,12 @@ function loadTrxList(page = 1) {
 
 // ... (kode lain tetap sama di atas)
 
+function toProperCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
 function renderTrxTable() {
   let startIdx = (trxCurrentPage - 1) * trxPageSize;
   let pageData = trxAllData.slice(startIdx, startIdx + trxPageSize);
@@ -665,7 +705,7 @@ function renderTrxTable() {
     pageData.forEach((t, i) => {
       let items = t.items.map(it =>
         `<div>
-          <b>${it.name}</b> x${it.qty}
+          <b>${toProperCase(it.name)}</b> x${it.qty}
           <span style="color: #888;">@Rp${it.price.toLocaleString('id-ID')}</span>
           = <b>Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</b>
         </div>`).join('');
@@ -752,6 +792,12 @@ function printTransaction(trxId) {
   const trx = trxAllData.find(t => String(t.id) === String(trxId));
   if (!trx) return alert('Transaksi tidak ditemukan!');
 
+  function toProperCase(str) {
+    return str.replace(/\w\S*/g, function(txt){
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
   let html = `
     <html>
     <head>
@@ -793,7 +839,7 @@ function printTransaction(trxId) {
   `;
   trx.items.forEach(it => {
     html += `<tr>
-      <td>${it.name}</td>
+      <td>${toProperCase(it.name)}</td>
       <td class="right">${it.qty}</td>
       <td class="right">Rp${it.price.toLocaleString('id-ID')}</td>
       <td class="right">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>

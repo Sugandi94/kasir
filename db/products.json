@@ -4,7 +4,7 @@
     "name": "Beras swan 30 kg",
     "buy_price": 433000,
     "sell_price": 435000,
-    "stock": 0
+    "stock": -1
   },
   {
     "id": 2,
@@ -18,7 +18,7 @@
     "name": "Beras swan 5 kg",
     "buy_price": 77000,
     "sell_price": 79000,
-    "stock": 4
+    "stock": 3
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
   },
   {
     "id": 5,
-    "name": "Beras murah",
+    "name": "Beras Murah",
     "buy_price": 390000,
     "sell_price": 405000,
     "stock": 1
@@ -47,5 +47,33 @@
     "buy_price": 16300,
     "sell_price": 9000,
     "stock": 25
+  },
+  {
+    "id": 8,
+    "name": "Tepung Roti",
+    "buy_price": 8000,
+    "sell_price": 8000,
+    "stock": 25
+  },
+  {
+    "id": 9,
+    "name": "Kacang Ijo",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": -1
+  },
+  {
+    "id": 10,
+    "name": "Minyak Kita 2 L",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
+  },
+  {
+    "id": 11,
+    "name": "Minyak Kita 1 L",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
   }
 ]
