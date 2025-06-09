@@ -286,14 +286,53 @@ function loadProductsPage(page) {
 }
 
 
+
 let productSearchKeyword = '';
 let productSearchTimeout = null;
+let productSortColumn = 'name'; // default sort column
+let productSortOrder = 'asc'; // 'asc' or 'desc'
 
 function renderProductTable() {
     let filteredData = productAllData.filter(p => p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()));
 
+    // Sort filteredData based on productSortColumn and productSortOrder
+    filteredData.sort((a, b) => {
+        let valA, valB;
+        switch(productSortColumn) {
+            case 'name':
+                valA = a.name.toLowerCase();
+                valB = b.name.toLowerCase();
+                break;
+            case 'buy_price':
+                valA = a.buy_price;
+                valB = b.buy_price;
+                break;
+            case 'sell_price':
+                valA = a.sell_price;
+                valB = b.sell_price;
+                break;
+            case 'stock':
+                valA = a.stock;
+                valB = b.stock;
+                break;
+            default:
+                valA = a.name.toLowerCase();
+                valB = b.name.toLowerCase();
+        }
+        if (valA < valB) return productSortOrder === 'asc' ? -1 : 1;
+        if (valA > valB) return productSortOrder === 'asc' ? 1 : -1;
+        return 0;
+    });
+
     let startIdx = (productCurrentPage - 1) * productPageSize;
     let pageData = productPaginationEnabled ? filteredData.slice(startIdx, startIdx + productPageSize) : filteredData;
+
+    function getSortIndicator(column) {
+        if (productSortColumn === column) {
+            return productSortOrder === 'asc' ? ' ▲' : ' ▼';
+        }
+        return '';
+    }
 
     let html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;flex-wrap:wrap;">
@@ -317,10 +356,10 @@ function renderProductTable() {
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Produk</th>
-                <th>Harga Beli</th>
-                <th>Harga Jual</th>
-                <th>Stok</th>
+                <th style="cursor:pointer;" onclick="changeProductSort('name')">Nama Produk${getSortIndicator('name')}</th>
+                <th style="cursor:pointer;" onclick="changeProductSort('buy_price')">Harga Beli${getSortIndicator('buy_price')}</th>
+                <th style="cursor:pointer;" onclick="changeProductSort('sell_price')">Harga Jual${getSortIndicator('sell_price')}</th>
+                <th style="cursor:pointer;" onclick="changeProductSort('stock')">Stok${getSortIndicator('stock')}</th>
                 <th style="text-align:center;">Aksi</th>
             </tr>
         </thead>
@@ -359,6 +398,17 @@ function renderProductTable() {
         // Remove pagination controls if any
         document.getElementById('product-pagination')?.remove();
     }
+}
+
+function changeProductSort(column) {
+    if (productSortColumn === column) {
+        productSortOrder = productSortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+        productSortColumn = column;
+        productSortOrder = 'asc';
+    }
+    productCurrentPage = 1;
+    renderProductTable();
 }
 
 function handleProductSearch(value) {
