@@ -238,60 +238,150 @@ function resetUserForm() {
     document.getElementById('adduser-msg').innerText = '';
 }
 
-// Produk Management
+
+let productPaginationEnabled = true;
+let productCurrentPage = 1;
+let productPageSize = 10;
+let productAllData = [];
+
 function toProperCase(str) {
     return str.replace(/\w\S*/g, function(txt){
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 }
 
+function renderProductPagination() {
+    let total = productAllData.length;
+    let pageCount = Math.ceil(total / productPageSize);
+
+    // Remove old pagination if exists
+    document.getElementById('product-pagination')?.remove();
+
+    if (pageCount <= 1) return;
+
+    let html = `<div id="product-pagination" class="product-pagination" style="margin-top:10px; text-align:center;">`;
+    html += `<button onclick="loadProductsPage(1)" ${productCurrentPage === 1 ? "disabled" : ""}>&laquo;</button>`;
+    html += `<button onclick="loadProductsPage(${productCurrentPage-1})" ${productCurrentPage === 1 ? "disabled" : ""}><</button>`;
+
+    // Show max 5 page buttons
+    let start = Math.max(1, productCurrentPage - 2);
+    let end = Math.min(pageCount, start + 4);
+    if (end - start < 4) start = Math.max(1, end - 4);
+
+    for (let i = start; i <= end; i++) {
+        html += `<button onclick="loadProductsPage(${i})" ${productCurrentPage === i ? "class='active'" : ""}>${i}</button>`;
+    }
+
+    html += `<button onclick="loadProductsPage(${productCurrentPage+1})" ${productCurrentPage === pageCount ? "disabled" : ""}>></button>`;
+    html += `<button onclick="loadProductsPage(${pageCount})" ${productCurrentPage === pageCount ? "disabled" : ""}>&raquo;</button>`;
+    html += `</div>`;
+
+    document.getElementById('product-list').insertAdjacentHTML('afterend', html);
+}
+
+function loadProductsPage(page) {
+    productCurrentPage = page;
+    renderProductTable();
+    renderProductPagination();
+}
+
+
+let productSearchKeyword = '';
+let productSearchTimeout = null;
+
+function renderProductTable() {
+    let filteredData = productAllData.filter(p => p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()));
+
+    let startIdx = (productCurrentPage - 1) * productPageSize;
+    let pageData = productPaginationEnabled ? filteredData.slice(startIdx, startIdx + productPageSize) : filteredData;
+
+    let html = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;flex-wrap:wrap;">
+        <span style="font-weight:bold;">Daftar Produk</span>
+        <input type="text" id="product-search" placeholder="Cari produk..." value="${productSearchKeyword}" 
+            style="padding:6px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; flex-grow:1; min-width: 180px;"
+            oninput="debouncedHandleProductSearch(this.value)">
+        <label style="display:flex;align-items:center;gap:6px; white-space: nowrap;">
+            <input type="checkbox" id="pagination-toggle" ${productPaginationEnabled ? 'checked' : ''} onchange="toggleProductPagination(this.checked)">
+            Enable Pagination
+        </label>
+        <div class="product-action-toolbar">
+            <button class="btn-export" onclick="exportProductsExcel()">Export Excel</button>
+            <button class="btn-small del" style="margin-left:8px;" onclick="deleteAllProducts()">&#128465; Hapus Semua</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+    <table class="product-table" id="product-table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Produk</th>
+                <th>Harga Beli</th>
+                <th>Harga Jual</th>
+                <th>Stok</th>
+                <th style="text-align:center;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    pageData.forEach((p, i) => {
+        html += `
+            <tr>
+                <td>${productPaginationEnabled ? (startIdx + i + 1) : (i + 1)}</td>
+                <td>${toProperCase(p.name)}</td>
+                <td>Rp${Number(p.buy_price).toLocaleString('id-ID')}</td>
+                <td>Rp${Number(p.sell_price).toLocaleString('id-ID')}</td>
+                <td>${p.stock}</td>
+                <td style="text-align:left;">
+                    <div class="product-row-actions">
+                        <button class="btn-small edit" title="Edit" onclick="editProduct('${p.id}', \`${p.name.replace(/`/g, '\\`')}\`, '${p.buy_price}', '${p.sell_price}', '${p.stock}')">&#9998;</button>
+                        <button class="btn-small del" title="Hapus" onclick="deleteProduct('${p.id}')">&#128465;</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+
+    html += `
+        </tbody>
+    </table>
+    </div>
+    `;
+
+    document.getElementById('product-list').innerHTML = html;
+
+    if (productPaginationEnabled) {
+        renderProductPagination();
+    } else {
+        // Remove pagination controls if any
+        document.getElementById('product-pagination')?.remove();
+    }
+}
+
+function handleProductSearch(value) {
+    productSearchKeyword = value;
+    productCurrentPage = 1;
+    renderProductTable();
+}
+
+function debouncedHandleProductSearch(value) {
+    clearTimeout(productSearchTimeout);
+    productSearchTimeout = setTimeout(() => {
+        handleProductSearch(value);
+    }, 300);
+}
+
+function toggleProductPagination(enabled) {
+    productPaginationEnabled = enabled;
+    productCurrentPage = 1;
+    loadProducts();
+}
+
 function loadProducts() {
     fetch('/api/products').then(r => r.json()).then(products => {
-        let html = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-            <span style="font-weight:bold;">Daftar Produk</span>
-            <div class="product-action-toolbar">
-                <button class="btn-export" onclick="exportProductsExcel()">Export Excel</button>
-                <button class="btn-small del" style="margin-left:8px;" onclick="deleteAllProducts()">&#128465; Hapus Semua</button>
-            </div>
-        </div>
-        <div class="table-responsive">
-        <table class="product-table" id="product-table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Produk</th>
-                    <th>Harga Beli</th>
-                    <th>Harga Jual</th>
-                    <th>Stok</th>
-                    <th style="text-align:center;">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-        products.forEach((p, i) => {
-            html += `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td>${toProperCase(p.name)}</td>
-                    <td>Rp${Number(p.buy_price).toLocaleString('id-ID')}</td>
-                    <td>Rp${Number(p.sell_price).toLocaleString('id-ID')}</td>
-                    <td>${p.stock}</td>
-                    <td style="text-align:left;">
-                        <div class="product-row-actions">
-                            <button class="btn-small edit" title="Edit" onclick="editProduct('${p.id}', \`${p.name.replace(/`/g, '\\`')}\`, '${p.buy_price}', '${p.sell_price}', '${p.stock}')">&#9998;</button>
-                            <button class="btn-small del" title="Hapus" onclick="deleteProduct('${p.id}')">&#128465;</button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        });
-        html += `
-            </tbody>
-        </table>
-        </div>
-        `;
-        document.getElementById('product-list').innerHTML = html;
+        productAllData = products;
+        renderProductTable();
     });
 }
 

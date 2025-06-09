@@ -19,5 +19,159 @@
       }
     ],
     "total": 514000
+  },
+  {
+    "id": 2,
+    "date": "2025-06-09T19:13:23.029Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 3,
+    "date": "2025-06-09T19:13:25.600Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 4,
+    "date": "2025-06-09T19:13:27.051Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 5,
+    "date": "2025-06-09T19:13:28.773Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 6,
+    "date": "2025-06-09T19:13:32.413Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 7,
+    "date": "2025-06-09T19:13:33.852Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 8,
+    "date": "2025-06-09T19:13:42.321Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 9,
+    "date": "2025-06-09T19:13:44.154Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 10,
+    "date": "2025-06-09T19:13:46.847Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 3,
+        "price": 435000,
+        "subtotal": 1305000
+      }
+    ],
+    "total": 1305000
+  },
+  {
+    "id": 11,
+    "date": "2025-06-09T19:13:48.234Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 12,
+    "date": "2025-06-09T19:13:49.502Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
   }
 ]

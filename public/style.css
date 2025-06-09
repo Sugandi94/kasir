@@ -524,6 +524,46 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   opacity: 0.5;
 }
 
+/* Product Pagination */
+.product-pagination {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.product-pagination button {
+  padding: 6px 14px;
+  border: 1px solid #1d8a4c;
+  background: #fff;
+  color: #1d8a4c;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+  min-width: 36px;
+  box-shadow: 0 1px 3px rgb(29 138 76 / 0.3);
+}
+
+.product-pagination button:hover:not(:disabled) {
+  background: #1d8a4c;
+  color: #fff;
+}
+
+.product-pagination button.active,
+.product-pagination button:disabled {
+  background: #1d8a4c;
+  color: #fff;
+  cursor: default;
+  box-shadow: none;
+}
+
+.product-pagination button:disabled {
+  opacity: 0.6;
+}
+
 /* Small Buttons (Edit, Delete, Print) */
 .btn-small {
   border: none;
