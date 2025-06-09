@@ -1,0 +1,28 @@
+{
+  "name": "pos-sederhana",
+  "version": "1.0.0",
+  "description": "Aplikasi POS sederhana berbasis Node.js dan file JSON, dengan login admin & kasir.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "pos",
+    "kasir",
+    "nodejs",
+    "json",
+    "admin",
+    "express"
+  ],
+  "author": "Sugandi94",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.4"
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "date": "2025-06-09T07:54:35.207Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "Beras swan 30 kg",
+        "qty": 1,
+        "price": 435000,
+        "subtotal": 435000
+      }
+    ],
+    "total": 435000
+  },
+  {
+    "id": 2,
+    "date": "2025-06-09T08:31:17.560Z",
+    "items": [
+      {
+        "product_id": "2",
+        "name": "Beras swan 10 kg",
+        "qty": 1,
+        "price": 149000,
+        "subtotal": 149000
+      }
+    ],
+    "total": 149000
+  }
+]

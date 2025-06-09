@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>POS Sederhana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login">
+        <h2>Login POS</h2>
+        <input id="username" placeholder="Username"><br>
+        <input id="password" type="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+        <div id="login-msg"></div>
+    </div>
+    <div id="dashboard" style="display:none;">
+        <div class="main-layout">
+            <aside id="sidebar">
+                <div class="sidebar-header">
+                    <span id="role"></span>
+                </div>
+                <!-- Dashboard Menu Vertical -->
+                <div class="dashboard-menu-vertical">
+                    <button onclick="showPage('user')" id="nav-user"><span>Kelola User</span></button>
+                    <button onclick="showPage('produk')" id="nav-produk"><span>Kelola Produk</span></button>
+                    <button onclick="showPage('transaksi')" id="nav-transaksi"><span>Transaksi</span></button>
+                    <button onclick="showPage('daftar')" id="nav-daftar"><span>Daftar Transaksi</span></button>
+                    <button onclick="logout()" id="nav-logout" class="logout-btn"><span>Logout</span></button>
+                </div>
+            </aside>
+            <main id="main-content">
+                <!-- User Management Page -->
+                <section id="page-user" class="page" style="display:none;">
+                    <h3>Kelola User</h3>
+                    <div id="user-list"></div>
+                    <h4 id="user-form-title">Tambah User Baru</h4>
+                    <input id="newuser" placeholder="Username">
+                    <input id="newpass" type="password" placeholder="Password">
+                    <select id="newrole">
+                        <option value="kasir">Kasir</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button onclick="saveUser()" id="user-save-btn">Tambah</button>
+                    <button onclick="cancelEditUser()" id="user-cancel-btn" style="display:none;">Batal</button>
+                    <div id="adduser-msg"></div>
+                </section>
+                <!-- Produk Management Page -->
+                <section id="page-produk" class="page" style="display:none;">
+                    <h3 id="product-form-title">Tambah Produk</h3>
+                    <input id="prodname" placeholder="Nama Produk">
+                    <input id="prodbuy" type="number" placeholder="Harga Beli">
+                    <input id="prodsell" type="number" placeholder="Harga Jual">
+                    <input id="prodstock" type="number" placeholder="Stok">
+                    <button onclick="saveProduct()" id="product-save-btn">Tambah</button>
+                    <button onclick="cancelEditProduct()" id="product-cancel-btn" style="display:none;">Batal</button>
+                    <div id="addprod-msg"></div>
+                    <div id="product-list"></div>
+                </section>
+                <!-- Transaksi Penjualan Page -->
+                <section id="page-transaksi" class="page" style="display:none;">
+                    <h3>Transaksi Penjualan</h3>
+                    <div id="trx-form">
+                        <select id="trx-product"></select>
+                        <input id="trx-qty" type="number" placeholder="Jumlah" min="1" value="1" style="width:80px">
+                        <input id="trx-price" type="text" placeholder="Harga Jual" readonly style="width:210px">
+                        <button onclick="addTrxItem()">Tambah</button>
+                    </div>
+                  <div class="table-responsive">
+                    <table id="trx-items-table" class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th>Harga</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="text-align:right;">Total</td>
+                                <td id="trx-total">Rp0</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <button onclick="submitTrx()">Simpan Transaksi</button>
+                    <div id="trx-msg"></div>
+                    <div id="last-trx-list"></div>
+                </section>
+                <!-- Daftar Transaksi Page -->
+                <section id="page-daftar" class="page" style="display:none;">
+                    <h3>Daftar Transaksi</h3>
+                    <div style="margin-bottom:15px;">
+                        <label for="filter-date">Filter Tanggal: </label>
+                        <input type="date" id="filter-date" onchange="loadTrxList()">
+                        <button onclick="resetFilterTrx()">Reset</button>
+                    </div>
+                    <div id="trx-list"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,742 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f3f3;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* LAYOUT UTAMA FULL WIDTH */
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* SIDEBAR */
+aside#sidebar {
+  background: #222f3e;
+  min-width: 130px;
+  max-width: 220px;
+  width: 22vw;
+  box-shadow: 2px 0 16px #e5e5e5;
+  padding: 28px 10px 18px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  color: #fff;
+  position: relative;
+  z-index: 101;
+  justify-content: flex-start;
+}
+
+.sidebar-header {
+  font-weight: bold;
+  font-size: 1.22em;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #222f3e;
+  background: #f3f3f3;
+  border-radius: 7px;
+  padding: 10px 0;
+}
+
+.dashboard-menu-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.dashboard-menu-vertical button {
+  background: #168bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  padding: 12px 0;
+  min-width: 180px;
+  width: 90%;
+  max-width: 340px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+  text-align: center;
+  outline: none;
+  box-shadow: 0 1.5px 8px rgba(22,139,255,0.09);
+  margin: 0;
+  word-break: break-word;
+  line-height: 1.2;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-menu-vertical button span {
+  flex: 1;
+}
+
+.dashboard-menu-vertical button:hover,
+.dashboard-menu-vertical button:focus {
+  background: #126fd1;
+  color: #ffe082;
+  box-shadow: 0 4px 14px rgba(22,139,255,0.17);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.dashboard-menu-vertical .logout-btn {
+  background: #e74c3c;
+  color: #fff;
+  margin-top: 8px;
+  margin-bottom: 0;
+  transition: background 0.18s;
+}
+.dashboard-menu-vertical .logout-btn:hover,
+.dashboard-menu-vertical .logout-btn:focus {
+  background: #c0392b;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  aside#sidebar {
+    min-width: 0;
+    max-width: none;
+    width: 100vw;
+    box-shadow: none;
+    padding: 10px 2vw 10px 2vw;
+    height: auto;
+    border-radius: 0;
+  }
+  .dashboard-menu-vertical button {
+    font-size: 1.01rem;
+    padding: 13px 0;
+    min-width: 0;
+    width: 99vw;
+    max-width: 99vw;
+    border-radius: 7px;
+  }
+  .dashboard-menu-vertical {
+    gap: 9px;
+    margin-bottom: 0;
+    width: 100%;
+    align-items: stretch;
+  }
+  .sidebar-header {
+    font-size: 1.08em;
+    padding: 8px 0;
+  }
+}
+
+/* LOGIN BOX */
+#login {
+  background: #fff;
+  max-width: 390px;
+  margin: 48px auto;
+  padding: 28px 28px 20px 28px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px #bbb;
+  width: 96vw;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* MAIN CONTENT */
+main#main-content {
+  flex: 1 1 0%;
+  padding: 0;
+  background: none;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* PAGE FULL WIDTH, RESPONSIVE */
+.page {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 24px 10px 18px 10px;
+  min-height: 240px;
+  box-sizing: border-box;
+}
+
+/* FORM & INPUT */
+input,
+select {
+  margin: 7px 0;
+  padding: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button:not(.nav):not(.dashboard-menu-vertical button) {
+  margin: 8px 0;
+  padding: 12px 0;
+  width: 100%;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+button:not(.nav):not(.dashboard-menu-vertical button):hover,
+button:not(.nav):not(.dashboard-menu-vertical button):focus {
+  background: #0056b3;
+  outline: none;
+}
+
+@media (max-width: 1150px) {
+  .main-layout {
+    max-width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .page {
+    max-width: 100vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+}
+@media (max-width: 850px) {
+  .main-layout {
+    flex-direction: column;
+    max-width: 100vw;
+  }
+  main#main-content {
+    padding: 0;
+  }
+  .page {
+    padding: 14px 2vw 12px 2vw;
+    max-width: 100vw;
+  }
+}
+@media (max-width: 600px) {
+  #login {
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 12px 2vw 12px 2vw;
+  }
+  main#main-content {
+    padding: 0;
+  }
+  .page {
+    padding: 8px 1vw 8px 1vw;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 100vw;
+  }
+}
+
+/* TABLES */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 18px;
+}
+
+.user-table,
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  min-width: 350px;
+}
+
+.user-table thead th {
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 8px;
+  text-align: left;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.user-table tbody td {
+  padding: 8px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: middle;
+}
+
+.user-table tr:last-child td {
+  border-bottom: none;
+}
+
+.user-table tbody tr:hover {
+  background: #f3f7fa;
+}
+
+/* Product Table */
+.product-table thead th {
+  background: #1d8a4c;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 8px;
+  text-align: left;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.product-table tbody td {
+  padding: 8px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: middle;
+}
+
+.product-table tr:last-child td {
+  border-bottom: none;
+}
+
+.product-table tbody tr:hover {
+  background: #f3f7fa;
+}
+
+.product-table th, .product-table td {
+  text-align: left;
+}
+
+.btn-export {
+  background: #27ae60;
+  border: none;
+  color: #fff;
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.18s;
+  margin-left: 0;
+  min-width: 110px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.btn-export:hover {
+  background: #1e8449;
+}
+
+/* Transaction Table (KERANJANG RESPONSIF) */
+.trx-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.trx-table th {
+  background: #228d57;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 4px 4px 0 0;
+  font-size: 1.04em;
+  white-space: nowrap;
+}
+.trx-table td {
+  background: #f8fbfd;
+  padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: normal;
+}
+
+.trx-table input[type="number"].trx-price {
+  width: 180px;
+  min-width: 110px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 9px 14px;
+  font-size: 1.1em;
+  border: 1.5px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  margin: 0 auto;
+  outline: none;
+  transition: border 0.18s, box-shadow 0.16s;
+  text-align: right;
+  display: block;
+  box-shadow: 0 0 0 0 #168bff;
+}
+.trx-table input[type="number"].trx-qty {
+  width: 90px;
+  min-width: 60px;
+  max-width: 120px;
+  box-sizing: border-box;
+  padding: 9px 14px;
+  font-size: 1.1em;
+  border: 1.5px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  margin: 0 auto;
+  outline: none;
+  transition: border 0.18s, box-shadow 0.16s;
+  text-align: center;
+  display: block;
+  box-shadow: 0 0 0 0 #168bff;
+}
+.trx-table input[type="number"]:focus {
+  border: 2px solid #168bff;
+  background: #f3f9ff;
+  box-shadow: 0 0 0 2px #e1f0fe;
+}
+
+.trx-table .btn-small {
+  min-width: 44px;
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px 0;
+}
+
+@media (max-width: 900px) {
+  .trx-table th, .trx-table td {
+    font-size: 0.97em;
+    padding: 8px 3px;
+  }
+  .trx-table input[type="number"].trx-price {
+    width: 120px;
+    min-width: 60px;
+    font-size: 1em;
+    padding: 8px 8px;
+  }
+  .trx-table input[type="number"].trx-qty {
+    width: 60px;
+    min-width: 40px;
+    font-size: 1em;
+    padding: 8px 8px;
+  }
+}
+
+/* --- MOBILE RESPONSIVE KERANJANG --- */
+@media (max-width: 600px) {
+  .trx-table, .trx-table thead, .trx-table tbody, .trx-table tr {
+    display: block;
+    width: 100%;
+  }
+  .trx-table thead {
+    display: none;
+  }
+  .trx-table tr {
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px #d4f2e7;
+    border-radius: 7px;
+    background: #fff;
+    padding: 0 0 10px 0;
+  }
+  .trx-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    text-align: left;
+    min-height: 44px;
+    border-bottom: 1px solid #e4e4e4;
+    font-size: 1em;
+    background: #fff;
+    border-radius: 0;
+    position: relative;
+    white-space: normal;
+  }
+  .trx-table td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    flex: 1 0 44%;
+    color: #228d57;
+    padding-right: 12px;
+    font-size: 0.96em;
+    max-width: 140px;
+    min-width: 90px;
+    text-align: left;
+    display: block;
+  }
+  .trx-table input[type="number"].trx-price,
+  .trx-table input[type="number"].trx-qty {
+    width: 98%;
+    min-width: 0;
+    font-size: 1em;
+    padding: 8px 8px;
+    margin-left: 7px;
+  }
+  .trx-table .btn-small {
+    padding: 8px 0;
+    width: 98%;
+    min-width: 44px;
+    font-size: 1em;
+    margin-left: 7px;
+  }
+}
+
+/* Pagination */
+.trx-pagination {
+  display: flex;
+  gap: 2px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+.trx-pagination button {
+  padding: 4px 10px;
+  border: 1px solid #2c7be5;
+  background: #fff;
+  color: #2c7be5;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: background 0.15s;
+}
+.trx-pagination button.active,
+.trx-pagination button:disabled {
+  background: #2c7be5;
+  color: #fff;
+  cursor: default;
+}
+.trx-pagination button:disabled {
+  opacity: 0.5;
+}
+
+/* Small Buttons (Edit, Delete, Print) */
+.btn-small {
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 4px 8px;
+  cursor: pointer;
+  min-width: 110px;
+  text-align: center;
+  margin-right: 0;
+  transition: background 0.15s;
+  line-height: 1.3;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.btn-small.edit {
+  background: #007bff;
+  color: #fff;
+}
+.btn-small.edit:hover {
+  background: #0056b3;
+}
+
+.btn-small.del {
+  background: #e74c3c;
+  color: #fff;
+}
+.btn-small.del:hover {
+  background: #c0392b;
+}
+
+.btn-small.print {
+  background: #2c7be5;
+  color: #fff;
+}
+.btn-small.print:hover {
+  background: #2063a8;
+}
+
+.trx-table td .btn-small,
+.product-table td .btn-small {
+  min-width: 110px;
+  margin-right: 4px;
+  box-sizing: border-box;
+}
+
+.product-action-toolbar {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.product-row-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .product-action-toolbar {
+    flex-direction: column;
+    gap: 4px;
+    align-items: stretch;
+  }
+  .product-row-actions {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /* opsional: biar ada garis bawah saat discroll */
+  border-radius: 7px;
+  margin-bottom: 1.5em;
+  background: transparent;
+}
+
+.product-table,
+.trx-table {
+  width: 100%;
+  min-width: 650px; /* Lebar minimal agar kolom tidak tumpuk di HP, bisa diperbesar */
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.product-table th,
+.trx-table th {
+  background: #228d57;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 6px;
+  border-radius: 4px 4px 0 0;
+  font-size: 1.04em;
+  white-space: nowrap;
+}
+
+.product-table td,
+.trx-table td {
+  background: #f8fbfd;
+  padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Biar scroll bar tidak tebal di HP */
+.table-responsive::-webkit-scrollbar {
+  height: 7px;
+  background: #f3f3f3;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+@media (max-width: 700px) {
+  .product-table,
+  .trx-table {
+    font-size: 0.98em;
+    min-width: 530px; /* agar mudah discroll di HP */
+  },
+  .product-table thead,
+  .trx-table thead,
+  .product-table td,
+  .trx-table td {
+    display: table-cell;
+  }
+  /* TIDAK PERLU mengubah display apapun! */
+}
+
+/* --- Atur ulang tombol di kolom aksi pada tabel transaksi agar lebar pas dan tidak melebihi kolom --- */
+
+/* Kolom aksi: pastikan td tidak terlalu lebar */
+.product-table .aksi-cell,
+.trx-table .aksi-cell {
+  width: 1px;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px 4px;
+}
+
+/* Atur tombol aksi agar lebar otomatis mengikuti isi, tidak 100% */
+.btn-small {
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 7px 18px;
+  cursor: pointer;
+  min-width: 80px;
+  max-width: 140px;
+  text-align: center;
+  margin-right: 4px;
+  margin-bottom: 3px;
+  transition: background 0.15s;
+  line-height: 1.3;
+  box-sizing: border-box;
+  display: inline-block;
+  font-weight: 500;
+  background: #007bff;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* Print button khusus */
+.btn-small.print {
+  background: #0753a6;
+  color: #fff;
+}
+.btn-small.print:hover {
+  background: #003e7e;
+}
+
+/* Hapus button khusus */
+.btn-small.del {
+  background: #168bff;
+  color: #fff;
+}
+.btn-small.del:hover {
+  background: #0056b3;
+}
+
+/* Untuk aksi di satu td, atur flex agar tombol sejajar */
+.product-table .aksi-group,
+.trx-table .aksi-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive: di HP, tombol bisa wrap ke bawah jika kurang lebar */
+@media (max-width: 700px) {
+  .product-table .aksi-group,
+  .trx-table .aksi-group {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .btn-small {
+    min-width: 60px;
+    max-width: 98vw;
+    width: 100%;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+}
