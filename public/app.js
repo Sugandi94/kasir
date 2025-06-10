@@ -3,6 +3,50 @@ let editingProductId = null;
 let editingUserId = null;
 let trxItems = [];
 
+// Helper functions to save/load cart data to/from localStorage
+function saveCartToStorage() {
+    localStorage.setItem('kasirku_cart', JSON.stringify(trxItems));
+}
+
+function loadCartFromStorage() {
+    const raw = localStorage.getItem('kasirku_cart');
+    if (!raw) return [];
+    try {
+        return JSON.parse(raw);
+    } catch {
+        return [];
+    }
+}
+
+// Login function
+function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    if (!username || !password) {
+        document.getElementById('login-msg').innerText = 'Username dan password harus diisi!';
+        return;
+    }
+    fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.success) {
+            currentUser = res.user;
+            saveSession(currentUser);
+            showDashboard();
+            document.getElementById('login-msg').innerText = '';
+        } else {
+            document.getElementById('login-msg').innerText = res.message || 'Login gagal';
+        }
+    })
+    .catch(() => {
+        document.getElementById('login-msg').innerText = 'Gagal menghubungi server.';
+    });
+}
+
 // Pagination state for transaksi
 let trxCurrentPage = 1;
 let trxPageSize = 10;
@@ -898,6 +942,7 @@ function addTrxItem() {
     } else {
         trxItems.push({ product_id: prodId, name: prodName, qty, price });
     }
+    saveCartToStorage();
     renderTrxItems();
     document.getElementById('trx-msg').innerText = '';
 }
@@ -943,6 +988,7 @@ function trxEditPrice(index, value) {
   let price = parseInt(value);
   if (isNaN(price) || price < 1) price = 1;
   trxItems[index].price = price;
+  saveCartToStorage();
   renderTrxItems();
 }
 
@@ -951,12 +997,14 @@ function trxEditQty(index, value) {
   let qty = parseInt(value);
   if (isNaN(qty) || qty < 1) qty = 1;
   trxItems[index].qty = qty;
+  saveCartToStorage();
   renderTrxItems();
 }
 
 // ... kode lain tetap sama ...
 function removeTrxItem(idx) {
     trxItems.splice(idx, 1);
+    saveCartToStorage();
     renderTrxItems();
 }
 // ... kode sebelum submitTrx tetap ...
@@ -982,6 +1030,7 @@ function submitTrx() {
         document.getElementById('trx-msg').innerText = res.success ? 'Transaksi sukses!' : (res.message || 'Gagal transaksi');
         if (res.success) {
             trxItems = [];
+            saveCartToStorage();
             renderTrxItems();
             loadTrxList(1); // reload daftar transaksi ke halaman pertama
             loadProducts();
@@ -1241,6 +1290,9 @@ window.onload = function() {
     if (session && session.username && session.role) {
         currentUser = session;
         showDashboard();
+        // Load cart from localStorage and render
+        trxItems = loadCartFromStorage();
+        renderTrxItems();
     } else {
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login').style.display = '';
