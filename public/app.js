@@ -1139,7 +1139,7 @@ function renderTrxToolbar() {
     document.getElementById('page-daftar').insertBefore(toolbar, document.getElementById('trx-list'));
   }
   toolbar.innerHTML = `
-    <button class="btn-small del" onclick="deleteAllTransactions()" style="background:#c0392b;">&#128465; Hapus Semua Transaksi</button>
+    <button class="del" onclick="deleteAllTransactions()" style="background:#c0392b;">&#128465; Hapus Semua Transaksi</button>
   `;
 }
 
