@@ -9,11 +9,11 @@
   },
   {
     "id": 2,
-    "name": "Minyak Makan Curah Â½ kg",
+    "name": "Minyak Makan Curah ½ kg",
     "buy_price": 16300,
     "sell_price": 0,
     "stock": 25,
-    "category": "Minyak"
+    "category": "Sembako"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "buy_price": 16300,
     "sell_price": 0,
     "stock": 23,
-    "category": "Minyak"
+    "category": "Sembako"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0,
-    "category": "Kacang"
+    "category": "Sembako"
   },
   {
     "id": 5,
@@ -78,13 +78,5 @@
     "sell_price": 0,
     "stock": 6,
     "category": "Beras"
-  },
-  {
-    "id": 11,
-    "name": "a",
-    "buy_price": 0,
-    "sell_price": 0,
-    "stock": 0,
-    "category": "Roti"
   }
 ]
