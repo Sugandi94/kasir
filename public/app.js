@@ -387,9 +387,18 @@ function renderTable(containerId, columns, data, options = {}) {
     let searchHtml = '';
     if (search !== null) {
         searchHtml = `
-        <input type="text" placeholder="Search..." value="${searchValue}" 
-            oninput="(${onSearchChange})(this.value)" 
-            style="padding:6px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; flex-grow:1; min-width: 180px;">
+        <div style="display:flex; align-items:center; gap:8px; flex-grow:1; min-width: 180px;">
+            <input type="text" placeholder="Search..." value="${searchValue}" 
+                oninput="(${onSearchChange})(this.value)" 
+                style="padding:6px 10px; font-size: 14px; border: 1px solid #168bff; border-radius: 4px; flex-grow:1;">
+            <button type="button" onclick="(function(){
+                const input = document.querySelector('#${containerId} input[type=text]');
+                if(input){
+                    input.value = '';
+                    (${onSearchChange})('');
+                }
+            })()" style="padding:6px 10px; font-size: 14px; border: 1px solid #168baa; border-radius: 4px; background:#168bff; cursor:pointer;">Reset</button>
+        </div>
         `;
     }
 
@@ -519,11 +528,7 @@ function renderProductTable() {
             tableClass: 'common-table',
             search: true,
             searchValue: productSearchKeyword,
-            onSearchChange: (val) => {
-                productSearchKeyword = val;
-                productCurrentPage = 1;
-                renderProductTable();
-            },
+            onSearchChange: debouncedHandleProductSearch,
             title: 'Daftar Produk'
         });
 }
