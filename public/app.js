@@ -110,11 +110,14 @@ function loadLastTrxList() {
         } else {
             trx.forEach((t, i) => {
                 let items = t.items.map(it =>
-                    `<div>
-                        <b>${it.name}</b> x${it.qty}
-                        <span style="color:#888;">@Rp${it.price.toLocaleString('id-ID')}</span>
-                        = <b>Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</b>
-                    </div>`
+                    `<table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
+                        <tr>
+                            <td style="font-weight:bold; padding: 2px 4px;">${it.name}</td>
+                            <td style="padding: 2px 4px; text-align: center;">x${it.qty}</td>
+                            <td style="padding: 2px 4px; color:#888; text-align: right;">@Rp${it.price.toLocaleString('id-ID')}</td>
+                            <td style="font-weight:bold; padding: 2px 4px; text-align: right;">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
+                        </tr>
+                    </table>`
                 ).join('');
                 html += `
                     <tr>
@@ -376,7 +379,7 @@ function renderProductTable() {
                 <td>Rp${Number(p.buy_price).toLocaleString('id-ID')}</td>
                 <td>Rp${Number(p.sell_price).toLocaleString('id-ID')}</td>
                 <td>${p.stock}</td>
-                <td style="text-align:left;">
+<td style="text-align:center;">
                     <div class="product-row-actions">
                         <button class="btn-small edit" title="Edit" onclick="editProduct('${p.id}', \`${p.name.replace(/`/g, '\\`')}\`, '${p.buy_price}', '${p.sell_price}', '${p.stock}')">&#9998;</button>
                         <button class="btn-small del" title="Hapus" onclick="deleteProduct('${p.id}')">&#128465;</button>
@@ -901,11 +904,14 @@ function renderTrxTable() {
   } else {
     pageData.forEach((t, i) => {
       let items = t.items.map(it =>
-        `<div>
-          <b>${toProperCase(it.name)}</b> x${it.qty}
-          <span style="color: #888;">@Rp${it.price.toLocaleString('id-ID')}</span>
-          = <b>Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</b>
-        </div>`).join('');
+        `<table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
+          <tr>
+            <td style="font-weight:bold; padding: 2px 4px;">${toProperCase(it.name)}</td>
+            <td style="padding: 2px 4px; text-align: center;">x${it.qty}</td>
+            <td style="padding: 2px 4px; color:#888; text-align: right;">@Rp${it.price.toLocaleString('id-ID')}</td>
+            <td style="font-weight:bold; padding: 2px 4px; text-align: right;">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
+          </tr>
+        </table>`).join('');
       html += `
         <tr>
           <td>${(trxCurrentPage - 1) * trxPageSize + i + 1}</td>

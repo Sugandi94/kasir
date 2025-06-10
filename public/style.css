@@ -303,10 +303,63 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   background: #1d8a4c;
   color: #fff;
   font-weight: 600;
-  padding: 10px 8px;
+  padding: 8px 8px;
   text-align: left;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.product-table tbody td {
+  padding: 8px 8px;
+  border-bottom: 1px solid #e5e5e5;
+  vertical-align: middle;
+}
+
+/* Fix table layout and column widths */
+.product-table {
+  table-layout: fixed;
+}
+
+.product-table th:nth-child(1),
+.product-table td:nth-child(1) {
+  width: 40px; /* No column */
+  text-align: center;
+}
+
+.product-table th:nth-child(2),
+.product-table td:nth-child(2) {
+  width: 220px; /* Nama Produk */
+  text-align: left;
+}
+
+.product-table th:nth-child(3),
+.product-table td:nth-child(3) {
+  width: 160px; /* Harga Beli */
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
+.product-table th:nth-child(4),
+.product-table td:nth-child(4) {
+  width: 160px; /* Harga Jual */
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+  
+.product-table th:nth-child(5),
+.product-table td:nth-child(5) {
+  width: 80px; /* Stok */
+  text-align: left;
+}
+
+.product-table th:nth-child(6),
+.product-table td:nth-child(6) {
+  width: 120px; /* Aksi column */
+  text-align: center;
 }
 
 .product-table tbody td {
@@ -444,8 +497,12 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
     display: block;
     width: 100%;
   }
-  .trx-table thead {
+  /* Hide some headers on mobile */
+  .trx-table thead th:nth-child(n+3) {
     display: none;
+  }
+  .trx-table thead {
+    display: table-header-group;
   }
   .trx-table tr {
     margin-bottom: 18px;
