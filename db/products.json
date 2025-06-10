@@ -1,105 +1,91 @@
 [
   {
     "id": 1,
-    "name": "Beras swan 30 kg",
-    "buy_price": 433000,
-    "sell_price": 435000,
-    "stock": -14
+    "name": "Aqua Besar",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": -2
   },
   {
     "id": 2,
-    "name": "Beras swan 10 kg",
-    "buy_price": 147000,
-    "sell_price": 149000,
-    "stock": 4
+    "name": "Aqua Kecil",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
   },
   {
     "id": 3,
-    "name": "Beras swan 5 kg",
-    "buy_price": 77000,
-    "sell_price": 79000,
-    "stock": 3
-  },
-  {
-    "id": 4,
     "name": "Beras kepala singa",
-    "buy_price": 72500,
-    "sell_price": 74000,
+    "buy_price": 0,
+    "sell_price": 0,
     "stock": 6
   },
   {
-    "id": 5,
+    "id": 4,
     "name": "Beras Murah",
-    "buy_price": 390000,
-    "sell_price": 405000,
+    "buy_price": 0,
+    "sell_price": 0,
     "stock": 1
   },
   {
+    "id": 5,
+    "name": "Beras swan 10 kg",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 4
+  },
+  {
     "id": 6,
-    "name": "Minyak Makan Curah 1 kg",
-    "buy_price": 16300,
-    "sell_price": 17500,
-    "stock": 25
+    "name": "Beras swan 30 kg",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": -14
   },
   {
     "id": 7,
-    "name": "Minyak Makan Curah ½ kg",
-    "buy_price": 16300,
-    "sell_price": 9000,
-    "stock": 25
+    "name": "Beras swan 5 kg",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 3
   },
   {
     "id": 8,
-    "name": "Tepung Roti",
-    "buy_price": 8000,
-    "sell_price": 8000,
-    "stock": 23
-  },
-  {
-    "id": 9,
     "name": "Kacang Ijo",
     "buy_price": 0,
     "sell_price": 0,
     "stock": -1
   },
   {
-    "id": 10,
-    "name": "Minyak Kita 2 L",
-    "buy_price": 0,
-    "sell_price": 33500,
-    "stock": 0
-  },
-  {
-    "id": 11,
+    "id": 9,
     "name": "Minyak Kita 1 L",
-    "buy_price": 0,
-    "sell_price": 16500,
-    "stock": 0
-  },
-  {
-    "id": 12,
-    "name": "Aqua Besar",
-    "buy_price": 52000,
-    "sell_price": 5000,
-    "stock": -2
-  },
-  {
-    "id": 13,
-    "name": "Aqua Kecil",
-    "buy_price": 46000,
-    "sell_price": 3000,
-    "stock": 0
-  },
-  {
-    "id": 14,
-    "name": "Aqua Besar",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0
   },
   {
-    "id": 15,
-    "name": "Aqua Kecil",
+    "id": 10,
+    "name": "Minyak Kita 2 L",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
+  },
+  {
+    "id": 11,
+    "name": "Minyak Makan Curah 1 Kg",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
+  },
+  {
+    "id": 12,
+    "name": "Minyak Makan Curah 1/2 Kg",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0
+  },
+  {
+    "id": 13,
+    "name": "Tepung Roti",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0

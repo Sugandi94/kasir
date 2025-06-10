@@ -361,7 +361,7 @@ function renderTable(containerId, columns, data, options = {}) {
         ${searchHtml}
     </div>
     <div class="table-responsive">
-    <table class="${tableClass}">
+    <table id="product-table" class="${tableClass}">
         <thead>
             <tr>
     `;
@@ -764,7 +764,6 @@ function cancelEditProduct() {
     resetProductForm();
 }
 
-// Export Produk ke Excel
 function exportProductsExcel() {
     const table = document.getElementById('product-table');
     let csv = [];
@@ -773,7 +772,8 @@ function exportProductsExcel() {
         let cols = row.querySelectorAll('th,td');
         let rowData = [];
         for (let i = 0; i < cols.length; i++) {
-            if (i === 4) continue;
+            // Exclude the "Aksi" column by checking header text or last column
+            if (cols[i].innerText.trim().toLowerCase() === 'aksi' || i === cols.length - 1) continue;
             let data = cols[i].innerText.replace(/,/g, '');
             rowData.push('"' + data + '"');
         }

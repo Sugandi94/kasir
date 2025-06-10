@@ -66,6 +66,10 @@
                         <input type="file" id="import-excel-file" accept=".xlsx,.xls" style="flex-grow: 1; min-width: 180px;">
                         <button onclick="importProductsFromExcel()" style="flex-shrink: 0;">Import Excel</button>
                         <button onclick="exportProductsExcel()" style="flex-shrink: 0;">Export Excel</button>
+                        <label style="display:flex; align-items:center; gap:4px; font-size:14px; user-select:none;">
+                            <input type="checkbox" id="toggle-pagination-checkbox" checked onchange="toggleProductPagination(this.checked)">
+                            Tampilkan Pagination
+                        </label>
                         <button onclick="deleteAllProducts()" style="flex-shrink: 0; background: #c0392b; color: white;">Hapus Semua Produk</button>
                     </div>
                     <div id="product-list"></div>
