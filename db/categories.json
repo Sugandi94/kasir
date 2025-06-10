@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "Rokok"
+  },
+  {
+    "id": 2,
+    "name": "Minuman"
+  },
+  {
+    "id": 3,
+    "name": "Makanan"
+  },
+  {
+    "id": 4,
+    "name": "Sabun"
+  },
+  {
+    "id": 5,
+    "name": "Tepung"
+  },
+  {
+    "id": 6,
+    "name": "Tisu"
+  },
+  {
+    "id": 7,
+    "name": "Roti"
+  },
+  {
+    "id": 8,
+    "name": "Sembako"
+  },
+  {
+    "id": 9,
+    "name": "Mie"
+  },
+  {
+    "id": 10,
+    "name": "Plastik"
+  },
+  {
+    "id": 11,
+    "name": "Obat"
+  }
+]

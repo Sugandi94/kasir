@@ -24,6 +24,7 @@
                 <div class="dashboard-menu-vertical">
                     <button onclick="showPage('user')" id="nav-user"><span>Kelola User</span></button>
                     <button onclick="showPage('produk')" id="nav-produk"><span>Kelola Produk</span></button>
+                    <button onclick="showPage('kategori')" id="nav-kategori"><span>Kelola Kategori</span></button>
                     <button onclick="showPage('transaksi')" id="nav-transaksi"><span>Transaksi</span></button>
                     <button onclick="showPage('daftar')" id="nav-daftar"><span>Daftar Transaksi</span></button>
                     <button onclick="logout()" id="nav-logout" class="logout-btn"><span>Logout</span></button>
@@ -58,6 +59,9 @@
                         <input id="prodbuy" type="number" placeholder="Harga Beli">
                         <input id="prodsell" type="number" placeholder="Harga Jual">
                         <input id="prodstock" type="number" placeholder="Stok">
+<select id="prodcategory">
+    <option value="">-- Pilih Kategori --</option>
+</select>
                         <button onclick="saveProduct()" id="product-save-btn">Tambah</button>
                         <button onclick="cancelEditProduct()" id="product-cancel-btn" style="display:none;">Batal</button>
                         <div id="addprod-msg"></div>
@@ -117,6 +121,19 @@
                         <button onclick="resetFilterTrx()">Reset</button>
                     </div>
                     <div id="trx-list"></div>
+                </section>
+                <!-- Kategori Management Page -->
+                <section id="page-kategori" class="page" style="display:none;">
+                    <h3>Kelola Kategori</h3>
+                    <button id="toggle-category-form-btn" onclick="toggleCategoryForm()">Tambah Kategori Baru</button>
+                    <div id="category-form-container" style="display:none; margin-top: 10px;">
+                        <h4 id="category-form-title">Tambah Kategori Baru</h4>
+                        <input id="newcategory" placeholder="Nama Kategori">
+                        <button onclick="saveCategory()" id="category-save-btn">Tambah</button>
+                        <button onclick="cancelEditCategory()" id="category-cancel-btn" style="display:none;">Batal</button>
+                        <div id="addcategory-msg"></div>
+                    </div>
+                    <div id="category-list"></div>
                 </section>
             </main>
         </div>

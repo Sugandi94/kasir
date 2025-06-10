@@ -104,6 +104,132 @@ function showDashboard() {
     showPage('transaksi');
 }
 
+// Category Management
+let editingCategoryId = null;
+
+function toggleCategoryForm() {
+    const formContainer = document.getElementById('category-form-container');
+    const toggleBtn = document.getElementById('toggle-category-form-btn');
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        toggleBtn.innerText = 'Sembunyikan Form';
+    } else {
+        formContainer.style.display = 'none';
+        toggleBtn.innerText = 'Tambah Kategori Baru';
+    }
+}
+
+function loadCategories() {
+    fetch('/api/categories').then(r => r.json()).then(categories => {
+        let html = `
+        <div class="table-responsive">
+        <table class="common-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
+        categories.forEach((cat, i) => {
+            html += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${cat.name}</td>
+                    <td style="text-align:center;">
+                        <button class="btn-small edit" title="Edit" onclick="editCategory('${cat.id}', '${cat.name}')">&#9998;</button>
+                        <button class="btn-small del" title="Hapus" onclick="deleteCategory('${cat.id}')">&#128465;</button>
+                    </td>
+                </tr>
+            `;
+        });
+        html += `
+            </tbody>
+        </table>
+        </div>
+        `;
+        document.getElementById('category-list').innerHTML = html;
+    });
+}
+
+function saveCategory() {
+    console.log('saveCategory called');
+    const name = document.getElementById('newcategory').value.trim();
+    if (!name) {
+        document.getElementById('addcategory-msg').innerText = 'Nama kategori wajib diisi!';
+        return;
+    }
+    if (editingCategoryId) {
+        fetch(`/api/categories/${editingCategoryId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(r => r.json())
+        .then(res => {
+            document.getElementById('addcategory-msg').innerText = res.success ? 'Kategori berhasil diupdate' : (res.message || 'Gagal update');
+            if (res.success) {
+                resetCategoryForm();
+                loadCategories();
+            }
+        }).catch(() => {
+            document.getElementById('addcategory-msg').innerText = 'Error update data.';
+        });
+    } else {
+        fetch('/api/categories', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(r => r.json())
+        .then(res => {
+            document.getElementById('addcategory-msg').innerText = res.success ? 'Kategori berhasil ditambah' : (res.message || 'Gagal tambah');
+            if (res.success) {
+                resetCategoryForm();
+                loadCategories();
+            }
+        });
+    }
+}
+
+function editCategory(id, name) {
+    editingCategoryId = id;
+    document.getElementById('newcategory').value = name;
+    document.getElementById('category-form-title').innerText = 'Edit Kategori';
+    document.getElementById('category-save-btn').innerText = 'Update';
+    document.getElementById('category-cancel-btn').style.display = '';
+}
+
+function cancelEditCategory() {
+    resetCategoryForm();
+}
+
+function resetCategoryForm() {
+    editingCategoryId = null;
+    document.getElementById('newcategory').value = '';
+    document.getElementById('category-form-title').innerText = 'Tambah Kategori Baru';
+    document.getElementById('category-save-btn').innerText = 'Tambah';
+    document.getElementById('category-cancel-btn').style.display = 'none';
+    document.getElementById('addcategory-msg').innerText = '';
+}
+
+// Extend showPage to load categories when page-kategori is shown
+function showPage(page) {
+    document.querySelectorAll('.page').forEach(section => section.style.display = 'none');
+    document.getElementById('page-' + page).style.display = '';
+    if(page === 'user') loadUsers();
+    if(page === 'produk') loadProducts();
+    if(page === 'kategori') loadCategories();
+    if(page === 'daftar') loadTrxList(1);
+    if(page === 'transaksi') {
+        loadTrxProducts();
+        renderTrxItems(); // Untuk tabel keranjang transaksi
+        loadLastTrxList(); // --- Tampilkan 5 transaksi terakhir di bawah form transaksi
+    }
+}
+
 function logout() {
     currentUser = null;
     clearSession();
@@ -124,6 +250,7 @@ function showPage(page) {
     document.getElementById('page-' + page).style.display = '';
     if(page === 'user') loadUsers();
     if(page === 'produk') loadProducts();
+    if(page === 'kategori') loadCategories();
     if(page === 'daftar') loadTrxList(1);
     if(page === 'transaksi') {
         loadTrxProducts();
@@ -490,6 +617,7 @@ function renderProductTable() {
     const columns = [
         { key: 'no', label: 'No' },
         { key: 'name', label: 'Nama Produk', sortable: true },
+        { key: 'category', label: 'Kategori', sortable: true },
         { key: 'buy_price', label: 'Harga Beli', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
         { key: 'sell_price', label: 'Harga Jual', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
         { key: 'stock', label: 'Stok', sortable: true },
@@ -633,6 +761,29 @@ function loadProducts() {
     });
 }
 
+function loadCategoryOptions() {
+    fetch('/api/categories').then(r => r.json()).then(categories => {
+        const select = document.getElementById('prodcategory');
+        if (!select) return;
+        select.innerHTML = '<option value="">-- Pilih Kategori --</option>';
+        categories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat.name;
+            option.textContent = cat.name;
+            select.appendChild(option);
+        });
+    });
+}
+
+// Update showPage to load categories options when showing product page
+const originalShowPage = showPage;
+showPage = function(page) {
+    originalShowPage(page);
+    if (page === 'produk') {
+        loadCategoryOptions();
+    }
+};
+
 // Fungsi deleteAllProducts tetap seperti jawaban sebelumnya
 function deleteAllProducts() {
     if (!confirm("Hapus semua produk? Tindakan ini tidak dapat dibatalkan!")) return;
@@ -652,6 +803,7 @@ async function saveProduct() {
     const buy_price_raw = document.getElementById('prodbuy').value.trim();
     const sell_price_raw = document.getElementById('prodsell').value.trim();
     const stock_raw = document.getElementById('prodstock').value.trim();
+    const category = document.getElementById('prodcategory').value.trim();
 
     if (!name) {
         document.getElementById('addprod-msg').innerText = 'Nama produk wajib diisi!';
@@ -687,7 +839,7 @@ async function saveProduct() {
         fetch(`/api/products/${editingProductId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, buy_price, sell_price, stock })
+            body: JSON.stringify({ name, buy_price, sell_price, stock, category })
         })
         .then(r => r.json())
         .then(res => {
@@ -703,7 +855,7 @@ async function saveProduct() {
         fetch('/api/products', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, buy_price, sell_price, stock })
+            body: JSON.stringify({ name, buy_price, sell_price, stock, category })
         })
         .then(r => r.json())
         .then(res => {
@@ -769,12 +921,13 @@ async function importProductsFromExcel() {
     reader.readAsArrayBuffer(file);
 }
 
-function editProduct(id, name, buy_price, sell_price, stock) {
+function editProduct(id, name, buy_price, sell_price, stock, category = '') {
     editingProductId = id;
     document.getElementById('prodname').value = name;
     document.getElementById('prodbuy').value = buy_price;
     document.getElementById('prodsell').value = sell_price;
     document.getElementById('prodstock').value = stock;
+    document.getElementById('prodcategory').value = category;
     document.getElementById('prodname').focus();
     document.getElementById('product-form-title').innerText = 'Edit Produk';
     document.getElementById('product-save-btn').innerText = 'Update';
@@ -787,6 +940,7 @@ function resetProductForm() {
     document.getElementById('prodbuy').value = '';
     document.getElementById('prodsell').value = '';
     document.getElementById('prodstock').value = '';
+    document.getElementById('prodcategory').value = '';
     document.getElementById('product-form-title').innerText = 'Tambah Produk';
     document.getElementById('product-save-btn').innerText = 'Tambah';
     document.getElementById('product-cancel-btn').style.display = 'none';

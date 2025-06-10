@@ -87,7 +87,7 @@ app.post('/api/products', (req, res) => {
         return res.status(500).json({ success: false, message: 'Gagal membaca database produk.' });
     }
 
-    const { name, buy_price, sell_price, stock } = req.body;
+    const { name, buy_price, sell_price, stock, category } = req.body;
     if (typeof name !== 'string' || name.trim() === '') {
         return res.json({ success: false, message: 'Nama produk wajib diisi.' });
     }
@@ -102,7 +102,8 @@ app.post('/api/products', (req, res) => {
         name,
         buy_price: buy_price !== undefined ? parseInt(buy_price) || 0 : 0,
         sell_price: sell_price !== undefined ? parseInt(sell_price) || 0 : 0,
-        stock: stock !== undefined ? parseInt(stock) || 0 : 0
+        stock: stock !== undefined ? parseInt(stock) || 0 : 0,
+        category: typeof category === 'string' ? category.trim() : ''
     };
 
     products.push(newProduct);
@@ -129,7 +130,7 @@ app.put('/api/products/:id', (req, res) => {
         return res.json({ success: false, message: 'Produk tidak ditemukan' });
     }
 
-    const { name, buy_price, sell_price, stock } = req.body;
+    const { name, buy_price, sell_price, stock, category } = req.body;
     if (typeof name !== 'string' || name.trim() === '') {
         return res.json({ success: false, message: 'Nama produk wajib diisi.' });
     }
@@ -138,6 +139,7 @@ app.put('/api/products/:id', (req, res) => {
     if (buy_price !== undefined) products[idx].buy_price = parseInt(buy_price) || 0;
     if (sell_price !== undefined) products[idx].sell_price = parseInt(sell_price) || 0;
     if (stock !== undefined) products[idx].stock = parseInt(stock) || 0;
+    if (category !== undefined) products[idx].category = typeof category === 'string' ? category.trim() : '';
 
     try {
         writeDB('./db/products.json', products);
@@ -258,6 +260,99 @@ app.delete('/api/products', (req, res) => {
         res.json({ success: true });
     } catch (e) {
         res.status(500).json({ success: false, message: 'Gagal menghapus semua produk.' });
+    }
+});
+
+// Category API
+
+// Ambil semua kategori
+app.get('/api/categories', (req, res) => {
+    let categories = [];
+    try {
+        categories = readDB('./db/categories.json');
+    } catch (e) {}
+    res.json(categories);
+});
+
+// Tambah kategori
+app.post('/api/categories', (req, res) => {
+    let categories = [];
+    try {
+        categories = readDB('./db/categories.json');
+    } catch (e) {}
+
+    const { name } = req.body;
+    if (typeof name !== 'string' || name.trim() === '') {
+        return res.json({ success: false, message: 'Nama kategori wajib diisi.' });
+    }
+
+    let newId = 1;
+    if (categories.length > 0) {
+        newId = Math.max(...categories.map(c => Number(c.id))) + 1;
+    }
+
+    const newCategory = {
+        id: newId,
+        name: name.trim()
+    };
+
+    categories.push(newCategory);
+
+    try {
+        writeDB('./db/categories.json', categories);
+        res.json({ success: true, category: newCategory });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menyimpan kategori.' });
+    }
+});
+
+// Update kategori
+app.put('/api/categories/:id', (req, res) => {
+    let categories = [];
+    try {
+        categories = readDB('./db/categories.json');
+    } catch (e) {
+        return res.status(500).json({ success: false, message: 'Gagal membaca database kategori.' });
+    }
+
+    const idx = categories.findIndex(c => String(c.id) === String(req.params.id));
+    if (idx === -1) {
+        return res.json({ success: false, message: 'Kategori tidak ditemukan' });
+    }
+
+    const { name } = req.body;
+    if (typeof name !== 'string' || name.trim() === '') {
+        return res.json({ success: false, message: 'Nama kategori wajib diisi.' });
+    }
+
+    categories[idx].name = name.trim();
+
+    try {
+        writeDB('./db/categories.json', categories);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menyimpan perubahan kategori.' });
+    }
+});
+
+// Hapus kategori
+app.delete('/api/categories/:id', (req, res) => {
+    let categories = [];
+    try {
+        categories = readDB('./db/categories.json');
+    } catch (e) {
+        return res.status(500).json({ success: false, message: 'Gagal membaca database kategori.' });
+    }
+    const index = categories.findIndex(c => String(c.id) === String(req.params.id));
+    if (index === -1) {
+        return res.json({ success: false, message: 'Kategori tidak ditemukan' });
+    }
+    categories.splice(index, 1);
+    try {
+        writeDB('./db/categories.json', categories);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menghapus kategori.' });
     }
 });
 
