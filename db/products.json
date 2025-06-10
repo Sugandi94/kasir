@@ -1,65 +1,90 @@
 [
   {
     "id": 1,
-    "name": "Beras Swan 30 kg",
-    "buy_price": 433000,
-    "sell_price": 435000,
-    "stock": -7
+    "name": "Tepung Roti 1 kg",
+    "buy_price": 8000,
+    "sell_price": 0,
+    "stock": 25,
+    "category": "Sembako"
   },
   {
     "id": 2,
-    "name": "Beras Swan 10 kg",
-    "buy_price": 147000,
-    "sell_price": 149000,
-    "stock": 4
+    "name": "Minyak Makan Curah Â½ kg",
+    "buy_price": 16300,
+    "sell_price": 0,
+    "stock": 25,
+    "category": "Minyak"
   },
   {
     "id": 3,
-    "name": "Beras Swan 5 kg",
-    "buy_price": 77000,
-    "sell_price": 79000,
-    "stock": 3
+    "name": "Minyak Makan Curah 1 kg",
+    "buy_price": 16300,
+    "sell_price": 0,
+    "stock": 23,
+    "category": "Minyak"
   },
   {
     "id": 4,
-    "name": "Beras Kepala Singa",
-    "buy_price": 72500,
-    "sell_price": 74000,
-    "stock": 6
-  },
-  {
-    "id": 5,
-    "name": "Beras Murah",
-    "buy_price": 390000,
-    "sell_price": 405000,
-    "stock": 1
-  },
-  {
-    "id": 6,
-    "name": "Minyak Makan Curah 1 kg",
-    "buy_price": 16300,
-    "sell_price": 17500,
-    "stock": 23
-  },
-  {
-    "id": 7,
-    "name": "Minyak Makan Curah ½ kg",
-    "buy_price": 16300,
-    "sell_price": 9000,
-    "stock": 25
-  },
-  {
-    "id": 8,
-    "name": "Tepung Roti 1 kg",
-    "buy_price": 8000,
-    "sell_price": 8000,
-    "stock": 25
-  },
-  {
-    "id": 9,
     "name": "Kacang Ijo",
     "buy_price": 0,
     "sell_price": 0,
-    "stock": 0
+    "stock": 0,
+    "category": "Kacang"
+  },
+  {
+    "id": 5,
+    "name": "Freshcare Hot",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Obat"
+  },
+  {
+    "id": 6,
+    "name": "Beras Swan 5 kg",
+    "buy_price": 77000,
+    "sell_price": 0,
+    "stock": 3,
+    "category": "Beras"
+  },
+  {
+    "id": 7,
+    "name": "Beras Swan 30 kg",
+    "buy_price": 433000,
+    "sell_price": 0,
+    "stock": -7,
+    "category": "Beras"
+  },
+  {
+    "id": 8,
+    "name": "Beras Swan 10 kg",
+    "buy_price": 147000,
+    "sell_price": 0,
+    "stock": 3,
+    "category": "Beras"
+  },
+  {
+    "id": 9,
+    "name": "Beras Murah",
+    "buy_price": 390000,
+    "sell_price": 0,
+    "stock": 1,
+    "category": "Beras"
+  },
+  {
+    "id": 10,
+    "name": "Beras Kepala Singa",
+    "buy_price": 72500,
+    "sell_price": 0,
+    "stock": 6,
+    "category": "Beras"
+  },
+  {
+    "id": 11,
+    "name": "a",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Roti"
   }
 ]

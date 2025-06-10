@@ -103,7 +103,7 @@ app.post('/api/products', (req, res) => {
         buy_price: buy_price !== undefined ? parseInt(buy_price) || 0 : 0,
         sell_price: sell_price !== undefined ? parseInt(sell_price) || 0 : 0,
         stock: stock !== undefined ? parseInt(stock) || 0 : 0,
-        category: typeof category === 'string' ? category.trim() : ''
+        category: category !== undefined ? String(category).trim() : ''
     };
 
     products.push(newProduct);
