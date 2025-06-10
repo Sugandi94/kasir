@@ -699,7 +699,8 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   font-size: 13px;
   padding: 4px 8px;
   cursor: pointer;
-  min-width: 110px;
+  min-width: 60px;
+  max-width: 60px;
   text-align: center;
   margin-right: 0;
   transition: background 0.15s;
@@ -726,6 +727,9 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 .btn-small.del {
   background: #e74c3c;
   color: #fff;
+  min-width: 60px;
+  max-width: 60px;
+  padding: 4px 8px;
 }
 .btn-small.del:hover {
   background: #c0392b;
@@ -936,6 +940,13 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   gap: 8px;
   justify-content: center;
   align-items: center;
+}
+
+/* Fix button width on Daftar Transaksi page */
+#page-daftar .btn-small {
+  min-width: 60px;
+  max-width: 60px;
+  padding: 4px 8px;
 }
 
 /* Responsive: di HP, tombol bisa wrap ke bawah jika kurang lebar */
