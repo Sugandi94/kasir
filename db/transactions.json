@@ -1,16 +1,1 @@
-[
-  {
-    "id": 4,
-    "date": "2025-06-10T04:58:51.952Z",
-    "items": [
-      {
-        "product_id": "1",
-        "name": "Beras Swan 30 kg",
-        "qty": 8,
-        "price": 5000,
-        "subtotal": 40000
-      }
-    ],
-    "total": 40000
-  }
-]
+[]
