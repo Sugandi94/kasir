@@ -1,6 +1,9 @@
 let currentUser = null;
 let editingProductId = null;
 let editingUserId = null;
+// Track the transaction being edited
+let editingTransactionId = null;
+
 let trxItems = [];
 
 // Helper functions to save/load cart data to/from localStorage
@@ -819,6 +822,10 @@ function exportProductsExcel() {
             // Exclude the "Aksi" column by checking header text or last column
             if (cols[i].innerText.trim().toLowerCase() === 'aksi' || i === cols.length - 1) continue;
             let data = cols[i].innerText.replace(/,/g, '');
+            // Remove "Rp" and "." from price columns (3rd and 4th columns, index 2 and 3)
+            if (i === 2 || i === 3) {
+                data = data.replace(/Rp/g, '').replace(/\./g, '').trim();
+            }
             rowData.push('"' + data + '"');
         }
         csv.push(rowData.join(','));
@@ -1029,6 +1036,17 @@ function submitTrx() {
     .then(r => r.json()).then(res => {
         document.getElementById('trx-msg').innerText = res.success ? 'Transaksi sukses!' : (res.message || 'Gagal transaksi');
         if (res.success) {
+            if (editingTransactionId) {
+                // Delete old transaction after successful save
+                fetch(`/api/transactions/${editingTransactionId}`, { method: 'DELETE' })
+                .then(r => r.json())
+                .then(delRes => {
+                    if (!delRes.success) {
+                        alert('Gagal menghapus transaksi lama.');
+                    }
+                });
+                editingTransactionId = null;
+            }
             trxItems = [];
             saveCartToStorage();
             renderTrxItems();
@@ -1094,8 +1112,11 @@ function renderTrxTable() {
 
     renderTable('trx-list', columns, pageData, {
         actions: (row) => `
-            <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️ Print</button>
-            <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465; Hapus</button>
+            <div class="aksi-group">
+                <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️ Print</button>
+                <button class="btn-small edit" style="min-width: 60px; max-width: 60px; padding: 4px 8px;" onclick="loadTransactionToCart('${row.id}')" title="Edit ke Keranjang">&#9998;</button>
+                <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465; Hapus</button>
+            </div>
         `,
         tableClass: 'user-table',
         pagination: true,
@@ -1172,31 +1193,65 @@ function printTransaction(trxId) {
   // Cari transaksi berdasarkan id dari semua data transaksi yang sudah di-load
   const trx = trxAllData.find(t => String(t.id) === String(trxId));
   if (!trx) return alert('Transaksi tidak ditemukan!');
+  // ... existing printTransaction code ...
+}
 
-  function toProperCase(str) {
-    return str.replace(/\w\S*/g, function(txt){
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+// New function to load transaction items back to cart for editing
+function loadTransactionToCart(trxId) {
+    const trx = trxAllData.find(t => String(t.id) === String(trxId));
+    if (!trx) {
+        alert('Transaksi tidak ditemukan!');
+        return;
+    }
+    editingTransactionId = trxId; // Set editing transaction id
+    trxItems = trx.items.map(item => {
+        let price = item.price;
+        if (!price || price === 0) {
+            // fallback to product sell_price if price missing or zero
+            const prod = productAllData.find(p => String(p.id) === String(item.product_id));
+            price = prod ? prod.sell_price : 0;
+        }
+        return {
+            product_id: item.product_id || item.id || '', // fallback if product_id missing
+            name: item.name,
+            qty: item.qty,
+            price: price
+        };
     });
-  }
+    saveCartToStorage();
+    renderTrxItems();
+    showPage('transaksi');
+}
 
-  let html = `
+// Recreate printTransaction function to restore print button functionality
+function printTransaction(trxId) {
+    const trx = trxAllData.find(t => String(t.id) === String(trxId));
+    if (!trx) return alert('Transaksi tidak ditemukan!');
+
+    function toProperCase(str) {
+        return str.replace(/\w\S*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
+    let html = `
     <html>
     <head>
       <title>Print Transaksi #${trx.id}</title>
       <style>
         body { font-family: Arial, sans-serif; margin:24px; color:#222; }
         .struk-container { max-width: 380px; margin: 0 auto; }
-        h2 { text-align:center; margin-bottom:16px; }
+        h2 { text-align: center; margin-bottom: 16px; }
         .info { margin-bottom: 12px; }
-        table { width:100%; border-collapse: collapse; margin-bottom:12px;}
-        th, td { padding: 5px 8px; border: 1px solid #ccc; font-size:14px;}
+        table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+        th, td { padding: 5px 8px; border: 1px solid #ccc; font-size: 14px; }
         th { background: #f4f4f4; }
-        .right { text-align:right; }
+        .right { text-align: right; }
         tfoot th { background: #fff; font-size: 16px; }
-        .footer { text-align:center; font-size:13px; margin-top:20px; color:#555; }
+        .footer { text-align: center; font-size: 13px; margin-top: 20px; color: #555; }
         @media print {
-          button { display:none; }
-          body { margin:0; }
+          button { display: none; }
+          body { margin: 0; }
         }
       </style>
     </head>
@@ -1218,15 +1273,15 @@ function printTransaction(trxId) {
         </thead>
         <tbody>
   `;
-  trx.items.forEach(it => {
-    html += `<tr>
+    trx.items.forEach(it => {
+        html += `<tr>
       <td>${toProperCase(it.name)}</td>
       <td class="right">${it.qty}</td>
       <td class="right">Rp${it.price.toLocaleString('id-ID')}</td>
       <td class="right">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
     </tr>`;
-  });
-  html += `
+    });
+    html += `
         </tbody>
         <tfoot>
           <tr>
@@ -1244,9 +1299,9 @@ function printTransaction(trxId) {
     </body>
     </html>
   `;
-  let win = window.open('', '_blank', 'width=400,height=600');
-  win.document.write(html);
-  win.document.close();
+    let win = window.open('', '_blank', 'width=400,height=600');
+    win.document.write(html);
+    win.document.close();
 }
 
 function renderTrxPagination() {

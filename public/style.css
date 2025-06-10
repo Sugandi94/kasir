@@ -712,6 +712,12 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 .btn-small.edit {
   background: #007bff;
   color: #fff;
+  min-width: 60px;
+  max-width: 60px;
+  padding: 4px 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-small.edit:hover {
   background: #0056b3;
