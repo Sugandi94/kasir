@@ -1221,7 +1221,7 @@ function loadTrxProducts() {
     fetch('/api/products').then(r => r.json()).then(products => {
         // Tampilkan semua produk tanpa filter stok
         let opt = products
-            .map(p => `<option value="${p.id}" data-price="${p.sell_price}">${p.name}</option>`)
+            .map(p => `<option value="${p.id}" data-price="${p.sell_price}" data-category="${p.category || ''}">${p.name}</option>`)
             .join('');
         document.getElementById('trx-product').innerHTML = opt;
         updateTrxPrice();
