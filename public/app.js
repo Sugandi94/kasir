@@ -1061,17 +1061,34 @@ function createProductAutocomplete() {
     if (document.getElementById('trx-product-search')) {
         document.getElementById('trx-product-search').remove();
     }
+    if (document.getElementById('trx-product-category')) {
+        document.getElementById('trx-product-category').remove();
+    }
 
-    // Buat input search di atas select
+    // Buat container div untuk search input dan category select
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.gap = '8px';
+    container.style.marginBottom = '7px';
+    container.style.width = '100%';
+    select.parentNode.insertBefore(container, select);
+
+    // Buat input search
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = 'Cari Produk...';
     input.id = 'trx-product-search';
-    input.style.marginBottom = '7px';
-    input.style.width = '100%';
+    input.style.flexGrow = '1';
     input.style.boxSizing = 'border-box';
     input.autocomplete = 'off';
-    select.parentNode.insertBefore(input, select);
+    container.appendChild(input);
+
+    // Buat select kategori
+    const categorySelect = document.createElement('select');
+    categorySelect.id = 'trx-product-category';
+    categorySelect.style.width = '180px';
+    categorySelect.style.boxSizing = 'border-box';
+    container.appendChild(categorySelect);
 
     // Ambil semua produk (option) awal
     let allOptions = [];
@@ -1079,41 +1096,69 @@ function createProductAutocomplete() {
         allOptions.push({
             value: select.options[i].value,
             text: select.options[i].text,
-            price: select.options[i].getAttribute('data-price')
+            price: select.options[i].getAttribute('data-price'),
+            category: select.options[i].getAttribute('data-category') || ''
         });
     }
 
-    // Saat ketik, filter option pada select
-    input.addEventListener('input', function() {
-        const keyword = this.value.toLowerCase();
+    // Fungsi untuk render opsi select berdasarkan filter
+    function renderOptions() {
+        const keyword = input.value.toLowerCase();
+        const selectedCategory = categorySelect.value;
         select.innerHTML = '';
         allOptions.forEach(opt => {
-            if (opt.text.toLowerCase().indexOf(keyword) !== -1) {
+            const matchesKeyword = opt.text.toLowerCase().indexOf(keyword) !== -1;
+            const matchesCategory = selectedCategory === '' || opt.category === selectedCategory;
+            if (matchesKeyword && matchesCategory) {
                 const option = document.createElement('option');
                 option.value = opt.value;
                 option.text = opt.text;
                 option.setAttribute('data-price', opt.price);
+                option.setAttribute('data-category', opt.category);
                 select.appendChild(option);
             }
         });
-        // Jika ada hasil, pilih pertama
         if (select.options.length > 0) {
             select.selectedIndex = 0;
             updateTrxPrice();
         } else {
             document.getElementById('trx-price').value = '';
         }
-    });
+    }
 
-    // Reset select jika input dikosongkan
+    // Event listener untuk input search
+    input.addEventListener('input', renderOptions);
+
+    // Event listener untuk category select
+    categorySelect.addEventListener('change', renderOptions);
+
+    // Reset select jika input dikosongkan dan category dipilih kosong
     input.addEventListener('blur', function() {
-        if (this.value.trim() === '') {
+        if (this.value.trim() === '' && categorySelect.value === '') {
             select.innerHTML = '';
             allOptions.forEach(opt => {
                 const option = document.createElement('option');
                 option.value = opt.value;
                 option.text = opt.text;
                 option.setAttribute('data-price', opt.price);
+                option.setAttribute('data-category', opt.category);
+                select.appendChild(option);
+            });
+            select.selectedIndex = 0;
+            updateTrxPrice();
+        }
+    });
+
+    // Reset select jika category dipilih kosong dan input kosong
+    categorySelect.addEventListener('blur', function() {
+        if (this.value === '' && input.value.trim() === '') {
+            select.innerHTML = '';
+            allOptions.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.text = opt.text;
+                option.setAttribute('data-price', opt.price);
+                option.setAttribute('data-category', opt.category);
                 select.appendChild(option);
             });
             select.selectedIndex = 0;
@@ -1123,6 +1168,17 @@ function createProductAutocomplete() {
 
     // Saat select berubah, update harga
     select.onchange = updateTrxPrice;
+
+    // Load categories for categorySelect
+    fetch('/api/categories').then(r => r.json()).then(categories => {
+        categorySelect.innerHTML = '<option value="">-- Semua Kategori --</option>';
+        categories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat.name;
+            option.textContent = cat.name;
+            categorySelect.appendChild(option);
+        });
+    });
 }
 
 // Transaksi
