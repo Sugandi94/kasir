@@ -3,7 +3,7 @@
     "id": 1,
     "name": "153",
     "buy_price": 0,
-    "sell_price": 15,
+    "sell_price": 15000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "name": "363",
     "buy_price": 0,
-    "sell_price": 9,
+    "sell_price": 9000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -19,7 +19,7 @@
     "id": 3,
     "name": "Aqua Besar",
     "buy_price": 52000,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -27,7 +27,7 @@
     "id": 4,
     "name": "Aqua Kecil",
     "buy_price": 46000,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -35,7 +35,7 @@
     "id": 5,
     "name": "Belau Cair",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -51,7 +51,7 @@
     "id": 7,
     "name": "Beras Kepala Singa",
     "buy_price": 72500,
-    "sell_price": 74,
+    "sell_price": 74000,
     "stock": 6,
     "category": "Sembako"
   },
@@ -59,7 +59,7 @@
     "id": 8,
     "name": "Beras Murah",
     "buy_price": 390000,
-    "sell_price": 405,
+    "sell_price": 405000,
     "stock": 1,
     "category": "Sembako"
   },
@@ -67,7 +67,7 @@
     "id": 9,
     "name": "Beras Swan 10 kg",
     "buy_price": 147000,
-    "sell_price": 149,
+    "sell_price": 149000,
     "stock": 4,
     "category": "Sembako"
   },
@@ -75,15 +75,15 @@
     "id": 10,
     "name": "Beras Swan 30 kg",
     "buy_price": 433000,
-    "sell_price": 435,
-    "stock": -7,
+    "sell_price": 435000,
+    "stock": 0,
     "category": "Sembako"
   },
   {
     "id": 11,
     "name": "Beras Swan 5 kg",
     "buy_price": 77000,
-    "sell_price": 79,
+    "sell_price": 79000,
     "stock": 3,
     "category": "Sembako"
   },
@@ -91,7 +91,7 @@
     "id": 12,
     "name": "BULL",
     "buy_price": 0,
-    "sell_price": 29,
+    "sell_price": 29000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -99,7 +99,7 @@
     "id": 13,
     "name": "CAMEL",
     "buy_price": 0,
-    "sell_price": 20,
+    "sell_price": 20000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -107,7 +107,7 @@
     "id": 14,
     "name": "CHIEF",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -115,7 +115,7 @@
     "id": 15,
     "name": "Club X",
     "buy_price": 0,
-    "sell_price": 22,
+    "sell_price": 22000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -123,7 +123,7 @@
     "id": 16,
     "name": "Commodore",
     "buy_price": 0,
-    "sell_price": 28,
+    "sell_price": 28000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -131,7 +131,7 @@
     "id": 17,
     "name": "Djarum Istimewa",
     "buy_price": 0,
-    "sell_price": 14,
+    "sell_price": 14000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -139,7 +139,7 @@
     "id": 18,
     "name": "Dongan (Filter)",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -147,7 +147,7 @@
     "id": 19,
     "name": "Esse Biru",
     "buy_price": 0,
-    "sell_price": 42,
+    "sell_price": 42000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -155,7 +155,7 @@
     "id": 20,
     "name": "Exrajoss",
     "buy_price": 0,
-    "sell_price": 13,
+    "sell_price": 13000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -163,7 +163,7 @@
     "id": 21,
     "name": "GM Besar",
     "buy_price": 0,
-    "sell_price": 19,
+    "sell_price": 19000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -171,7 +171,7 @@
     "id": 22,
     "name": "GM Hitam",
     "buy_price": 0,
-    "sell_price": 14,
+    "sell_price": 14000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -179,7 +179,7 @@
     "id": 23,
     "name": "GM Kecil",
     "buy_price": 0,
-    "sell_price": 15,
+    "sell_price": 15500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -187,7 +187,7 @@
     "id": 24,
     "name": "Grow Biru",
     "buy_price": 0,
-    "sell_price": 17,
+    "sell_price": 17000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -195,7 +195,7 @@
     "id": 25,
     "name": "Grow Merah",
     "buy_price": 0,
-    "sell_price": 17,
+    "sell_price": 17000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -203,7 +203,7 @@
     "id": 26,
     "name": "Grow Ungu",
     "buy_price": 0,
-    "sell_price": 18,
+    "sell_price": 18000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -211,7 +211,7 @@
     "id": 27,
     "name": "HIT Kaleng 150ml",
     "buy_price": 0,
-    "sell_price": 12,
+    "sell_price": 12500,
     "stock": 0,
     "category": "Racun"
   },
@@ -219,7 +219,7 @@
     "id": 28,
     "name": "Insta Merah (Kretek)",
     "buy_price": 0,
-    "sell_price": 11,
+    "sell_price": 11000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -227,7 +227,7 @@
     "id": 29,
     "name": "Insta Semangka",
     "buy_price": 0,
-    "sell_price": 24,
+    "sell_price": 24000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -235,7 +235,7 @@
     "id": 30,
     "name": "INTRO",
     "buy_price": 0,
-    "sell_price": 8,
+    "sell_price": 8500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -251,7 +251,7 @@
     "id": 32,
     "name": "Konco Coklat (Kretek)",
     "buy_price": 0,
-    "sell_price": 8,
+    "sell_price": 8000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -259,7 +259,7 @@
     "id": 33,
     "name": "Konco Ijo",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -267,7 +267,7 @@
     "id": 34,
     "name": "Kopi Aceh",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Kopi"
   },
@@ -275,7 +275,7 @@
     "id": 35,
     "name": "Kopi Aroma",
     "buy_price": 0,
-    "sell_price": 10,
+    "sell_price": 10000,
     "stock": 0,
     "category": "Kopi"
   },
@@ -283,7 +283,7 @@
     "id": 36,
     "name": "Kopi Jembatan",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Kopi"
   },
@@ -291,7 +291,7 @@
     "id": 37,
     "name": "Kraton (Kretek)",
     "buy_price": 0,
-    "sell_price": 14,
+    "sell_price": 14000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -299,7 +299,7 @@
     "id": 38,
     "name": "Kuku Bima",
     "buy_price": 0,
-    "sell_price": 7,
+    "sell_price": 7000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -307,7 +307,7 @@
     "id": 39,
     "name": "LA Bold Hitam",
     "buy_price": 0,
-    "sell_price": 38,
+    "sell_price": 38000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -315,7 +315,7 @@
     "id": 40,
     "name": "Lilin Besar",
     "buy_price": 0,
-    "sell_price": 10,
+    "sell_price": 10000,
     "stock": 0,
     "category": "Lilin"
   },
@@ -323,7 +323,7 @@
     "id": 41,
     "name": "Lilin Kecil",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3500,
     "stock": 0,
     "category": "Lilin"
   },
@@ -331,7 +331,7 @@
     "id": 42,
     "name": "Lucky Strike",
     "buy_price": 0,
-    "sell_price": 29,
+    "sell_price": 29000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -339,7 +339,7 @@
     "id": 43,
     "name": "Magnum Bintang",
     "buy_price": 0,
-    "sell_price": 25,
+    "sell_price": 25000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -347,7 +347,7 @@
     "id": 44,
     "name": "Magnum Kretek",
     "buy_price": 0,
-    "sell_price": 18,
+    "sell_price": 18000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -355,7 +355,7 @@
     "id": 45,
     "name": "Mancis",
     "buy_price": 0,
-    "sell_price": 2,
+    "sell_price": 2000,
     "stock": 0,
     "category": "Korek"
   },
@@ -363,7 +363,7 @@
     "id": 46,
     "name": "Mancis Cricket",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Korek"
   },
@@ -371,7 +371,7 @@
     "id": 47,
     "name": "Mancis Tokai",
     "buy_price": 0,
-    "sell_price": 2,
+    "sell_price": 2500,
     "stock": 0,
     "category": "Korek"
   },
@@ -379,7 +379,7 @@
     "id": 48,
     "name": "Marcopolo",
     "buy_price": 0,
-    "sell_price": 21,
+    "sell_price": 21000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -387,7 +387,7 @@
     "id": 49,
     "name": "Marlboro Gold",
     "buy_price": 0,
-    "sell_price": 48,
+    "sell_price": 48500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -395,7 +395,7 @@
     "id": 50,
     "name": "Marlboro Merah",
     "buy_price": 0,
-    "sell_price": 48,
+    "sell_price": 48500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -403,7 +403,7 @@
     "id": 51,
     "name": "Marlong Besar",
     "buy_price": 0,
-    "sell_price": 39,
+    "sell_price": 39000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -411,7 +411,7 @@
     "id": 52,
     "name": "Marlong Kecil",
     "buy_price": 0,
-    "sell_price": 24,
+    "sell_price": 24000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -419,7 +419,7 @@
     "id": 53,
     "name": "Menara Bold",
     "buy_price": 0,
-    "sell_price": 17,
+    "sell_price": 17000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -427,7 +427,7 @@
     "id": 54,
     "name": "Menara Coklat",
     "buy_price": 0,
-    "sell_price": 17,
+    "sell_price": 17000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -435,7 +435,7 @@
     "id": 55,
     "name": "Menara Kuning",
     "buy_price": 0,
-    "sell_price": 9,
+    "sell_price": 9500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -443,7 +443,7 @@
     "id": 56,
     "name": "Menara Merah",
     "buy_price": 0,
-    "sell_price": 17,
+    "sell_price": 17000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -451,7 +451,7 @@
     "id": 57,
     "name": "Minyak Kita 1 L",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16500,
     "stock": 0,
     "category": "Sembako"
   },
@@ -459,7 +459,7 @@
     "id": 58,
     "name": "Minyak Kita 2 L",
     "buy_price": 0,
-    "sell_price": 33,
+    "sell_price": 33500,
     "stock": 0,
     "category": "Sembako"
   },
@@ -467,15 +467,15 @@
     "id": 59,
     "name": "Minyak Makan Curah 1 kg",
     "buy_price": 16300,
-    "sell_price": 17,
+    "sell_price": 17500,
     "stock": 23,
     "category": "Sembako"
   },
   {
     "id": 60,
-    "name": "Minyak Makan Curah Â½ kg",
+    "name": "Minyak Makan Curah ÃÂ½ kg",
     "buy_price": 16300,
-    "sell_price": 9,
+    "sell_price": 9000,
     "stock": 25,
     "category": "Sembako"
   },
@@ -483,7 +483,7 @@
     "id": 61,
     "name": "Mustang",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -491,7 +491,7 @@
     "id": 62,
     "name": "NATION BOLD",
     "buy_price": 0,
-    "sell_price": 24,
+    "sell_price": 24000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -515,7 +515,7 @@
     "id": 65,
     "name": "Pasta Gigi Formula 75g",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Pasta Gigi"
   },
@@ -547,7 +547,7 @@
     "id": 69,
     "name": "RAZOR Kretek",
     "buy_price": 0,
-    "sell_price": 13,
+    "sell_price": 13000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -563,7 +563,7 @@
     "id": 71,
     "name": "Sabun Claudia",
     "buy_price": 0,
-    "sell_price": 4,
+    "sell_price": 4000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -579,7 +579,7 @@
     "id": 73,
     "name": "Sabun GIV",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -587,7 +587,7 @@
     "id": 74,
     "name": "Sabun Harmoni",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3500,
     "stock": 0,
     "category": "Sabun"
   },
@@ -595,7 +595,7 @@
     "id": 75,
     "name": "Sabun Natural",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -603,7 +603,7 @@
     "id": 76,
     "name": "Sabun Natural White",
     "buy_price": 0,
-    "sell_price": 4,
+    "sell_price": 4000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -619,7 +619,7 @@
     "id": 78,
     "name": "Sabun Shinzui",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -627,7 +627,7 @@
     "id": 79,
     "name": "SALVO",
     "buy_price": 0,
-    "sell_price": 10,
+    "sell_price": 10000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -635,7 +635,7 @@
     "id": 80,
     "name": "Samsu Kuning",
     "buy_price": 0,
-    "sell_price": 20,
+    "sell_price": 20000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -643,7 +643,7 @@
     "id": 81,
     "name": "Samsu Refill (Black)",
     "buy_price": 0,
-    "sell_price": 20,
+    "sell_price": 20000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -651,7 +651,7 @@
     "id": 82,
     "name": "Sari Asam",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -659,7 +659,7 @@
     "id": 83,
     "name": "Sari Gula",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Minuman"
   },
@@ -667,7 +667,7 @@
     "id": 84,
     "name": "Sarimurni (Kotak)",
     "buy_price": 0,
-    "sell_price": 6,
+    "sell_price": 6500,
     "stock": 0,
     "category": "Teh"
   },
@@ -675,7 +675,7 @@
     "id": 85,
     "name": "Selera (Kretek)",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -683,7 +683,7 @@
     "id": 86,
     "name": "Sempurna Besar",
     "buy_price": 0,
-    "sell_price": 34,
+    "sell_price": 34000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -691,7 +691,7 @@
     "id": 87,
     "name": "Sempurna Hijau",
     "buy_price": 0,
-    "sell_price": 15,
+    "sell_price": 15000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -699,7 +699,7 @@
     "id": 88,
     "name": "Sempurna Kecil",
     "buy_price": 0,
-    "sell_price": 25,
+    "sell_price": 25000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -707,7 +707,7 @@
     "id": 89,
     "name": "Sempurna Prima",
     "buy_price": 0,
-    "sell_price": 16,
+    "sell_price": 16000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -715,7 +715,7 @@
     "id": 90,
     "name": "Sempurna Prima Go",
     "buy_price": 0,
-    "sell_price": 14,
+    "sell_price": 14000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -723,7 +723,7 @@
     "id": 91,
     "name": "Sikat Gigi Brico",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3500,
     "stock": 0,
     "category": "Sikat"
   },
@@ -731,7 +731,7 @@
     "id": 92,
     "name": "Sikat Gigi Formula",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3500,
     "stock": 0,
     "category": "Sikat"
   },
@@ -739,7 +739,7 @@
     "id": 93,
     "name": "Surya Besar",
     "buy_price": 0,
-    "sell_price": 34,
+    "sell_price": 34500,
     "stock": 0,
     "category": "Rokok"
   },
@@ -747,7 +747,7 @@
     "id": 94,
     "name": "Surya Besar (Merah)",
     "buy_price": 0,
-    "sell_price": 32,
+    "sell_price": 32000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -755,7 +755,7 @@
     "id": 95,
     "name": "Surya Kecil",
     "buy_price": 0,
-    "sell_price": 25,
+    "sell_price": 25000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -771,7 +771,7 @@
     "id": 97,
     "name": "Teh Bendera (Kotak)",
     "buy_price": 0,
-    "sell_price": 6,
+    "sell_price": 6500,
     "stock": 0,
     "category": "Teh"
   },
@@ -779,7 +779,7 @@
     "id": 98,
     "name": "Teh Prenjak (Kotak)",
     "buy_price": 0,
-    "sell_price": 6,
+    "sell_price": 6500,
     "stock": 0,
     "category": "Teh"
   },
@@ -787,7 +787,7 @@
     "id": 99,
     "name": "Teh Sari Wangi Kotak",
     "buy_price": 0,
-    "sell_price": 6,
+    "sell_price": 6500,
     "stock": 0,
     "category": "Teh"
   },
@@ -795,7 +795,7 @@
     "id": 100,
     "name": "TEN",
     "buy_price": 0,
-    "sell_price": 11,
+    "sell_price": 11000,
     "stock": 0,
     "category": "Rokok"
   },
@@ -803,7 +803,7 @@
     "id": 101,
     "name": "Tepung Kanji 1 kg",
     "buy_price": 0,
-    "sell_price": 10,
+    "sell_price": 10000,
     "stock": 0,
     "category": "Sembako"
   },
@@ -811,7 +811,7 @@
     "id": 102,
     "name": "Tepung Roti 1 kg",
     "buy_price": 8000,
-    "sell_price": 8,
+    "sell_price": 8000,
     "stock": 25,
     "category": "Sembako"
   },
@@ -827,7 +827,7 @@
     "id": 104,
     "name": "Tisu Nice",
     "buy_price": 0,
-    "sell_price": 7,
+    "sell_price": 7000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -835,7 +835,7 @@
     "id": 105,
     "name": "Tisu Paseo 3000",
     "buy_price": 0,
-    "sell_price": 3,
+    "sell_price": 3000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -843,7 +843,7 @@
     "id": 106,
     "name": "Tisu Paseo 5500",
     "buy_price": 0,
-    "sell_price": 5,
+    "sell_price": 5500,
     "stock": 0,
     "category": "Tisu"
   },
@@ -851,7 +851,7 @@
     "id": 107,
     "name": "Tisu Paseo Basah",
     "buy_price": 0,
-    "sell_price": 11,
+    "sell_price": 11000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -859,7 +859,7 @@
     "id": 108,
     "name": "Tisu Paseo Besar",
     "buy_price": 0,
-    "sell_price": 11,
+    "sell_price": 11000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -867,7 +867,7 @@
     "id": 109,
     "name": "Tisu Paseo Kecil",
     "buy_price": 0,
-    "sell_price": 1,
+    "sell_price": 1000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -875,7 +875,7 @@
     "id": 110,
     "name": "Tisu Selection",
     "buy_price": 0,
-    "sell_price": 6,
+    "sell_price": 6000,
     "stock": 0,
     "category": "Tisu"
   },
@@ -883,7 +883,7 @@
     "id": 111,
     "name": "UNION",
     "buy_price": 0,
-    "sell_price": 26,
+    "sell_price": 26500,
     "stock": 0,
     "category": "Rokok"
   }

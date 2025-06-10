@@ -1050,7 +1050,17 @@ function cancelEditProduct() {
 }
 
 function exportProductsExcel() {
-    const table = document.getElementById('product-table');
+    const productListDiv = document.getElementById('product-list');
+    if (!productListDiv) {
+        alert('Tabel produk tidak ditemukan.');
+        return;
+    }
+    // Cari tabel produk di dalam div product-list
+    const table = productListDiv.querySelector('table');
+    if (!table) {
+        alert('Tabel produk tidak ditemukan.');
+        return;
+    }
     let csv = [];
     const rows = table.querySelectorAll('tr');
     for (let row of rows) {
@@ -1061,7 +1071,7 @@ function exportProductsExcel() {
             if (cols[i].innerText.trim().toLowerCase() === 'aksi' || i === cols.length - 1) continue;
             let data = cols[i].innerText.replace(/,/g, '');
             // Remove "Rp" and "." from price columns (3rd and 4th columns, index 2 and 3)
-            if (i === 2 || i === 3) {
+            if (i === 3 || i === 4) {
                 data = data.replace(/Rp/g, '').replace(/\./g, '').trim();
             }
             rowData.push('"' + data + '"');
