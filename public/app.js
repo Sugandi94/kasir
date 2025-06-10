@@ -624,7 +624,10 @@ function renderProductTable() {
         { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
     ];
 
-    const filteredData = productAllData.filter(p => p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()));
+    const filteredData = productAllData.filter(p =>
+        p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()) ||
+        (p.category && p.category.toLowerCase().includes(productSearchKeyword.toLowerCase()))
+    );
 
         renderTable('product-list', columns, filteredData, {
             sortable: true,
@@ -805,6 +808,8 @@ async function saveProduct() {
     const stock_raw = document.getElementById('prodstock').value.trim();
     const category = document.getElementById('prodcategory').value.trim();
 
+    console.log('Saving product with category:', category);
+
     if (!name) {
         document.getElementById('addprod-msg').innerText = 'Nama produk wajib diisi!';
         return;
@@ -889,7 +894,8 @@ async function importProductsFromExcel() {
             name: row['Nama Produk'] || row['name'] || '',
             buy_price: parseInt(row['Harga Beli'] || row['buy_price'] || 0),
             sell_price: parseInt(row['Harga Jual'] || row['sell_price'] || 0),
-            stock: parseInt(row['Stok'] || row['stock'] || 0)
+            stock: parseInt(row['Stok'] || row['stock'] || 0),
+            category: row['Kategori'] || row['category'] || ''
         })).filter(p => p.name.trim() !== '');
 
         if (productsToImport.length === 0) {
@@ -927,7 +933,10 @@ function editProduct(id, name, buy_price, sell_price, stock, category = '') {
     document.getElementById('prodbuy').value = buy_price;
     document.getElementById('prodsell').value = sell_price;
     document.getElementById('prodstock').value = stock;
-    document.getElementById('prodcategory').value = category;
+    const prodCategorySelect = document.getElementById('prodcategory');
+    if (prodCategorySelect) {
+        prodCategorySelect.value = category;
+    }
     document.getElementById('prodname').focus();
     document.getElementById('product-form-title').innerText = 'Edit Produk';
     document.getElementById('product-save-btn').innerText = 'Update';
