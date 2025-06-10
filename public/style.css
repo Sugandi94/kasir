@@ -260,8 +260,65 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 /* TABLES */
 .table-responsive {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   margin-bottom: 18px;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.main-layout {
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.common-table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  /* Removed border to remove table borders */
+  border: none;
+}
+
+.common-table th,
+.common-table td {
+  /* Removed border to remove cell borders */
+  border: none;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.common-table thead th {
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 10px;
+  text-align: left;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.common-table tbody tr:hover {
+  background: #f3f7fa;
+}
+
+@media (max-width: 600px) {
+  .product-table,
+  .user-table,
+  .trx-table {
+    font-size: 0.85rem;
+  }
 }
 
 .user-table,
@@ -272,6 +329,8 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   margin-bottom: 8px;
   font-size: 1rem;
   min-width: 350px;
+  /* Remove all borders */
+  border: none;
 }
 
 .user-table thead th {
@@ -282,11 +341,14 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   text-align: left;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  /* Remove borders */
+  border: none;
 }
 
 .user-table tbody td {
   padding: 8px 8px;
-  border-bottom: 1px solid #e5e5e5;
+  /* Remove borders */
+  border: none;
   vertical-align: middle;
 }
 
@@ -296,6 +358,15 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 
 .user-table tbody tr:hover {
   background: #f3f7fa;
+}
+
+/* Smaller buttons in user-table for print and delete */
+.user-table .btn-small.print,
+.user-table .btn-small.del {
+  padding: 4px 8px;
+  font-size: 12px;
+  min-width: 60px;
+  max-width: 60px;
 }
 
 /* Product Table */
@@ -317,49 +388,49 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 
 /* Fix table layout and column widths */
 .product-table {
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 .product-table th:nth-child(1),
 .product-table td:nth-child(1) {
-  width: 40px; /* No column */
   text-align: center;
+  width: auto;
 }
 
 .product-table th:nth-child(2),
 .product-table td:nth-child(2) {
-  width: 220px; /* Nama Produk */
   text-align: left;
+  width: auto;
 }
 
 .product-table th:nth-child(3),
 .product-table td:nth-child(3) {
-  width: 160px; /* Harga Beli */
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: auto;
 }
   
 .product-table th:nth-child(4),
 .product-table td:nth-child(4) {
-  width: 160px; /* Harga Jual */
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: auto;
 }
   
 .product-table th:nth-child(5),
 .product-table td:nth-child(5) {
-  width: 80px; /* Stok */
   text-align: left;
+  width: auto;
 }
 
 .product-table th:nth-child(6),
 .product-table td:nth-child(6) {
-  width: 120px; /* Aksi column */
   text-align: center;
+  width: auto;
 }
 
 .product-table tbody td {
@@ -369,7 +440,7 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 }
 
 .product-table tr:last-child td {
-  border-bottom: none;
+  border-bottom: 1px;
 }
 
 .product-table tbody tr:hover {
@@ -707,11 +778,41 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
 }
 
 .product-table,
+.user-table,
 .trx-table {
   width: 100%;
-  min-width: 650px; /* Lebar minimal agar kolom tidak tumpuk di HP, bisa diperbesar */
+  /* Removed min-width to improve responsiveness on zoom */
   border-collapse: collapse;
   background: #fff;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+}
+
+.product-table th,
+.user-table th,
+.trx-table th,
+.product-table td,
+.user-table td,
+.trx-table td {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Flex containers for action buttons to wrap on smaller widths */
+.product-row-actions,
+.product-action-toolbar {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Adjust padding and font size for better scaling */
+.product-table th,
+.product-table td {
+  padding: 0.5em 0.75em;
   font-size: 1rem;
 }
 
@@ -793,6 +894,15 @@ button:not(.nav):not(.dashboard-menu-vertical button):focus {
   background: #007bff;
   color: #fff;
   white-space: nowrap;
+}
+
+/* Smaller print and delete buttons in trx-table */
+.trx-table .btn-small.print,
+.trx-table .btn-small.del {
+  padding: 4px 8px;
+  font-size: 12px;
+  min-width: 60px;
+  max-width: 60px;
 }
 
 /* Print button khusus */

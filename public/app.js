@@ -94,7 +94,7 @@ function loadLastTrxList() {
         let html = `
         <h4 style="margin-top:32px;margin-bottom:8px;">5 Transaksi Terakhir</h4>
         <div class="table-responsive">
-        <table class="product-table trx-table" style="font-size:14px;">
+        <table class="common-table" style="font-size:14px;">
             <thead>
                 <tr>
                     <th style="width:32px;">No</th>
@@ -297,96 +297,105 @@ let productSearchTimeout = null;
 let productSortColumn = 'name'; // default sort column
 let productSortOrder = 'asc'; // 'asc' or 'desc'
 
-function renderProductTable() {
-    let filteredData = productAllData.filter(p => p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()));
+function renderTable(containerId, columns, data, options = {}) {
+    const {
+        sortable = false,
+        sortColumn = null,
+        sortOrder = 'asc',
+        onSortChange = null,
+        pagination = false,
+        currentPage = 1,
+        pageSize = 10,
+        onPageChange = null,
+        actions = null,
+        tableClass = 'product-table',
+        search = null,
+        onSearchChange = null,
+        searchValue = '',
+        title = ''
+    } = options;
 
-    // Sort filteredData based on productSortColumn and productSortOrder
-    filteredData.sort((a, b) => {
-        let valA, valB;
-        switch(productSortColumn) {
-            case 'name':
-                valA = a.name.toLowerCase();
-                valB = b.name.toLowerCase();
-                break;
-            case 'buy_price':
-                valA = a.buy_price;
-                valB = b.buy_price;
-                break;
-            case 'sell_price':
-                valA = a.sell_price;
-                valB = b.sell_price;
-                break;
-            case 'stock':
-                valA = a.stock;
-                valB = b.stock;
-                break;
-            default:
-                valA = a.name.toLowerCase();
-                valB = b.name.toLowerCase();
-        }
-        if (valA < valB) return productSortOrder === 'asc' ? -1 : 1;
-        if (valA > valB) return productSortOrder === 'asc' ? 1 : -1;
-        return 0;
-    });
+    // Sorting
+    let sortedData = [...data];
+    if (sortable && sortColumn) {
+        sortedData.sort((a, b) => {
+            let valA = a[sortColumn];
+            let valB = b[sortColumn];
+            if (typeof valA === 'string') valA = valA.toLowerCase();
+            if (typeof valB === 'string') valB = valB.toLowerCase();
+            if (valA < valB) return sortOrder === 'asc' ? -1 : 1;
+            if (valA > valB) return sortOrder === 'asc' ? 1 : -1;
+            return 0;
+        });
+    }
 
-    let startIdx = (productCurrentPage - 1) * productPageSize;
-    let pageData = productPaginationEnabled ? filteredData.slice(startIdx, startIdx + productPageSize) : filteredData;
+    // Pagination
+    let pagedData = sortedData;
+    if (pagination) {
+        const startIdx = (currentPage - 1) * pageSize;
+        pagedData = sortedData.slice(startIdx, startIdx + pageSize);
+    }
 
+    // Search input
+    let searchHtml = '';
+    if (search !== null) {
+        searchHtml = `
+        <input type="text" placeholder="Search..." value="${searchValue}" 
+            oninput="(${onSearchChange})(this.value)" 
+            style="padding:6px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; flex-grow:1; min-width: 180px;">
+        `;
+    }
+
+    // Table header with sorting indicators
     function getSortIndicator(column) {
-        if (productSortColumn === column) {
-            return productSortOrder === 'asc' ? ' ▲' : ' ▼';
+        if (!sortable) return '';
+        if (sortColumn === column) {
+            return sortOrder === 'asc' ? ' ▲' : ' ▼';
         }
         return '';
     }
 
     let html = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:12px;flex-wrap:wrap;">
-        <span style="font-weight:bold;">Daftar Produk</span>
-        <input type="text" id="product-search" placeholder="Cari produk..." value="${productSearchKeyword}" 
-            style="padding:6px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; flex-grow:1; min-width: 180px;"
-            oninput="debouncedHandleProductSearch(this.value)">
-        <label style="display:flex;align-items:center;gap:6px; white-space: nowrap;">
-            <input type="checkbox" id="pagination-toggle" ${productPaginationEnabled ? 'checked' : ''} onchange="toggleProductPagination(this.checked)">
-            Enable Pagination
-        </label>
-        <input type="file" id="import-excel-file" accept=".xlsx,.xls" style="margin-left: 8px;">
-        <button class="btn-small" style="margin-left: 4px;" title="Buat Excel dengan Header 'NAMA PRODUK, HARGA BELI, HARGA JUAL, STOK'" onclick="importProductsFromExcel()">Import Excel</button>
-        <div class="product-action-toolbar">
-            <button class="btn-export" onclick="exportProductsExcel()">Export Excel</button>
-            <button class="btn-small del" style="margin-left:8px;" onclick="deleteAllProducts()">&#128465; Hapus Semua</button>
-        </div>
+        <span style="font-weight:bold;">${title}</span>
+        ${searchHtml}
     </div>
     <div class="table-responsive">
-    <table class="product-table" id="product-table">
+    <table class="${tableClass}">
         <thead>
             <tr>
-                <th>No</th>
-                <th style="cursor:pointer;" onclick="changeProductSort('name')">Nama Produk${getSortIndicator('name')}</th>
-                <th style="cursor:pointer;" onclick="changeProductSort('buy_price')">Harga Beli${getSortIndicator('buy_price')}</th>
-                <th style="cursor:pointer;" onclick="changeProductSort('sell_price')">Harga Jual${getSortIndicator('sell_price')}</th>
-                <th style="cursor:pointer;" onclick="changeProductSort('stock')">Stok${getSortIndicator('stock')}</th>
-                <th style="text-align:center;">Aksi</th>
+    `;
+
+    columns.forEach(col => {
+        if (col.sortable) {
+            html += `<th style="cursor:pointer;" onclick="(${onSortChange})('${col.key}')">${col.label}${getSortIndicator(col.key)}</th>`;
+        } else {
+            html += `<th${col.style ? ` style="${col.style}"` : ''}>${col.label}</th>`;
+        }
+    });
+
+    html += `
             </tr>
         </thead>
         <tbody>
     `;
 
-    pageData.forEach((p, i) => {
-        html += `
-            <tr>
-                <td>${productPaginationEnabled ? (startIdx + i + 1) : (i + 1)}</td>
-                <td>${toProperCase(p.name)}</td>
-                <td>Rp${Number(p.buy_price).toLocaleString('id-ID')}</td>
-                <td>Rp${Number(p.sell_price).toLocaleString('id-ID')}</td>
-                <td>${p.stock}</td>
-<td style="text-align:center;">
-                    <div class="product-row-actions">
-                        <button class="btn-small edit" title="Edit" onclick="editProduct('${p.id}', \`${p.name.replace(/`/g, '\\`')}\`, '${p.buy_price}', '${p.sell_price}', '${p.stock}')">&#9998;</button>
-                        <button class="btn-small del" title="Hapus" onclick="deleteProduct('${p.id}')">&#128465;</button>
-                    </div>
-                </td>
-            </tr>
-        `;
+    pagedData.forEach((row, i) => {
+        html += '<tr>';
+        columns.forEach(col => {
+            if (col.key === 'no') {
+                html += `<td>${pagination ? ((currentPage - 1) * pageSize + i + 1) : (i + 1)}</td>`;
+            } else if (col.key === 'actions' && actions) {
+                html += `<td style="text-align:center;">${actions(row)}</td>`;
+            } else {
+                let cell = row[col.key];
+                if (col.format) {
+                    cell = col.format(cell, row);
+                }
+                html += `<td>${cell}</td>`;
+            }
+        });
+        html += '</tr>';
     });
 
     html += `
@@ -395,14 +404,144 @@ function renderProductTable() {
     </div>
     `;
 
-    document.getElementById('product-list').innerHTML = html;
+    // Pagination controls
+    if (pagination) {
+        const totalPages = Math.ceil(sortedData.length / pageSize);
+        if (totalPages > 1) {
+            html += `<div class="product-pagination" style="margin-top:10px; text-align:center;">`;
+            html += `<button onclick="(${onPageChange})(1)" ${currentPage === 1 ? 'disabled' : ''}>&laquo;</button>`;
+            html += `<button onclick="(${onPageChange})(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><</button>`;
 
-    if (productPaginationEnabled) {
-        renderProductPagination();
-    } else {
-        // Remove pagination controls if any
-        document.getElementById('product-pagination')?.remove();
+            let start = Math.max(1, currentPage - 2);
+            let end = Math.min(totalPages, start + 4);
+            if (end - start < 4) start = Math.max(1, end - 4);
+
+            for (let i = start; i <= end; i++) {
+                html += `<button onclick="(${onPageChange})(${i})" ${currentPage === i ? 'class="active"' : ''}>${i}</button>`;
+            }
+
+            html += `<button onclick="(${onPageChange})(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>></button>`;
+            html += `<button onclick="(${onPageChange})(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>&raquo;</button>`;
+            html += `</div>`;
+        }
     }
+
+    document.getElementById(containerId).innerHTML = html;
+}
+
+// Refactor renderProductTable to use renderTable
+function renderProductTable() {
+    const columns = [
+        { key: 'no', label: 'No' },
+        { key: 'name', label: 'Nama Produk', sortable: true },
+        { key: 'buy_price', label: 'Harga Beli', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
+        { key: 'sell_price', label: 'Harga Jual', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
+        { key: 'stock', label: 'Stok', sortable: true },
+        { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
+    ];
+
+    const filteredData = productAllData.filter(p => p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()));
+
+        renderTable('product-list', columns, filteredData, {
+            sortable: true,
+            sortColumn: productSortColumn,
+            sortOrder: productSortOrder,
+            onSortChange: (col) => {
+                if (productSortColumn === col) {
+                    productSortOrder = productSortOrder === 'asc' ? 'desc' : 'asc';
+                } else {
+                    productSortColumn = col;
+                    productSortOrder = 'asc';
+                }
+                productCurrentPage = 1;
+                renderProductTable();
+            },
+            pagination: productPaginationEnabled,
+            currentPage: productCurrentPage,
+            pageSize: productPageSize,
+            onPageChange: (page) => {
+                productCurrentPage = page;
+                renderProductTable();
+            },
+            actions: (row) => `
+                <div class="product-row-actions">
+                    <button class="btn-small edit" title="Edit" onclick="editProduct('${row.id}', \`${row.name.replace(/`/g, '\\`')}\`, '${row.buy_price}', '${row.sell_price}', '${row.stock}')">&#9998;</button>
+                    <button class="btn-small del" title="Hapus" onclick="deleteProduct('${row.id}')">&#128465;</button>
+                </div>
+            `,
+            tableClass: 'common-table',
+            search: true,
+            searchValue: productSearchKeyword,
+            onSearchChange: (val) => {
+                productSearchKeyword = val;
+                productCurrentPage = 1;
+                renderProductTable();
+            },
+            title: 'Daftar Produk'
+        });
+}
+
+// Refactor loadUsers to use renderTable
+function loadUsers() {
+    fetch('/api/users').then(r => r.json()).then(users => {
+        const columns = [
+            { key: 'no', label: 'No' },
+            { key: 'username', label: 'Username' },
+            { key: 'role', label: 'Role' },
+            { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
+        ];
+
+        renderTable('user-list', columns, users, {
+            actions: (row) => `
+                <button class="btn-small edit" title="Edit" onclick="editUser('${row.id}', '${row.username}', '${row.role}')">&#9998;</button>
+                ${row.id == 1
+                    ? `<button class="btn-small del" title="Tidak bisa dihapus" style="opacity:0.5;cursor:not-allowed;" disabled>&#128465;</button>`
+                    : `<button class="btn-small del" title="Hapus" onclick="deleteUser('${row.id}')">&#128465;</button>`
+                }
+            `,
+            tableClass: 'common-table'
+        });
+    });
+}
+
+// Refactor renderTrxTable to use renderTable
+function renderTrxTable() {
+    let startIdx = (trxCurrentPage - 1) * trxPageSize;
+    let pageData = trxAllData.slice(startIdx, startIdx + trxPageSize);
+
+    const columns = [
+        { key: 'no', label: 'No' },
+        { key: 'date', label: 'Tanggal', format: (val) => (new Date(val)).toLocaleString('id-ID') },
+        { key: 'items', label: 'Produk', format: (val) => {
+            return val.map(it => `
+                <table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
+                    <tr>
+                        <td style="font-weight:bold; padding: 2px 4px;">${toProperCase(it.name)}</td>
+                        <td style="padding: 2px 4px; text-align: center;">x${it.qty}</td>
+                        <td style="padding: 2px 4px; color:#888; text-align: right;">@Rp${it.price.toLocaleString('id-ID')}</td>
+                        <td style="font-weight:bold; padding: 2px 4px; text-align: right;">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
+                    </tr>
+                </table>
+            `).join('');
+        }},
+        { key: 'total', label: 'Total', format: (val) => `Rp${val.toLocaleString('id-ID')}` },
+        { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
+    ];
+
+    renderTable('trx-list', columns, pageData, {
+        actions: (row) => `
+            <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️ Print</button>
+            <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465; Hapus</button>
+        `,
+        tableClass: 'user-table',
+        pagination: true,
+        currentPage: trxCurrentPage,
+        pageSize: trxPageSize,
+        onPageChange: (page) => {
+            trxCurrentPage = page;
+            loadTrxList(page);
+        }
+    });
 }
 
 function changeProductSort(column) {
@@ -882,52 +1021,42 @@ function toProperCase(str) {
 }
 
 function renderTrxTable() {
-  let startIdx = (trxCurrentPage - 1) * trxPageSize;
-  let pageData = trxAllData.slice(startIdx, startIdx + trxPageSize);
+    const columns = [
+        { key: 'no', label: 'No' },
+        { key: 'date', label: 'Tanggal', format: (val) => (new Date(val)).toLocaleString('id-ID') },
+        { key: 'items', label: 'Produk', format: (val) => {
+            return val.map(it => `
+                <table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
+                    <tr>
+                        <td style="font-weight:bold; padding: 2px 4px;">${toProperCase(it.name)}</td>
+                        <td style="padding: 2px 4px; text-align: center;">x${it.qty}</td>
+                        <td style="padding: 2px 4px; color:#888; text-align: right;">@Rp${it.price.toLocaleString('id-ID')}</td>
+                        <td style="font-weight:bold; padding: 2px 4px; text-align: right;">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
+                    </tr>
+                </table>
+            `).join('');
+        }},
+        { key: 'total', label: 'Total', format: (val) => `Rp${val.toLocaleString('id-ID')}` },
+        { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
+    ];
 
-  let html = `
-    <div class="table-responsive">
-    <table class="product-table trx-table">
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Tanggal</th>
-          <th>Produk</th>
-          <th>Total</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-  if(pageData.length === 0) {
-    html += `<tr><td colspan="5" style="text-align:center;color:#888;">Tidak ada transaksi</td></tr>`;
-  } else {
-    pageData.forEach((t, i) => {
-      let items = t.items.map(it =>
-        `<table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
-          <tr>
-            <td style="font-weight:bold; padding: 2px 4px;">${toProperCase(it.name)}</td>
-            <td style="padding: 2px 4px; text-align: center;">x${it.qty}</td>
-            <td style="padding: 2px 4px; color:#888; text-align: right;">@Rp${it.price.toLocaleString('id-ID')}</td>
-            <td style="font-weight:bold; padding: 2px 4px; text-align: right;">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
-          </tr>
-        </table>`).join('');
-      html += `
-        <tr>
-          <td>${(trxCurrentPage - 1) * trxPageSize + i + 1}</td>
-          <td>${(new Date(t.date)).toLocaleString('id-ID')}</td>
-          <td>${items}</td>
-          <td>Rp${t.total.toLocaleString('id-ID')}</td>
-          <td>
-            <button class="btn-small print" onclick="printTransaction('${t.id}')">🖨️ Print</button>
-            <button class="btn-small del" onclick="deleteTransaction('${t.id}')">&#128465; Hapus</button>
-          </td>
-        </tr>
-      `;
+    let startIdx = (trxCurrentPage - 1) * trxPageSize;
+    let pageData = trxAllData.slice(startIdx, startIdx + trxPageSize);
+
+    renderTable('trx-list', columns, pageData, {
+        actions: (row) => `
+            <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️ Print</button>
+            <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465; Hapus</button>
+        `,
+        tableClass: 'user-table',
+        pagination: true,
+        currentPage: trxCurrentPage,
+        pageSize: trxPageSize,
+        onPageChange: (page) => {
+            trxCurrentPage = page;
+            loadTrxList(page);
+        }
     });
-  }
-  html += `</tbody></table></div>`;
-  document.getElementById('trx-list').innerHTML = html;
 }
 
 // Tambahkan tombol "Hapus Semua Transaksi" di atas daftar
