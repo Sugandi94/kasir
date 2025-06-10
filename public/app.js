@@ -920,6 +920,9 @@ async function saveProduct() {
 
 async function importProductsFromExcel() {
     const fileInput = document.getElementById('import-excel-file');
+    const loadingIndicator = document.getElementById('import-loading');
+    const progressBar = document.getElementById('import-progress');
+    const progressText = document.getElementById('import-progress-text');
     if (!fileInput.files || fileInput.files.length === 0) {
         alert('Pilih file Excel terlebih dahulu.');
         return;
@@ -927,46 +930,68 @@ async function importProductsFromExcel() {
     const file = fileInput.files[0];
     const reader = new FileReader();
 
+    loadingIndicator.style.display = 'block'; // Show loading indicator
+    progressBar.value = 0;
+    progressText.textContent = '0%';
+
+    let productsToImport = [];
+
     reader.onload = async function(e) {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const firstSheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[firstSheetName];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+        try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
 
-        // Validate and map data to product format
-        const productsToImport = jsonData.map(row => ({
-            name: row['Nama Produk'] || row['name'] || '',
-            buy_price: parseInt(row['Harga Beli'] || row['buy_price'] || 0),
-            sell_price: parseInt(row['Harga Jual'] || row['sell_price'] || 0),
-            stock: parseInt(row['Stok'] || row['stock'] || 0),
-            category: row['Kategori'] || row['category'] || ''
-        })).filter(p => p.name.trim() !== '');
+            // Validate and map data to product format
+            productsToImport = jsonData.map(row => ({
+                name: String(row['Nama Produk'] || row['name'] || '').trim(),
+                buy_price: parseInt(row['Harga Beli'] || row['buy_price'] || 0),
+                sell_price: parseInt(row['Harga Jual'] || row['sell_price'] || 0),
+                stock: parseInt(row['Stok'] || row['stock'] || 0),
+                category: row['Kategori'] || row['category'] || ''
+            })).filter(p => p.name !== '');
 
-        if (productsToImport.length === 0) {
-            alert('File Excel tidak berisi data produk yang valid.');
+            if (productsToImport.length === 0) {
+                alert('File Excel tidak berisi data produk yang valid.');
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+                return;
+            }
+        } catch (err) {
+            console.error('Error parsing Excel file:', err);
+            alert('Gagal memproses file Excel. Pastikan file valid dan format benar.\nError detail: ' + err.message);
+            loadingIndicator.style.display = 'none'; // Hide loading indicator
             return;
         }
 
         // Send products to backend API to add/update
         try {
-            for (const product of productsToImport) {
+            for (let i = 0; i < productsToImport.length; i++) {
+                const product = productsToImport[i];
                 await fetch('/api/products', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(product)
                 });
+                // Update progress bar and text
+                const percent = Math.round(((i + 1) / productsToImport.length) * 100);
+                progressBar.value = percent;
+                progressText.textContent = percent + '%';
             }
             alert('Import produk berhasil.');
             fileInput.value = '';
             loadProducts();
         } catch (error) {
             alert('Gagal mengimpor produk: ' + error.message);
+        } finally {
+            loadingIndicator.style.display = 'none'; // Hide loading indicator
         }
     };
 
     reader.onerror = function() {
         alert('Gagal membaca file.');
+        loadingIndicator.style.display = 'none'; // Hide loading indicator
     };
 
     reader.readAsArrayBuffer(file);
