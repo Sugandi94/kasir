@@ -1204,15 +1204,20 @@ function createProductAutocomplete() {
     // Saat select berubah, update harga
     select.onchange = updateTrxPrice;
 
-    // Load categories for categorySelect
-    fetch('/api/categories').then(r => r.json()).then(categories => {
-        categorySelect.innerHTML = '<option value="">-- Semua Kategori --</option>';
-        categories.forEach(cat => {
-            const option = document.createElement('option');
-            option.value = cat.name;
-            option.textContent = cat.name;
-            categorySelect.appendChild(option);
-        });
+    // Load categories for categorySelect from product options
+    const uniqueCategories = new Set();
+    allOptions.forEach(opt => {
+        if (opt.category && opt.category.trim() !== '') {
+            uniqueCategories.add(opt.category.trim());
+        }
+    });
+
+    categorySelect.innerHTML = '<option value="">-- Semua Kategori --</option>';
+    Array.from(uniqueCategories).sort().forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
     });
 }
 

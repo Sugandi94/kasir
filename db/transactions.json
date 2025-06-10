@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": 1,
+    "date": "2025-06-10T14:41:57.756Z",
+    "items": [
+      {
+        "product_id": "113",
+        "name": "Beras Swan",
+        "qty": 3,
+        "price": 15500,
+        "subtotal": 46500
+      },
+      {
+        "product_id": "8",
+        "name": "Beras Murah",
+        "qty": 2,
+        "price": 13500,
+        "subtotal": 27000
+      },
+      {
+        "product_id": "112",
+        "name": "Telepon Colek Kecil",
+        "qty": 2,
+        "price": 2500,
+        "subtotal": 5000
+      },
+      {
+        "product_id": "114",
+        "name": "Pulut Putih",
+        "qty": 1,
+        "price": 16000,
+        "subtotal": 16000
+      }
+    ],
+    "total": 94500
+  }
+]

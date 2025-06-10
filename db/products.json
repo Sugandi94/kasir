@@ -60,7 +60,7 @@
     "name": "Beras Murah",
     "buy_price": 390000,
     "sell_price": 405000,
-    "stock": 1,
+    "stock": -1,
     "category": "Sembako"
   },
   {
@@ -886,5 +886,29 @@
     "sell_price": 26500,
     "stock": 0,
     "category": "Rokok"
+  },
+  {
+    "id": 112,
+    "name": "Telepon Colek Kecil",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": -2,
+    "category": "Sabun"
+  },
+  {
+    "id": 113,
+    "name": "Beras Swan",
+    "buy_price": 0,
+    "sell_price": 15500,
+    "stock": -3,
+    "category": "Sembako"
+  },
+  {
+    "id": 114,
+    "name": "Pulut Putih",
+    "buy_price": 0,
+    "sell_price": 16000,
+    "stock": -1,
+    "category": "Sembako"
   }
 ]
