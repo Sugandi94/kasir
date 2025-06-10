@@ -1113,9 +1113,9 @@ function renderTrxTable() {
     renderTable('trx-list', columns, pageData, {
         actions: (row) => `
             <div class="aksi-group">
-            <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️ Print</button>
+            <button class="btn-small print" onclick="printTransaction('${row.id}')">🖨️</button>
             <button class="btn-small edit" onclick="loadTransactionToCart('${row.id}')" title="Edit ke Keranjang">&#9998;</button>
-            <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465; Hapus</button>
+            <button class="btn-small del" onclick="deleteTransaction('${row.id}')">&#128465;</button>
             </div>
         `,
         tableClass: 'user-table',
