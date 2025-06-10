@@ -40,8 +40,24 @@ app.post('/api/users', (req, res) => {
 // EDIT user
 app.put('/api/users/:id', (req, res) => {
     let users = readDB('./db/users.json');
-    let user = users.find(u => u.id == req.params.id);
+    let user = users.find(u => String(u.id) === String(req.params.id));
     if (!user) return res.json({ success: false, message: 'User tidak ditemukan' });
+
+    // Check if username is provided
+    if (req.body.username) {
+        const newUsername = req.body.username.trim().toLowerCase();
+        const currentUsername = user.username.trim().toLowerCase();
+
+        // If username is different from current user's username, check for duplicates
+        if (newUsername !== currentUsername) {
+            const usernameExists = users.find(u => u.username.trim().toLowerCase() === newUsername && String(u.id) !== String(req.params.id));
+            if (usernameExists) {
+                return res.json({ success: false, message: 'Username sudah ada' });
+            }
+        }
+        user.username = req.body.username;
+    }
+
     if (req.body.password) user.password = bcrypt.hashSync(req.body.password, 10);
     user.role = req.body.role;
     writeDB('./db/users.json', users);

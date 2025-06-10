@@ -354,24 +354,57 @@ function loadUsers() {
 }
 
 
+// Save user (add or update)
 function saveUser() {
     const username = document.getElementById('newuser').value.trim();
     const password = document.getElementById('newpass').value;
     const role = document.getElementById('newrole').value;
 
-    if (!username || !password) {
-        document.getElementById('adduser-msg').innerText = 'Username dan password harus diisi!';
+    if (!username) {
+        document.getElementById('adduser-msg').innerText = 'Username harus diisi!';
+        return;
+    }
+    // Password is required only when adding new user or changing password
+    if (!editingUserId && !password) {
+        document.getElementById('adduser-msg').innerText = 'Password harus diisi!';
         return;
     }
 
-    fetch('/api/users', {
-        method: 'POST',
+    if (editingUserId) {
+        // Update existing user
+        updateUser(editingUserId, username, password, role);
+    } else {
+        // Add new user
+        fetch('/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password, role })
+        })
+        .then(r => r.json())
+        .then(res => {
+            document.getElementById('adduser-msg').innerText = res.success ? 'User berhasil ditambah' : res.message;
+            if (res.success) {
+                resetUserForm();
+                loadUsers();
+            }
+        });
+    }
+}
+
+// Update user function
+function updateUser(id, username, password, role) {
+    const bodyData = { username, role };
+    if (password) {
+        bodyData.password = password;
+    }
+    fetch(`/api/users/${id}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, role })
+        body: JSON.stringify(bodyData)
     })
     .then(r => r.json())
     .then(res => {
-        document.getElementById('adduser-msg').innerText = res.success ? 'User berhasil ditambah' : res.message;
+        document.getElementById('adduser-msg').innerText = res.success ? 'User berhasil diupdate' : res.message;
         if (res.success) {
             resetUserForm();
             loadUsers();
@@ -379,10 +412,22 @@ function saveUser() {
     });
 }
 
+// Edit user function
 function editUser(id, username, role) {
     editingUserId = id;
     document.getElementById('newuser').value = username;
-    document.getElementById('newuser').disabled = true;
+    document.getElementById('newuser').disabled = false; // Enable username input for editing
+    document.getElementById('newpass').value = '';
+    document.getElementById('newrole').value = role;
+    document.getElementById('user-form-title').innerText = 'Edit User';
+    document.getElementById('user-save-btn').innerText = 'Update';
+    document.getElementById('user-cancel-btn').style.display = '';
+}
+
+function editUser(id, username, role) {
+    editingUserId = id;
+    document.getElementById('newuser').value = username;
+    document.getElementById('newuser').disabled = false; // Enable username input for editing
     document.getElementById('newpass').value = '';
     document.getElementById('newrole').value = role;
     document.getElementById('user-form-title').innerText = 'Edit User';
