@@ -1420,11 +1420,11 @@ function renderTrxItems() {
       <tr>
         <td>${item.name}</td>
         <td>
-          <input type="number" min="1" value="${item.price}" style="width:100px;text-align:right;"
+          <input type="number" min="1" value="${item.price}" style="width:150px;text-align:right;"
             onchange="trxEditPrice(${i}, this.value)">
         </td>
         <td>
-          <input type="number" min="1" value="${item.qty}" style="width:60px;text-align:center;"
+          <input type="number" min="1" value="${item.qty}" style="width:90px;text-align:center;"
             onchange="trxEditQty(${i}, this.value)">
         </td>
         <td style="text-align:right;">
