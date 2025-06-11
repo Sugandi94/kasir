@@ -1521,7 +1521,7 @@ function submitTrx() {
 // ... kode setelah submitTrx tetap ...
 
 // DAFTAR TRANSAKSI: PAGINATION
-function loadTrxList(page = 1) {
+function loadTrxList(page) {
   trxCurrentPage = page;
   let filterDate = document.getElementById('filter-date')?.value;
   fetch('/api/transactions').then(r => r.json()).then(trx => {
@@ -1531,7 +1531,7 @@ function loadTrxList(page = 1) {
     trx = trx.slice().reverse(); // terbaru di atas
     trxAllData = trx;
     renderTrxTable();
-    renderTrxPagination();
+    // renderTrxPagination();
   });
 }
 
@@ -1563,11 +1563,18 @@ function renderTrxTable() {
         { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
     ];
 
+    // Ambil data sesuai halaman aktif
     let startIdx = (trxCurrentPage - 1) * trxPageSize;
     let pageData = trxAllData.slice(startIdx, startIdx + trxPageSize);
 
+    // Tambahkan nomor urut global sesuai halaman (bukan selalu mulai dari 1)
+    pageData = pageData.map((row, idx) => ({
+        ...row,
+        no: (trxCurrentPage - 1) * trxPageSize + idx + 1
+    }));
+
     renderTable('trx-list', columns, pageData, {
-        actions: (row) => `
+        actions: (row, i) => `
            <div class="aksi-group">
             <button class="btn-small edit" onclick="printTransaction('${row.id}')">🖨️</button>
             <button class="btn-small edit" onclick="loadTransactionToCart('${row.id}')" title="Edit ke Keranjang">&#9998;</button>
@@ -1575,13 +1582,7 @@ function renderTrxTable() {
             </div>
         `,
         tableClass: 'user-table',
-        pagination: true,
-        currentPage: trxCurrentPage,
-        pageSize: trxPageSize,
-        onPageChange: (page) => {
-            trxCurrentPage = page;
-            loadTrxList(page);
-        }
+        pagination: false // Pagination dihandle manual
     });
 }
 
