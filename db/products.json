@@ -4,7 +4,7 @@
     "name": "153",
     "buy_price": 0,
     "sell_price": 15000,
-    "stock": -46,
+    "stock": 0,
     "category": "Rokok"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Aqua Besar",
     "buy_price": 52000,
     "sell_price": 5000,
-    "stock": -1,
+    "stock": 0,
     "category": "Minuman"
   },
   {
@@ -28,7 +28,7 @@
     "name": "Aqua Kecil",
     "buy_price": 46000,
     "sell_price": 3000,
-    "stock": -1,
+    "stock": 0,
     "category": "Minuman"
   },
   {
@@ -44,7 +44,7 @@
     "name": "Belau Kotak",
     "buy_price": 0,
     "sell_price": 500,
-    "stock": -1,
+    "stock": 0,
     "category": "Sabun"
   },
   {
@@ -52,7 +52,7 @@
     "name": "Beras Kepala Singa",
     "buy_price": 72500,
     "sell_price": 74000,
-    "stock": 4,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -60,7 +60,7 @@
     "name": "Beras Murah",
     "buy_price": 390000,
     "sell_price": 405000,
-    "stock": -2,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -68,7 +68,7 @@
     "name": "Beras Swan 10 kg",
     "buy_price": 147000,
     "sell_price": 149000,
-    "stock": 4,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -76,7 +76,7 @@
     "name": "Beras Swan 30 kg",
     "buy_price": 433000,
     "sell_price": 435000,
-    "stock": -2,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -84,7 +84,7 @@
     "name": "Beras Swan 5 kg",
     "buy_price": 77000,
     "sell_price": 79000,
-    "stock": 3,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -92,7 +92,7 @@
     "name": "BULL",
     "buy_price": 0,
     "sell_price": 29000,
-    "stock": -3,
+    "stock": 0,
     "category": "Rokok"
   },
   {
@@ -116,7 +116,7 @@
     "name": "Club X",
     "buy_price": 0,
     "sell_price": 22000,
-    "stock": -1,
+    "stock": 0,
     "category": "Rokok"
   },
   {
@@ -316,7 +316,7 @@
     "name": "Lilin Besar",
     "buy_price": 0,
     "sell_price": 10000,
-    "stock": -1,
+    "stock": 0,
     "category": "Lilin"
   },
   {
@@ -468,15 +468,15 @@
     "name": "Minyak Makan Curah 1 kg",
     "buy_price": 16300,
     "sell_price": 17500,
-    "stock": 23,
+    "stock": 0,
     "category": "Sembako"
   },
   {
     "id": 60,
-    "name": "Minyak Makan Curah ÃÂ½ kg",
+    "name": "Minyak Makan Curah Â½ kg",
     "buy_price": 16300,
     "sell_price": 9000,
-    "stock": 25,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -812,7 +812,7 @@
     "name": "Tepung Roti 1 kg",
     "buy_price": 8000,
     "sell_price": 8000,
-    "stock": 25,
+    "stock": 0,
     "category": "Sembako"
   },
   {
@@ -886,37 +886,5 @@
     "sell_price": 26500,
     "stock": 0,
     "category": "Rokok"
-  },
-  {
-    "id": 112,
-    "name": "Telepon Colek Kecil",
-    "buy_price": 0,
-    "sell_price": 2500,
-    "stock": -2,
-    "category": "Sabun"
-  },
-  {
-    "id": 113,
-    "name": "Beras Swan",
-    "buy_price": 0,
-    "sell_price": 15500,
-    "stock": -4.5,
-    "category": "Sembako"
-  },
-  {
-    "id": 114,
-    "name": "Pulut Putih",
-    "buy_price": 0,
-    "sell_price": 16000,
-    "stock": -1,
-    "category": "Sembako"
-  },
-  {
-    "id": 115,
-    "name": "Freshcare Hot",
-    "buy_price": 0,
-    "sell_price": 12000,
-    "stock": 0,
-    "category": "Obat"
   }
 ]

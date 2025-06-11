@@ -104,6 +104,8 @@ function showDashboard() {
     showPage('transaksi');
 }
 
+
+// AWAL KATEGORI
 // Category Management
 let editingCategoryId = null;
 
@@ -119,40 +121,128 @@ function toggleCategoryForm() {
     }
 }
 
+// Add pagination state for categories
+let categoryCurrentPage = 1;
+let categoryPageSize = 10;
+let categoryAllData = [];
+let categoryFilteredData = null;
+
 function loadCategories() {
     fetch('/api/categories').then(r => r.json()).then(categories => {
-        let html = `
-        <div class="table-responsive">
-        <table class="common-table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kategori</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-        categories.forEach((cat, i) => {
-            html += `
-                <tr>
-                    <td>${i + 1}</td>
-                    <td>${cat.name}</td>
-                    <td style="text-align:center;">
-                        <button class="btn-small edit" title="Edit" onclick="editCategory('${cat.id}', '${cat.name}')">&#9998;</button>
-                        <button class="btn-small del" title="Hapus" onclick="deleteCategory('${cat.id}')">&#128465;</button>
-                    </td>
-                </tr>
-            `;
-        });
-        html += `
-            </tbody>
-        </table>
-        </div>
-        `;
-        document.getElementById('category-list').innerHTML = html;
+        categoryAllData = categories;
+        renderCategoryTable();
+        renderCategoryPagination();
     });
 }
+
+function renderCategoryTable() {
+    let data = categoryFilteredData || categoryAllData;
+    let startIdx = (categoryCurrentPage - 1) * categoryPageSize;
+    let pageData = data.slice(startIdx, startIdx + categoryPageSize);
+
+    let html = `
+    <div class="table-responsive">
+    <table class="common-table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Kategori</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+    pageData.forEach((cat, i) => {
+        html += `
+            <tr>
+                <td>${startIdx + i + 1}</td>
+                <td>${cat.name}</td>
+                <td style="text-align:center;">
+                    <button class="btn-small edit" title="Edit" onclick="editCategory('${cat.id}', '${cat.name}')">&#9998;</button>
+                    <button class="btn-small del" title="Hapus" onclick="deleteCategory('${cat.id}')">&#128465;</button>
+                </td>
+            </tr>
+        `;
+    });
+    html += `
+        </tbody>
+    </table>
+    </div>
+    `;
+    document.getElementById('category-list').innerHTML = html;
+}
+
+function renderCategoryPagination() {
+    let data = categoryFilteredData || categoryAllData;
+    let total = data.length;
+    let pageCount = Math.ceil(total / categoryPageSize);
+let timestamp = Date.now();
+let newId = `category-search-container-${timestamp}`;
+
+    // Remove old pagination if exists
+    document.getElementById('category-pagination')?.remove();
+
+    if (pageCount <= 1) return;
+
+// Tambahkan elemen baru
+document.getElementById('category-list').insertAdjacentHTML('beforebegin', `
+    <div id="${newId}" class="category-search-wrapper" style="margin-bottom: 15px; display:flex; gap:8px;">
+        <input type="text" 
+               id="category-search" 
+               placeholder="Cari kategori..." 
+               style="padding:8px; flex-grow:1;"
+               oninput="filterCategories(this.value)">
+        <button onclick="document.getElementById('category-search').value=''; filterCategories('');"
+                style="padding:8px;">Reset</button>
+    </div>
+`);
+
+// Hapus semua elemen lama (selain yang baru dibuat)
+document.querySelectorAll('.category-search-wrapper').forEach(el => {
+    if (el.id !== newId) el.remove();
+});
+
+    // Create pagination
+    let html = `
+    <div id="category-pagination" style="display:flex; justify-content:center; align-items:center; gap:5px; margin-top:15px;">
+        <button onclick="loadCategoryPage(1)" ${categoryCurrentPage === 1 ? "disabled" : ""} style="margin:0;">&laquo;</button>
+        <button onclick="loadCategoryPage(${categoryCurrentPage-1})" ${categoryCurrentPage === 1 ? "disabled" : ""} style="margin:0;">&lt;</button>
+    `;
+
+    // Show max 5 page buttons
+    let start = Math.max(1, categoryCurrentPage - 2);
+    let end = Math.min(pageCount, start + 4);
+    if (end - start < 4) start = Math.max(1, end - 4);
+
+    for (let i = start; i <= end; i++) {
+        html += `<button onclick="loadCategoryPage(${i})" ${categoryCurrentPage === i ? 'class="active"' : ""} style="margin:0;">${i}</button>`;
+    }
+
+    html += `
+        <button onclick="loadCategoryPage(${categoryCurrentPage+1})" ${categoryCurrentPage === pageCount ? "disabled" : ""} style="margin:0;">&gt;</button>
+        <button onclick="loadCategoryPage(${pageCount})" ${categoryCurrentPage === pageCount ? "disabled" : ""} style="margin:0;">&raquo;</button>
+    </div>`;
+
+    document.getElementById('category-list').insertAdjacentHTML('afterend', html);
+}
+
+function filterCategories(keyword) {
+    const filtered = categoryAllData.filter(cat => 
+        cat.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+    categoryCurrentPage = 1;
+    categoryFilteredData = filtered;
+    renderCategoryTable();
+    renderCategoryPagination();
+}
+
+function loadCategoryPage(page) {
+    categoryCurrentPage = page;
+    renderCategoryTable();
+    renderCategoryPagination();
+}
+
+// KATEGORI AKHIR
 
 function saveCategory() {
     console.log('saveCategory called');
