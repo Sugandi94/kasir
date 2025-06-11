@@ -1233,15 +1233,127 @@ function loadTrxProducts() {
         createProductAutocomplete(); // Tambahkan fitur autocomplete
     });
 }
+let userEditedPrice = false;
+
 function updateTrxPrice() {
     let select = document.getElementById('trx-product');
     let price = select.options[select.selectedIndex]?.getAttribute('data-price') || 0;
-    document.getElementById('trx-price').value = price ? 'Rp' + Number(price).toLocaleString('id-ID') : '';
+    let productName = select.options[select.selectedIndex]?.text.toLowerCase() || '';
+    const qtyInput = document.getElementById('trx-qty');
+    let riceQtySelect = document.getElementById('trx-rice-qty');
+
+    // List of products that use dropdown quantity
+    const dropdownProducts = ['beras', 'minyak', 'tepung', 'pulut', 'gula', 'kacang', 'kerupuk'];
+
+    // Check if product is in dropdownProducts list
+    const isDropdownProduct = dropdownProducts.some(p => productName.includes(p));
+
+    if (isDropdownProduct) {
+        // Hide qty input
+        qtyInput.style.display = 'none';
+
+        // Create rice quantity dropdown if not exists
+        if (!riceQtySelect) {
+            riceQtySelect = document.createElement('select');
+            riceQtySelect.id = 'trx-rice-qty';
+            riceQtySelect.style.width = '80px';
+            riceQtySelect.style.marginLeft = '8px';
+
+            // Add options for quantity
+            const options = [
+                { value: 1, text: '1 kg' },
+                { value: 0.5, text: '0.5 kg' },
+                { value: 0.25, text: '0.25 kg' }
+            ];
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                riceQtySelect.appendChild(option);
+            });
+
+            // Insert dropdown after qty input
+            qtyInput.parentNode.insertBefore(riceQtySelect, qtyInput.nextSibling);
+
+            // Add event listener to update price on change
+            riceQtySelect.addEventListener('change', () => {
+                userEditedPrice = false;
+                updateTrxPrice();
+            });
+        } else {
+            riceQtySelect.style.display = '';
+        }
+
+        // Calculate price based on selected quantity
+        const selectedQty = parseFloat(riceQtySelect.value);
+        const basePrice = parseFloat(price);
+        const calculatedPrice = basePrice * selectedQty;
+
+        if (!userEditedPrice) {
+            document.getElementById('trx-price').value = calculatedPrice ? 'Rp' + Number(calculatedPrice).toLocaleString('id-ID') : '';
+        }
+    } else {
+        // Show qty input and hide rice quantity dropdown if exists
+        qtyInput.style.display = '';
+        if (riceQtySelect) {
+            riceQtySelect.style.display = 'none';
+        }
+        if (!userEditedPrice) {
+            document.getElementById('trx-price').value = price ? 'Rp' + Number(price).toLocaleString('id-ID') : '';
+        }
+        
+    }
 }
+
+// Detect manual price input changes
+document.addEventListener('DOMContentLoaded', function() {
+    const priceInput = document.getElementById('trx-price');
+    if (priceInput) {
+        priceInput.addEventListener('input', () => {
+            userEditedPrice = true;
+        });
+    }
+});
 document.addEventListener('DOMContentLoaded', function() {
     let trxProduct = document.getElementById('trx-product');
+    let qtyInput = document.getElementById('trx-qty');
     if (trxProduct) {
-        trxProduct.onchange = updateTrxPrice;
+        trxProduct.addEventListener('change', () => {
+            // Reset manual edit flag and update price input to original product price
+            userEditedPrice = false;
+            let select = document.getElementById('trx-product');
+            let price = select.options[select.selectedIndex]?.getAttribute('data-price') || 0;
+            let productName = select.options[select.selectedIndex]?.text.toLowerCase() || '';
+            let riceQtySelect = document.getElementById('trx-rice-qty');
+
+            // Reset quantity input to 1
+            qtyInput.value = 1;
+
+            // List of products that use dropdown quantity
+            const dropdownProducts = ['beras', 'minyak', 'tepung', 'pulut', 'gula', 'kacang', 'kerupuk'];
+
+            // Check if product is in dropdownProducts list
+            const isDropdownProduct = dropdownProducts.some(p => productName.includes(p));
+
+            if (isDropdownProduct) {
+                if (riceQtySelect) {
+                    riceQtySelect.value = 1;
+                }
+                const selectedQty = riceQtySelect ? parseFloat(riceQtySelect.value) : 1;
+                const basePrice = parseFloat(price);
+                const calculatedPrice = basePrice * selectedQty;
+                document.getElementById('trx-price').value = calculatedPrice ? 'Rp' + Number(calculatedPrice).toLocaleString('id-ID') : '';
+            } else {
+                document.getElementById('trx-price').value = price ? 'Rp' + Number(price).toLocaleString('id-ID') : '';
+            }
+            updateTrxPrice();
+        });
+    }
+    if (qtyInput) {
+        qtyInput.addEventListener('change', () => {
+            userEditedPrice = false;
+            updateTrxPrice();
+        });
     }
 });
 
@@ -1249,12 +1361,40 @@ function addTrxItem() {
     let select = document.getElementById('trx-product');
     let prodId = select.value;
     let prodName = select.options[select.selectedIndex]?.text;
-    let price = parseInt(select.options[select.selectedIndex]?.getAttribute('data-price'));
-    let qty = parseInt(document.getElementById('trx-qty').value);
-    if (!prodId || isNaN(qty) || qty < 1) return;
+    let basePrice = parseFloat(select.options[select.selectedIndex]?.getAttribute('data-price'));
+    let productName = prodName.toLowerCase();
+    let qtyInput = document.getElementById('trx-qty');
+    let riceQtySelect = document.getElementById('trx-rice-qty');
+    let priceInput = document.getElementById('trx-price');
+    let qty;
+
+    // List of products that use dropdown quantity
+    const dropdownProducts = ['beras', 'minyak', 'tepung', 'pulut', 'gula', 'kacang', 'kerupuk'];
+
+    // Check if product is in dropdownProducts list
+    const isDropdownProduct = dropdownProducts.some(p => productName.includes(p));
+
+    if (isDropdownProduct) {
+        if (!riceQtySelect) return; // safety check
+        qty = parseFloat(riceQtySelect.value);
+    } else {
+        qty = parseInt(qtyInput.value);
+    }
+
+    if (!prodId || isNaN(qty) || qty <= 0) return;
+
+    // Parse price input value, remove "Rp" and dots, convert to number
+    let priceStr = priceInput.value.replace(/Rp\s?|\./g, '').trim();
+    let price = parseFloat(priceStr);
+    if (isNaN(price) || price <= 0) {
+        // fallback to basePrice if invalid
+        price = basePrice;
+    }
+
     let exist = trxItems.find(i => i.product_id === prodId);
     if (exist) {
         exist.qty += qty;
+        exist.price = price; // update price with user edited price
     } else {
         trxItems.push({ product_id: prodId, name: prodName, qty, price });
     }

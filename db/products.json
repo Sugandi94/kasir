@@ -900,7 +900,7 @@
     "name": "Beras Swan",
     "buy_price": 0,
     "sell_price": 15500,
-    "stock": -3,
+    "stock": -3.5,
     "category": "Sembako"
   },
   {
