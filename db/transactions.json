@@ -1,65 +1,296 @@
 [
   {
     "id": 1,
-    "date": "2025-06-10T14:41:57.756Z",
-    "items": [
-      {
-        "product_id": "113",
-        "name": "Beras Swan",
-        "qty": 3,
-        "price": 15500,
-        "subtotal": 46500
-      },
-      {
-        "product_id": "8",
-        "name": "Beras Murah",
-        "qty": 2,
-        "price": 13500,
-        "subtotal": 27000
-      },
-      {
-        "product_id": "112",
-        "name": "Telepon Colek Kecil",
-        "qty": 2,
-        "price": 2500,
-        "subtotal": 5000
-      },
-      {
-        "product_id": "114",
-        "name": "Pulut Putih",
-        "qty": 1,
-        "price": 16000,
-        "subtotal": 16000
-      }
-    ],
-    "total": 94500
-  },
-  {
-    "id": 2,
-    "date": "2025-06-10T15:44:40.986Z",
-    "items": [
-      {
-        "product_id": "113",
-        "name": "Beras Swan",
-        "qty": 0.5,
-        "price": 15500,
-        "subtotal": 7750
-      }
-    ],
-    "total": 7750
-  },
-  {
-    "id": 3,
-    "date": "2025-06-11T01:13:27.602Z",
+    "date": "2025-06-11T02:54:41.793Z",
     "items": [
       {
         "product_id": "1",
         "name": "153",
-        "qty": 13,
-        "price": 15005,
-        "subtotal": 195065
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
       }
     ],
-    "total": 195065
+    "total": 15000
+  },
+  {
+    "id": 2,
+    "date": "2025-06-11T02:54:43.081Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 3,
+    "date": "2025-06-11T02:54:44.393Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 4,
+    "date": "2025-06-11T02:54:46.647Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 5,
+    "date": "2025-06-11T02:54:47.990Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 6,
+    "date": "2025-06-11T02:54:50.827Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 7,
+    "date": "2025-06-11T02:54:52.676Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 8,
+    "date": "2025-06-11T02:54:54.476Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 9,
+    "date": "2025-06-11T02:54:56.111Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 10,
+    "date": "2025-06-11T02:55:00.597Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 11,
+    "date": "2025-06-11T02:55:02.180Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 12,
+    "date": "2025-06-11T02:55:04.176Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 13,
+    "date": "2025-06-11T02:55:06.127Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 14,
+    "date": "2025-06-11T02:55:09.088Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 15,
+    "date": "2025-06-11T02:55:13.231Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 16,
+    "date": "2025-06-11T02:58:03.892Z",
+    "items": [
+      {
+        "product_id": "7",
+        "name": "Beras Kepala Singa",
+        "qty": 1,
+        "price": 74000,
+        "subtotal": 74000
+      },
+      {
+        "product_id": "12",
+        "name": "BULL",
+        "qty": 1,
+        "price": 29000,
+        "subtotal": 29000
+      },
+      {
+        "product_id": "15",
+        "name": "Club X",
+        "qty": 1,
+        "price": 22000,
+        "subtotal": 22000
+      }
+    ],
+    "total": 125000
+  },
+  {
+    "id": 17,
+    "date": "2025-06-11T02:58:08.456Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 18,
+    "date": "2025-06-11T02:58:09.925Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 19,
+    "date": "2025-06-11T02:58:11.387Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
+  },
+  {
+    "id": 20,
+    "date": "2025-06-11T02:58:12.836Z",
+    "items": [
+      {
+        "product_id": "1",
+        "name": "153",
+        "qty": 1,
+        "price": 15000,
+        "subtotal": 15000
+      }
+    ],
+    "total": 15000
   }
 ]

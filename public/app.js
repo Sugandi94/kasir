@@ -1092,7 +1092,13 @@ function createProductAutocomplete() {
     const select = document.getElementById('trx-product');
     if (!select) return;
 
-    // Hilangkan jika sudah ada
+    // Remove existing container if any
+    const existingContainer = document.getElementById('trx-product-autocomplete-container');
+    if (existingContainer) {
+        existingContainer.remove();
+    }
+
+    // Remove old search input and category select if any
     if (document.getElementById('trx-product-search')) {
         document.getElementById('trx-product-search').remove();
     }
@@ -1100,8 +1106,9 @@ function createProductAutocomplete() {
         document.getElementById('trx-product-category').remove();
     }
 
-    // Buat container div untuk search input dan category select
+    // Create container div for search input and category select
     const container = document.createElement('div');
+    container.id = 'trx-product-autocomplete-container';
     container.style.display = 'flex';
     container.style.gap = '8px';
     container.style.marginBottom = '7px';
