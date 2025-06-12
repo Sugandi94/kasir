@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HTML Minifier</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  textarea { width: 100%; height: 300px; font-family: monospace; font-size: 14px; }
+  #output { margin-top: 20px; }
+  button { padding: 8px 16px; font-size: 16px; }
+</style>
+</head>
+<body>
+<h1>HTML Minifier</h1>
+<p>Select an HTML file to minify. The minified code will be shown below for you to copy.</p>
+<input type="file" id="fileInput" accept=".html,.htm" />
+<button id="minifyBtn" disabled>Minify</button>
+<div id="output">
+  <h2>Minified HTML</h2>
+  <textarea id="minifiedCode" readonly></textarea>
+</div>
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const minifyBtn = document.getElementById('minifyBtn');
+  const minifiedCodeArea = document.getElementById('minifiedCode');
+  let fileContent = '';
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (!file) {
+      minifyBtn.disabled = true;
+      return;
+    }
+    if (!file.name.match(/\.html?$/i)) {
+      alert('Please select an HTML file.');
+      fileInput.value = '';
+      minifyBtn.disabled = true;
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      fileContent = e.target.result;
+      minifyBtn.disabled = false;
+      minifiedCodeArea.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  function simpleMinify(html) {
+    // Remove comments
+    let minified = html.replace(/<!--[\s\S]*?-->/g, '');
+    // Remove whitespace between tags
+    minified = minified.replace(/\s*(<[^>]+>)\s*/g, '$1');
+    // Collapse multiple spaces
+    minified = minified.replace(/\s{2,}/g, ' ');
+    // Trim
+    minified = minified.trim();
+    return minified;
+  }
+
+  minifyBtn.addEventListener('click', function() {
+    if (!fileContent) return;
+    try {
+      const minified = simpleMinify(fileContent);
+      minifiedCodeArea.value = minified;
+    } catch (err) {
+      alert('Error during minification: ' + err.message);
+    }
+  });
+</script>
+</body>
+</html>
