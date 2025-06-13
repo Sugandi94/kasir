@@ -2005,7 +2005,75 @@ window.onload = function() {
                 }
             });
         }
-        // Remove category filter event listeners and related code as category filter is removed
+
+        // Hook up barcode input event listener
+        const barcodeInput = document.getElementById('trx-barcode');
+        if (barcodeInput) {
+            barcodeInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const barcode = barcodeInput.value.trim();
+                    if (!barcode) return;
+
+                    // Find product by barcode (matching product name)
+                    const product = productAllData.find(p => p.name === barcode);
+                    if (!product) {
+                        alert('Produk dengan barcode tersebut tidak ditemukan.');
+                        barcodeInput.value = '';
+                        return;
+                    }
+
+                    // Add product to transaction list
+                    let exist = trxItems.find(i => i.product_id === product.id);
+                    if (exist) {
+                        exist.qty += 1;
+                    } else {
+                        trxItems.push({
+                            product_id: product.id,
+                            name: product.name,
+                            qty: 1,
+                            price: product.sell_price
+                        });
+                    }
+                    saveCartToStorage();
+                    renderTrxItems();
+                    barcodeInput.value = '';
+                }
+            });
+        }
+
+        // Hook up camera barcode scanner button
+        const openCameraBtn = document.getElementById('open-camera-btn');
+        if (openCameraBtn) {
+            openCameraBtn.addEventListener('click', () => {
+                const scannerWindow = window.open('barcode-scanner.html', 'Barcode Scanner', 'width=400,height=600');
+                window.addEventListener('message', (event) => {
+                    if (event.data && event.data.barcode) {
+                        const barcode = event.data.barcode;
+                        // Find product by barcode (matching product name)
+                        const product = productAllData.find(p => p.name === barcode);
+                        if (!product) {
+                            alert('Produk dengan barcode tersebut tidak ditemukan.');
+                            return;
+                        }
+                        // Add product to transaction list
+                        let exist = trxItems.find(i => i.product_id === product.id);
+                        if (exist) {
+                            exist.qty += 1;
+                        } else {
+                            trxItems.push({
+                                product_id: product.id,
+                                name: product.name,
+                                qty: 1,
+                                price: product.sell_price
+                            });
+                        }
+                        saveCartToStorage();
+                        renderTrxItems();
+                    }
+                }, { once: true });
+            });
+        }
     } else {
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login').style.display = '';

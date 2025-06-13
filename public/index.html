@@ -91,12 +91,16 @@
                 <!-- Transaksi Penjualan Page -->
                 <section id="page-transaksi" class="page" style="display:none;">
                     <h3>Transaksi Penjualan</h3>
-                    <div id="trx-form">
-                        <select id="trx-product"></select>
-                        <input id="trx-qty" type="number" placeholder="Jumlah" min="1" value="1" style="width:80px">
-                        <input id="trx-price" type="text" placeholder="Harga Jual" style="width:210px">
-                        <button onclick="addTrxItem()">Tambah</button>
-                    </div>
+<div id="trx-form">
+    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+        <input id="trx-barcode" type="text" placeholder="Scan Barcode..." style="flex-grow: 1; padding: 6px; font-size: 14px; box-sizing: border-box;">
+        <button id="open-camera-btn" type="button" style="padding: 6px 12px; font-size: 14px; cursor: pointer;">Buka Kamera</button>
+    </div>
+    <select id="trx-product"></select>
+    <input id="trx-qty" type="number" placeholder="Jumlah" min="1" value="1" style="width:80px">
+    <input id="trx-price" type="text" placeholder="Harga Jual" style="width:210px">
+    <button onclick="addTrxItem()">Tambah</button>
+</div>
                   <div class="table-responsive">
 <table id="trx-items-table" class="common-table">
                         <thead>
