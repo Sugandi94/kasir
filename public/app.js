@@ -731,6 +731,17 @@ function handleProductCategoryFilter(value) {
     renderProductTable();
 }
 
+// Add resetCategoryFilter function to reset category filter and re-render product table
+function resetCategoryFilter() {
+    productCategoryFilter = '';
+    const categorySelect = document.getElementById('product-category-filter');
+    if (categorySelect) {
+        categorySelect.value = '';
+    }
+    productCurrentPage = 1;
+    renderProductTable();
+}
+
 function renderProductTable() {
     const columns = [
         { key: 'no', label: 'No' },
