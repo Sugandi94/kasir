@@ -243,7 +243,7 @@
     "id": 31,
     "name": "Kacang Ijo",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 26000,
     "stock": 0,
     "category": "Sembako"
   },
@@ -571,7 +571,7 @@
     "id": 72,
     "name": "Sabun Dettol",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Sabun"
   },
@@ -611,7 +611,7 @@
     "id": 77,
     "name": "Sabun Nuvo",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 4000,
     "stock": 0,
     "category": "Sabun"
   },

@@ -565,38 +565,13 @@ function toProperCase(str) {
 }
 
 function renderProductPagination() {
-    let total = productAllData.length;
-    let pageCount = Math.ceil(total / productPageSize);
-
-    // Remove old pagination if exists
-    document.getElementById('product-pagination')?.remove();
-
-    if (pageCount <= 1) return;
-
-    let html = `<div id="product-pagination" class="product-pagination" style="margin-top:10px; text-align:center;">`;
-    html += `<button onclick="loadProductsPage(1)" ${productCurrentPage === 1 ? "disabled" : ""}>&laquo;</button>`;
-    html += `<button onclick="loadProductsPage(${productCurrentPage-1})" ${productCurrentPage === 1 ? "disabled" : ""}><</button>`;
-
-    // Show max 5 page buttons
-    let start = Math.max(1, productCurrentPage - 2);
-    let end = Math.min(pageCount, start + 4);
-    if (end - start < 4) start = Math.max(1, end - 4);
-
-    for (let i = start; i <= end; i++) {
-        html += `<button onclick="loadProductsPage(${i})" ${productCurrentPage === i ? "class='active'" : ""}>${i}</button>`;
-    }
-
-    html += `<button onclick="loadProductsPage(${productCurrentPage+1})" ${productCurrentPage === pageCount ? "disabled" : ""}>></button>`;
-    html += `<button onclick="loadProductsPage(${pageCount})" ${productCurrentPage === pageCount ? "disabled" : ""}>&raquo;</button>`;
-    html += `</div>`;
-
-    document.getElementById('product-list').insertAdjacentHTML('afterend', html);
+    // Removed to avoid duplicate pagination elements
 }
 
 function loadProductsPage(page) {
     productCurrentPage = page;
     renderProductTable();
-    renderProductPagination();
+    // Removed renderProductPagination call to avoid duplicate pagination
 }
 
 
@@ -748,6 +723,14 @@ function renderTable(containerId, columns, data, options = {}) {
 }
 
 // Refactor renderProductTable to use renderTable
+let productCategoryFilter = '';
+
+function handleProductCategoryFilter(value) {
+    productCategoryFilter = value;
+    productCurrentPage = 1;
+    renderProductTable();
+}
+
 function renderProductTable() {
     const columns = [
         { key: 'no', label: 'No' },
@@ -759,44 +742,154 @@ function renderProductTable() {
         { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
     ];
 
-    const filteredData = productAllData.filter(p =>
-        p.name.toLowerCase().includes(productSearchKeyword.toLowerCase()) ||
-        (p.category && p.category.toLowerCase().includes(productSearchKeyword.toLowerCase()))
-    );
+    const filteredData = productAllData.filter(p => {
+        const matchesKeyword = p.name.toLowerCase().includes(productSearchKeyword.toLowerCase());
+        const matchesCategory = productCategoryFilter === '' || (p.category && p.category === productCategoryFilter);
+        return matchesKeyword && matchesCategory;
+    });
 
-        renderTable('product-list', columns, filteredData, {
-            sortable: true,
-            sortColumn: productSortColumn,
-            sortOrder: productSortOrder,
-            onSortChange: (col) => {
-                if (productSortColumn === col) {
+    // Create category filter dropdown HTML
+    let categoryFilterHtml = '';
+    const uniqueCategories = [...new Set(productAllData.map(p => p.category).filter(c => c && c.trim() !== ''))];
+    uniqueCategories.sort();
+
+    categoryFilterHtml += `
+    <select id="product-category-filter" onchange="handleProductCategoryFilter(this.value)" style="padding:6px 10px; font-size: 14px; border: 1px solid #168bff; border-radius: 4px;">
+        <option value="">-- Semua Kategori --</option>
+    `;
+    uniqueCategories.forEach(cat => {
+        const selected = cat === productCategoryFilter ? 'selected' : '';
+        categoryFilterHtml += `<option value="${cat}" ${selected}>${cat}</option>`;
+    });
+    categoryFilterHtml += `</select>`;
+
+    // Render the table with search input and category filter side by side
+    const searchHtml = `
+    <div style="display:flex; align-items:center; gap:8px; flex-grow:1; min-width: 180px;">
+        <input type="text" placeholder="Search..." value="${productSearchKeyword}" 
+            oninput="(${debouncedHandleProductSearch})(this.value)" 
+            style="padding:6px 10px; font-size: 14px; border: 1px solid #168bff; border-radius: 4px; flex-grow:1;">
+        <button type="button" onclick="(function(){
+            const input = document.querySelector('#product-list input[type=text]');
+            if(input){
+                input.value = '';
+                (${debouncedHandleProductSearch})('');
+            }
+        })()" style="padding:6px 10px; font-size: 14px; border: 1px solid #168baa; border-radius: 4px; background:#168bff; cursor:pointer;">Reset</button>
+    </div>
+    `;
+
+    const combinedFilterHtml = `
+    <div style="display:flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">
+        ${searchHtml}
+        ${categoryFilterHtml}
+    </div>
+    `;
+
+    let html = combinedFilterHtml;
+    html += `
+    <div class="table-responsive">
+    <table id="product-table" class="common-table">
+        <thead>
+            <tr>
+    `;
+
+    columns.forEach(col => {
+        if (col.sortable) {
+            html += `<th style="cursor:pointer;" onclick="(function(colKey){ 
+                if (productSortColumn === colKey) {
                     productSortOrder = productSortOrder === 'asc' ? 'desc' : 'asc';
                 } else {
-                    productSortColumn = col;
+                    productSortColumn = colKey;
                     productSortOrder = 'asc';
                 }
                 productCurrentPage = 1;
                 renderProductTable();
-            },
-            pagination: productPaginationEnabled,
-            currentPage: productCurrentPage,
-            pageSize: productPageSize,
-            onPageChange: (page) => {
-                productCurrentPage = page;
-                renderProductTable();
-            },
-            actions: (row) => `
-                <div class="product-row-actions">
-                    <button class="btn-small edit" title="Edit" onclick="editProduct('${row.id}', \`${row.name.replace(/`/g, '\\`')}\`, '${row.buy_price}', '${row.sell_price}', '${row.stock}')">&#9998;</button>
-                    <button class="btn-small del" title="Hapus" onclick="deleteProduct('${row.id}')">&#128465;</button>
-                </div>
-            `,
-            tableClass: 'common-table',
-            search: true,
-            searchValue: productSearchKeyword,
-            onSearchChange: debouncedHandleProductSearch,
-            title: 'Daftar Produk'
+            })('${col.key}')">${col.label}${(productSortColumn === col.key) ? (productSortOrder === 'asc' ? ' ▲' : ' ▼') : ''}</th>`;
+        } else {
+            html += `<th${col.style ? ` style="${col.style}"` : ''}>${col.label}</th>`;
+        }
+    });
+
+    html += `
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    // Sorting
+    let sortedData = [...filteredData];
+    if (productSortColumn) {
+        sortedData.sort((a, b) => {
+            let valA = a[productSortColumn];
+            let valB = b[productSortColumn];
+            if (typeof valA === 'string') valA = valA.toLowerCase();
+            if (typeof valB === 'string') valB = valB.toLowerCase();
+            if (valA < valB) return productSortOrder === 'asc' ? -1 : 1;
+            if (valA > valB) return productSortOrder === 'asc' ? 1 : -1;
+            return 0;
         });
+    }
+
+    // Pagination
+    let pagedData = sortedData;
+    if (productPaginationEnabled) {
+        const startIdx = (productCurrentPage - 1) * productPageSize;
+        pagedData = sortedData.slice(startIdx, startIdx + productPageSize);
+    }
+
+    pagedData.forEach((row, i) => {
+        html += '<tr>';
+        columns.forEach(col => {
+            if (col.key === 'no') {
+                html += `<td>${productPaginationEnabled ? ((productCurrentPage - 1) * productPageSize + i + 1) : (i + 1)}</td>`;
+            } else if (col.key === 'actions') {
+                html += `<td style="text-align:center;">
+                    <div class="product-row-actions">
+                        <button class="btn-small edit" title="Edit" onclick="editProduct('${row.id}', \`${row.name.replace(/`/g, '\\`')}\`, '${row.buy_price}', '${row.sell_price}', '${row.stock}', '${row.category || ''}')">&#9998;</button>
+                        <button class="btn-small del" title="Hapus" onclick="deleteProduct('${row.id}')">&#128465;</button>
+                    </div>
+                </td>`;
+            } else {
+                let cell = row[col.key];
+                if (col.format) {
+                    cell = col.format(cell, row);
+                }
+                html += `<td>${cell}</td>`;
+            }
+        });
+        html += '</tr>';
+    });
+
+    html += `
+        </tbody>
+    </table>
+    </div>
+    `;
+
+    // Pagination controls
+    if (productPaginationEnabled) {
+        const totalPages = Math.ceil(sortedData.length / productPageSize);
+        if (totalPages > 1) {
+            html += `<div class="product-pagination" style="margin-top:10px; text-align:center;">`;
+            html += `<button onclick="loadProductsPage(1)" ${productCurrentPage === 1 ? 'disabled' : ''}>&laquo;</button>`;
+            html += `<button onclick="loadProductsPage(${productCurrentPage - 1})" ${productCurrentPage === 1 ? 'disabled' : ''}><</button>`;
+
+            let start = Math.max(1, productCurrentPage - 2);
+            let end = Math.min(totalPages, start + 4);
+            if (end - start < 4) start = Math.max(1, end - 4);
+
+            for (let i = start; i <= end; i++) {
+                html += `<button onclick="loadProductsPage(${i})" ${productCurrentPage === i ? 'class="active"' : ''}>${i}</button>`;
+            }
+
+            html += `<button onclick="loadProductsPage(${productCurrentPage + 1})" ${productCurrentPage === totalPages ? 'disabled' : ''}>></button>`;
+            html += `<button onclick="loadProductsPage(${totalPages})" ${productCurrentPage === totalPages ? 'disabled' : ''}>&raquo;</button>`;
+            html += `</div>`;
+        }
+    }
+
+    document.getElementById('product-list').innerHTML = html;
 }
 
 // Refactor loadUsers to use renderTable
