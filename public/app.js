@@ -763,25 +763,9 @@ function renderProductTable() {
     });
     categoryFilterHtml += `</select>`;
 
-    // Render the table with search input and category filter side by side
-    const searchHtml = `
-    <div style="display:flex; align-items:center; gap:8px; flex-grow:1; min-width: 180px;">
-        <input type="text" placeholder="Search..." value="${productSearchKeyword}" 
-            oninput="(${debouncedHandleProductSearch})(this.value)" 
-            style="padding:6px 10px; font-size: 14px; border: 1px solid #168bff; border-radius: 4px; flex-grow:1;">
-        <button type="button" onclick="(function(){
-            const input = document.querySelector('#product-list input[type=text]');
-            if(input){
-                input.value = '';
-                (${debouncedHandleProductSearch})('');
-            }
-        })()" style="padding:6px 10px; font-size: 14px; border: 1px solid #168baa; border-radius: 4px; background:#168bff; cursor:pointer;">Reset</button>
-    </div>
-    `;
-
+    // Render the table with only category filter (search input removed)
     const combinedFilterHtml = `
     <div style="display:flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">
-        ${searchHtml}
         ${categoryFilterHtml}
     </div>
     `;
@@ -1988,6 +1972,14 @@ window.onload = function() {
         // Load cart from localStorage and render
         trxItems = loadCartFromStorage();
         renderTrxItems();
+
+        // Hook up product search input event listener
+        const productSearchInput = document.getElementById('product-search-input');
+        if (productSearchInput) {
+            productSearchInput.addEventListener('input', (e) => {
+                debouncedHandleProductSearch(e.target.value);
+            });
+        }
     } else {
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login').style.display = '';
