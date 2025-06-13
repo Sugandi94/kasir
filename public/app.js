@@ -765,8 +765,11 @@ function renderProductTable() {
 
     // Render the table with only category filter (search input removed)
     const combinedFilterHtml = `
-    <div style="display:flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">
+    <div style="display:flex; justify-content: flex-start; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: nowrap;">
         ${categoryFilterHtml}
+        <button id="category-filter-reset" onclick="resetCategoryFilter()" style="padding:6px 10px; font-size: 14px; border: 1px solid #168bff; border-radius: 4px; background: #168bff; color: white; cursor: pointer;">
+            Reset Kategori
+        </button>
     </div>
     `;
 
