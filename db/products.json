@@ -356,7 +356,7 @@
     "name": "Mancis",
     "buy_price": 0,
     "sell_price": 2000,
-    "stock": 0,
+    "stock": -1,
     "category": "Korek"
   },
   {
