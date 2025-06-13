@@ -103,7 +103,7 @@ app.post('/api/products', (req, res) => {
         return res.status(500).json({ success: false, message: 'Gagal membaca database produk.' });
     }
 
-    const { name, buy_price, sell_price, stock, category } = req.body;
+    const { name, buy_price, sell_price, stock, category, barcode } = req.body;
     if (typeof name !== 'string' || name.trim() === '') {
         return res.json({ success: false, message: 'Nama produk wajib diisi.' });
     }
@@ -119,7 +119,8 @@ app.post('/api/products', (req, res) => {
         buy_price: buy_price !== undefined ? parseInt(buy_price) || 0 : 0,
         sell_price: sell_price !== undefined ? parseInt(sell_price) || 0 : 0,
         stock: stock !== undefined ? parseInt(stock) || 0 : 0,
-        category: category !== undefined ? String(category).trim() : ''
+        category: category !== undefined ? String(category).trim() : '',
+        barcode: barcode !== undefined ? String(barcode).trim() : ''
     };
 
     products.push(newProduct);
@@ -146,7 +147,7 @@ app.put('/api/products/:id', (req, res) => {
         return res.json({ success: false, message: 'Produk tidak ditemukan' });
     }
 
-    const { name, buy_price, sell_price, stock, category } = req.body;
+    const { name, buy_price, sell_price, stock, category, barcode } = req.body;
     if (typeof name !== 'string' || name.trim() === '') {
         return res.json({ success: false, message: 'Nama produk wajib diisi.' });
     }
@@ -156,6 +157,7 @@ app.put('/api/products/:id', (req, res) => {
     if (sell_price !== undefined) products[idx].sell_price = parseInt(sell_price) || 0;
     if (stock !== undefined) products[idx].stock = parseInt(stock) || 0;
     if (category !== undefined) products[idx].category = typeof category === 'string' ? category.trim() : '';
+    if (barcode !== undefined) products[idx].barcode = typeof barcode === 'string' ? barcode.trim() : '';
 
     try {
         writeDB('./db/products.json', products);

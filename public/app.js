@@ -1032,6 +1032,7 @@ async function saveProduct() {
     const buy_price_raw = document.getElementById('prodbuy').value.trim();
     const sell_price_raw = document.getElementById('prodsell').value.trim();
     const stock_raw = document.getElementById('prodstock').value.trim();
+    const barcode = document.getElementById('prodbarcode').value.trim();
     const category = document.getElementById('prodcategory').value.trim();
 
     console.log('Saving product with category:', category);
@@ -1178,7 +1179,7 @@ async function importProductsFromExcel() {
     reader.readAsArrayBuffer(file);
 }
 
-function editProduct(id, name, buy_price, sell_price, stock, category = '') {
+function editProduct(id, name, buy_price, sell_price, stock, category = '', barcode = '') {
     editingProductId = id;
     document.getElementById('prodname').value = name;
     document.getElementById('prodbuy').value = buy_price;
@@ -1187,6 +1188,10 @@ function editProduct(id, name, buy_price, sell_price, stock, category = '') {
     const prodCategorySelect = document.getElementById('prodcategory');
     if (prodCategorySelect) {
         prodCategorySelect.value = category;
+    }
+    const prodBarcodeInput = document.getElementById('prodbarcode');
+    if (prodBarcodeInput) {
+        prodBarcodeInput.value = barcode;
     }
     document.getElementById('prodname').focus();
     document.getElementById('product-form-title').innerText = 'Edit Produk';
@@ -2006,7 +2011,7 @@ window.onload = function() {
             });
         }
 
-        // Hook up barcode input event listener
+        // Hook up barcode input event listener for transaction page
         const barcodeInput = document.getElementById('trx-barcode');
         if (barcodeInput) {
             barcodeInput.addEventListener('keydown', (e) => {
@@ -2015,8 +2020,8 @@ window.onload = function() {
                     const barcode = barcodeInput.value.trim();
                     if (!barcode) return;
 
-                    // Find product by barcode (matching product name)
-                    const product = productAllData.find(p => p.name === barcode);
+                    // Find product by barcode field (not name)
+                    const product = productAllData.find(p => p.barcode === barcode);
                     if (!product) {
                         alert('Produk dengan barcode tersebut tidak ditemukan.');
                         barcodeInput.value = '';
@@ -2042,16 +2047,16 @@ window.onload = function() {
             });
         }
 
-        // Hook up camera barcode scanner button
+        // Hook up camera barcode scanner button for transaction page
         const openCameraBtn = document.getElementById('open-camera-btn');
         if (openCameraBtn) {
             openCameraBtn.addEventListener('click', () => {
-                const scannerWindow = window.open('barcode-scanner.html', 'Barcode Scanner', 'width=400,height=600');
+                const scannerWindow = window.open('barcode-scanner.html?context=transaction', 'Barcode Scanner', 'width=400,height=600');
                 window.addEventListener('message', (event) => {
-                    if (event.data && event.data.barcode) {
+                    if (event.data && event.data.barcode && event.data.context === 'transaction') {
                         const barcode = event.data.barcode;
-                        // Find product by barcode (matching product name)
-                        const product = productAllData.find(p => p.name === barcode);
+                        // Find product by barcode field (not name)
+                        const product = productAllData.find(p => p.barcode === barcode);
                         if (!product) {
                             alert('Produk dengan barcode tersebut tidak ditemukan.');
                             return;
@@ -2074,8 +2079,28 @@ window.onload = function() {
                 }, { once: true });
             });
         }
+
     } else {
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login').style.display = '';
+    }
+
+    // Add event listener for Scan Barcode button in product form
+    const barcodeScannerBtn = document.getElementById('open-barcode-scanner-btn');
+    if (barcodeScannerBtn) {
+        barcodeScannerBtn.addEventListener('click', () => {
+            const scannerWindow = window.open('barcode-scanner.html?context=product', 'Barcode Scanner', 'width=400,height=600');
+            function onMessage(event) {
+                if (event.data && event.data.barcode && event.data.context === 'product') {
+                    const barcodeInput = document.getElementById('prodbarcode');
+                    if (barcodeInput) {
+                        barcodeInput.value = event.data.barcode;
+                    }
+                    window.removeEventListener('message', onMessage);
+                    barcodeInput.focus();
+                }
+            }
+            window.addEventListener('message', onMessage);
+        });
     }
 };
