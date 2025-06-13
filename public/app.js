@@ -1980,6 +1980,18 @@ window.onload = function() {
                 debouncedHandleProductSearch(e.target.value);
             });
         }
+        // Hook up reset button event listener
+        const productSearchReset = document.getElementById('product-search-reset');
+        if (productSearchReset) {
+            productSearchReset.addEventListener('click', () => {
+                const input = document.getElementById('product-search-input');
+                if (input) {
+                    input.value = '';
+                    debouncedHandleProductSearch('');
+                }
+            });
+        }
+        // Remove category filter event listeners and related code as category filter is removed
     } else {
         document.getElementById('dashboard').style.display = 'none';
         document.getElementById('login').style.display = '';
