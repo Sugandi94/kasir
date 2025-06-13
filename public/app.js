@@ -2095,6 +2095,8 @@ window.onload = function() {
                     const barcodeInput = document.getElementById('prodbarcode');
                     if (barcodeInput) {
                         barcodeInput.value = event.data.barcode;
+                        // Show success notification
+                        alert('Scan barcode produk berhasil: ' + event.data.barcode);
                     }
                     window.removeEventListener('message', onMessage);
                     barcodeInput.focus();
