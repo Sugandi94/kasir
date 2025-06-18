@@ -997,14 +997,5 @@
     "stock": 0,
     "category": "Rokok",
     "barcode": ""
-  },
-  {
-    "id": 112,
-    "name": "1",
-    "buy_price": 0,
-    "sell_price": 875,
-    "stock": 6575,
-    "category": "Rokok",
-    "barcode": "32432423423"
   }
 ]

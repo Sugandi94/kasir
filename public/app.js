@@ -747,6 +747,7 @@ function renderProductTable() {
         { key: 'no', label: 'No' },
         { key: 'name', label: 'Nama Produk', sortable: true },
         { key: 'category', label: 'Kategori', sortable: true },
+        { key: 'barcode', label: 'Barcode', sortable: false },
         { key: 'buy_price', label: 'Harga Beli', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
         { key: 'sell_price', label: 'Harga Jual', sortable: true, format: (val) => `Rp${Number(val).toLocaleString('id-ID')}` },
         { key: 'stock', label: 'Stok', sortable: true },
@@ -984,9 +985,11 @@ function toggleProductPagination(enabled) {
 }
 
 function loadProducts() {
+    console.log('loadProducts called');
     fetch('/api/products').then(r => r.json()).then(products => {
         productAllData = products;
         renderProductTable();
+        console.log('Product table rendered with', products.length, 'items');
     });
 }
 
@@ -1071,12 +1074,14 @@ async function saveProduct() {
         fetch(`/api/products/${editingProductId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, buy_price, sell_price, stock, category })
+            body: JSON.stringify({ name, buy_price, sell_price, stock, category, barcode })
         })
         .then(r => r.json())
         .then(res => {
             document.getElementById('addprod-msg').innerText = res.success ? 'Produk berhasil diupdate' : (res.message || 'Gagal update');
             if (res.success) {
+                alert('Produk berhasil diupdate');
+                console.log('Product update success');
                 resetProductForm();
                 loadProducts();
             }
@@ -1087,7 +1092,7 @@ async function saveProduct() {
         fetch('/api/products', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, buy_price, sell_price, stock, category })
+            body: JSON.stringify({ name, buy_price, sell_price, stock, category, barcode })
         })
         .then(r => r.json())
         .then(res => {
@@ -1197,6 +1202,7 @@ function editProduct(id, name, buy_price, sell_price, stock, category = '', barc
     document.getElementById('product-form-title').innerText = 'Edit Produk';
     document.getElementById('product-save-btn').innerText = 'Update';
     document.getElementById('product-cancel-btn').style.display = '';
+    loadProducts(); // Reload product table after loading product to edit
 }
 
 function resetProductForm() {
@@ -1221,6 +1227,7 @@ function deleteProduct(id) {
         .then(res => {
             document.getElementById('addprod-msg').innerText = res.success ? 'Produk berhasil dihapus' : (res.message || 'Gagal hapus produk');
             if (res.success) {
+                console.log('Product delete success');
                 resetProductForm();
                 loadProducts();
             }
@@ -1233,6 +1240,7 @@ function deleteProduct(id) {
 
 function cancelEditProduct() {
     resetProductForm();
+    loadProducts(); // Reload product table after cancel edit
 }
 
 function exportProductsExcel() {
@@ -1317,6 +1325,26 @@ function createProductAutocomplete() {
     categorySelect.style.width = '180px';
     categorySelect.style.boxSizing = 'border-box';
     container.appendChild(categorySelect);
+
+    // Buat tombol reset filter
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.textContent = 'Reset';
+    resetButton.style.padding = '6px 12px';
+    resetButton.style.fontSize = '14px';
+    resetButton.style.border = '1px solid #168bff';
+    resetButton.style.borderRadius = '4px';
+    resetButton.style.background = '#168bff';
+    resetButton.style.color = 'white';
+    resetButton.style.cursor = 'pointer';
+    container.appendChild(resetButton);
+
+    // Event listener untuk tombol reset
+    resetButton.addEventListener('click', () => {
+        input.value = '';
+        categorySelect.value = '';
+        renderOptions();
+    });
 
     // Ambil semua produk (option) awal
     let allOptions = [];
