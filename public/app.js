@@ -1429,7 +1429,13 @@ function createProductAutocomplete() {
     const uniqueCategories = new Set();
     allOptions.forEach(opt => {
         if (opt.category && opt.category.trim() !== '') {
-            uniqueCategories.add(opt.category.trim());
+            // Split categories by comma if multiple categories are stored in one string
+            opt.category.split(',').forEach(cat => {
+                const trimmedCat = cat.trim();
+                if (trimmedCat !== '') {
+                    uniqueCategories.add(trimmedCat);
+                }
+            });
         }
     });
 
