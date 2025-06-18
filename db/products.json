@@ -4,7 +4,7 @@
     "name": "153",
     "buy_price": 0,
     "sell_price": 15000,
-    "stock": -1,
+    "stock": -18,
     "category": "Rokok",
     "barcode": ""
   },
@@ -13,12 +13,111 @@
     "name": "363",
     "buy_price": 0,
     "sell_price": 9000,
-    "stock": -1,
+    "stock": 0,
     "category": "Rokok",
     "barcode": ""
   },
   {
     "id": 3,
+    "name": "7 Kurma",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 4,
+    "name": "ABC 3000",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Saus",
+    "barcode": ""
+  },
+  {
+    "id": 5,
+    "name": "ABC Kecap Manis Botol",
+    "buy_price": 0,
+    "sell_price": 8000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 6,
+    "name": "ABC Kecap Manis Extra Pedas",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 7,
+    "name": "ABC Super Batre",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Batre",
+    "barcode": ""
+  },
+  {
+    "id": 8,
+    "name": "ABC super power kecil",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Batre",
+    "barcode": ""
+  },
+  {
+    "id": 9,
+    "name": "Afitson 18 gram",
+    "buy_price": 0,
+    "sell_price": 9500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 10,
+    "name": "Agar kerang",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Agar-agar",
+    "barcode": ""
+  },
+  {
+    "id": 11,
+    "name": "Agar walet",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Agar-agar",
+    "barcode": ""
+  },
+  {
+    "id": 12,
+    "name": "Antangin",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 13,
+    "name": "Antangin anak",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 14,
     "name": "Aqua Besar",
     "buy_price": 52000,
     "sell_price": 5000,
@@ -27,7 +126,7 @@
     "barcode": ""
   },
   {
-    "id": 4,
+    "id": 15,
     "name": "Aqua Kecil",
     "buy_price": 46000,
     "sell_price": 3000,
@@ -36,7 +135,115 @@
     "barcode": ""
   },
   {
-    "id": 5,
+    "id": 16,
+    "name": "Baby Happy L",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 17,
+    "name": "Baby Happy L 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 11000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 18,
+    "name": "Baby Happy M",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 19,
+    "name": "Baby Happy M 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 11000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 20,
+    "name": "Baby Happy XL",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 21,
+    "name": "Baby Happy XL 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 22,
+    "name": "Bango 1000",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 23,
+    "name": "Bango 10000",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 24,
+    "name": "Bango 22000",
+    "buy_price": 0,
+    "sell_price": 22000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 25,
+    "name": "Bango 3000",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 26,
+    "name": "Bear Brand Kaleng",
+    "buy_price": 0,
+    "sell_price": 11000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 27,
+    "name": "Bejo",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 28,
     "name": "Belau Cair",
     "buy_price": 0,
     "sell_price": 3000,
@@ -45,7 +252,7 @@
     "barcode": ""
   },
   {
-    "id": 6,
+    "id": 29,
     "name": "Belau Kotak",
     "buy_price": 0,
     "sell_price": 500,
@@ -54,8 +261,26 @@
     "barcode": ""
   },
   {
-    "id": 7,
-    "name": "Beras Kepala Singa",
+    "id": 30,
+    "name": "Beras Cap Pinguin 10 kg",
+    "buy_price": 0,
+    "sell_price": 145000,
+    "stock": 5,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 31,
+    "name": "Beras Cap Pinguin 5 kg",
+    "buy_price": 0,
+    "sell_price": 75000,
+    "stock": 10,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 32,
+    "name": "Beras Kepala Singa 5 kg",
     "buy_price": 72500,
     "sell_price": 74000,
     "stock": 0,
@@ -63,16 +288,25 @@
     "barcode": ""
   },
   {
-    "id": 8,
+    "id": 33,
     "name": "Beras Murah",
     "buy_price": 390000,
     "sell_price": 405000,
+    "stock": -2,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 34,
+    "name": "Beras Swan 1 kg",
+    "buy_price": 0,
+    "sell_price": 15500,
     "stock": 0,
     "category": "Sembako",
     "barcode": ""
   },
   {
-    "id": 9,
+    "id": 35,
     "name": "Beras Swan 10 kg",
     "buy_price": 147000,
     "sell_price": 149000,
@@ -81,7 +315,7 @@
     "barcode": ""
   },
   {
-    "id": 10,
+    "id": 36,
     "name": "Beras Swan 30 kg",
     "buy_price": 433000,
     "sell_price": 435000,
@@ -90,7 +324,7 @@
     "barcode": ""
   },
   {
-    "id": 11,
+    "id": 37,
     "name": "Beras Swan 5 kg",
     "buy_price": 77000,
     "sell_price": 79000,
@@ -99,7 +333,88 @@
     "barcode": ""
   },
   {
-    "id": 12,
+    "id": 38,
+    "name": "Bintang Toedjoe",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 39,
+    "name": "Boncabe lvl 10",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 40,
+    "name": "Boncabe lvl 10 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 41,
+    "name": "Boncabe lvl 15",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 42,
+    "name": "Boncabe lvl 15 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 43,
+    "name": "Boncabe lvl 30",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 44,
+    "name": "Boncabe lvl 30 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 45,
+    "name": "Boncabe lvl 50",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 46,
+    "name": "Boncabe lvl 50 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 47,
     "name": "BULL",
     "buy_price": 0,
     "sell_price": 29000,
@@ -108,16 +423,124 @@
     "barcode": ""
   },
   {
-    "id": 13,
+    "id": 48,
     "name": "CAMEL",
     "buy_price": 0,
     "sell_price": 20000,
-    "stock": -10,
+    "stock": 0,
     "category": "Rokok",
     "barcode": ""
   },
   {
-    "id": 14,
+    "id": 49,
+    "name": "Cap Lang 15 ml",
+    "buy_price": 0,
+    "sell_price": 6500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 50,
+    "name": "Carnation",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 51,
+    "name": "Carnation 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 7500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 52,
+    "name": "Champion",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 53,
+    "name": "Champion 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 23000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 54,
+    "name": "Charm Oren 1",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 55,
+    "name": "Charm Oren 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 6500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 56,
+    "name": "Charm Oren 1 Tas",
+    "buy_price": 0,
+    "sell_price": 25000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 57,
+    "name": "Charm Oren 3",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 58,
+    "name": "Charm Oren Tas",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 59,
+    "name": "Charm Safe Night 350",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 60,
+    "name": "Charm Safe Night 350 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 28000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 61,
     "name": "CHIEF",
     "buy_price": 0,
     "sell_price": 16500,
@@ -126,7 +549,106 @@
     "barcode": ""
   },
   {
-    "id": 15,
+    "id": 62,
+    "name": "Chocolatos Coklat",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 63,
+    "name": "Chocolatos Coklat 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 64,
+    "name": "Chocolatos Creamy",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 65,
+    "name": "Chocolatos Creamy 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 66,
+    "name": "Chocolatos Matcha",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 67,
+    "name": "Chocolatos Matcha 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 68,
+    "name": "Chocolatos Vanilla Latte",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 69,
+    "name": "Chocolatos Vanilla Latte 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Minuman",
+    "barcode": ""
+  },
+  {
+    "id": 70,
+    "name": "Ciptaden 120g",
+    "buy_price": 0,
+    "sell_price": 8000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 71,
+    "name": "Ciptaden 75g",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 72,
+    "name": "Citra 110 ml",
+    "buy_price": 0,
+    "sell_price": 13000,
+    "stock": 0,
+    "category": "Lotion",
+    "barcode": ""
+  },
+  {
+    "id": 73,
     "name": "Club X",
     "buy_price": 0,
     "sell_price": 22000,
@@ -135,7 +657,34 @@
     "barcode": ""
   },
   {
-    "id": 16,
+    "id": 74,
+    "name": "Coffeemix",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 75,
+    "name": "Coffeemix 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 16000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 76,
+    "name": "Coffeemix 2",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 77,
     "name": "Commodore",
     "buy_price": 0,
     "sell_price": 28000,
@@ -144,7 +693,133 @@
     "barcode": ""
   },
   {
-    "id": 17,
+    "id": 78,
+    "name": "Creamy Latte",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 79,
+    "name": "Creamy Latte 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 80,
+    "name": "Dancow",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 81,
+    "name": "Dancow 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 37000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 82,
+    "name": "Dancow Coklat",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 83,
+    "name": "Dancow Coklat 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 37000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 84,
+    "name": "Desaku Bawang Putih",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 85,
+    "name": "Desaku Bawang Putih 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 86,
+    "name": "Desaku Ketumbar",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 87,
+    "name": "Desaku Ketumbar 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 88,
+    "name": "Desaku Kunyit Bubuk",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 89,
+    "name": "Desaku Kunyit Bubuk 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 90,
+    "name": "Desaku Marinasi",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 91,
+    "name": "Desaku Marinasi 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 8500,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 92,
     "name": "Djarum Istimewa",
     "buy_price": 0,
     "sell_price": 14000,
@@ -153,7 +828,7 @@
     "barcode": ""
   },
   {
-    "id": 18,
+    "id": 93,
     "name": "Dongan (Filter)",
     "buy_price": 0,
     "sell_price": 16000,
@@ -162,7 +837,16 @@
     "barcode": ""
   },
   {
-    "id": 19,
+    "id": 94,
+    "name": "Egle Balm",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 95,
     "name": "Esse Biru",
     "buy_price": 0,
     "sell_price": 42000,
@@ -171,7 +855,7 @@
     "barcode": ""
   },
   {
-    "id": 20,
+    "id": 96,
     "name": "Exrajoss",
     "buy_price": 0,
     "sell_price": 13000,
@@ -180,7 +864,133 @@
     "barcode": ""
   },
   {
-    "id": 21,
+    "id": 97,
+    "name": "Formula 75g",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 98,
+    "name": "Formula Family 160g",
+    "buy_price": 0,
+    "sell_price": 13000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 99,
+    "name": "Formula Junior 45g",
+    "buy_price": 0,
+    "sell_price": 6000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 100,
+    "name": "Freshcare Hot",
+    "buy_price": 0,
+    "sell_price": 12000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 101,
+    "name": "Frisianflag",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 102,
+    "name": "Frisianflag 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 8500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 103,
+    "name": "Frisianflag Coklat",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 104,
+    "name": "Frisianflag Coklat 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 8500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 105,
+    "name": "Frisianflag gold Kaleng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 106,
+    "name": "Frisianflag Kaleng",
+    "buy_price": 0,
+    "sell_price": 13000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 107,
+    "name": "Geliga",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 108,
+    "name": "Gillette Flaxi Blue 2",
+    "buy_price": 0,
+    "sell_price": 20000,
+    "stock": 0,
+    "category": "Pisau",
+    "barcode": ""
+  },
+  {
+    "id": 109,
+    "name": "Gillette Goal 2 Kuning",
+    "buy_price": 0,
+    "sell_price": 8500,
+    "stock": 0,
+    "category": "Pisau",
+    "barcode": ""
+  },
+  {
+    "id": 110,
+    "name": "Gillette Goal Klik Biru",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Pisau",
+    "barcode": ""
+  },
+  {
+    "id": 111,
     "name": "GM Besar",
     "buy_price": 0,
     "sell_price": 19000,
@@ -189,7 +999,7 @@
     "barcode": ""
   },
   {
-    "id": 22,
+    "id": 112,
     "name": "GM Hitam",
     "buy_price": 0,
     "sell_price": 14000,
@@ -198,7 +1008,7 @@
     "barcode": ""
   },
   {
-    "id": 23,
+    "id": 113,
     "name": "GM Kecil",
     "buy_price": 0,
     "sell_price": 15500,
@@ -207,7 +1017,16 @@
     "barcode": ""
   },
   {
-    "id": 24,
+    "id": 114,
+    "name": "GPU",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 115,
     "name": "Grow Biru",
     "buy_price": 0,
     "sell_price": 17000,
@@ -216,7 +1035,7 @@
     "barcode": ""
   },
   {
-    "id": 25,
+    "id": 116,
     "name": "Grow Merah",
     "buy_price": 0,
     "sell_price": 17000,
@@ -225,7 +1044,7 @@
     "barcode": ""
   },
   {
-    "id": 26,
+    "id": 117,
     "name": "Grow Ungu",
     "buy_price": 0,
     "sell_price": 18000,
@@ -234,16 +1053,124 @@
     "barcode": ""
   },
   {
-    "id": 27,
+    "id": 118,
+    "name": "Gula merah",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 119,
+    "name": "Gula Putih",
+    "buy_price": 0,
+    "sell_price": 17500,
+    "stock": -2,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 120,
+    "name": "Hannochs 18 watt",
+    "buy_price": 0,
+    "sell_price": 25000,
+    "stock": 0,
+    "category": "Lampu",
+    "barcode": ""
+  },
+  {
+    "id": 121,
+    "name": "Hilo",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 122,
+    "name": "Hilo 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 123,
     "name": "HIT Kaleng 150ml",
     "buy_price": 0,
     "sell_price": 12500,
     "stock": 0,
-    "category": "Racun",
+    "category": "Obat nyamuk",
     "barcode": ""
   },
   {
-    "id": 28,
+    "id": 124,
+    "name": "HIT Kaleng 600 ml",
+    "buy_price": 0,
+    "sell_price": 35000,
+    "stock": 0,
+    "category": "Obat nyamuk",
+    "barcode": ""
+  },
+  {
+    "id": 125,
+    "name": "Indocafe Capucino",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 126,
+    "name": "Indocafe Capucino 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 23000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 127,
+    "name": "Indofood Extra Pedas",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 128,
+    "name": "Indofood Manis",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 129,
+    "name": "Indofood Sambal Pedas Botol",
+    "buy_price": 0,
+    "sell_price": 8000,
+    "stock": 0,
+    "category": "Saus",
+    "barcode": ""
+  },
+  {
+    "id": 130,
+    "name": "Indofood Sambal Tomat Botol",
+    "buy_price": 0,
+    "sell_price": 8000,
+    "stock": 0,
+    "category": "Saus",
+    "barcode": ""
+  },
+  {
+    "id": 131,
     "name": "Insta Merah (Kretek)",
     "buy_price": 0,
     "sell_price": 11000,
@@ -252,7 +1179,7 @@
     "barcode": ""
   },
   {
-    "id": 29,
+    "id": 132,
     "name": "Insta Semangka",
     "buy_price": 0,
     "sell_price": 24000,
@@ -261,7 +1188,7 @@
     "barcode": ""
   },
   {
-    "id": 30,
+    "id": 133,
     "name": "INTRO",
     "buy_price": 0,
     "sell_price": 8500,
@@ -270,7 +1197,7 @@
     "barcode": ""
   },
   {
-    "id": 31,
+    "id": 134,
     "name": "Kacang Ijo",
     "buy_price": 0,
     "sell_price": 26000,
@@ -279,7 +1206,151 @@
     "barcode": ""
   },
   {
-    "id": 32,
+    "id": 135,
+    "name": "Kapan Api",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 136,
+    "name": "Kapan Api 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 14500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 137,
+    "name": "Kapur Bagus",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Racun",
+    "barcode": ""
+  },
+  {
+    "id": 138,
+    "name": "Kari Ayam",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Mie",
+    "barcode": ""
+  },
+  {
+    "id": 139,
+    "name": "Kari Ayam 1 Kotak",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Mie",
+    "barcode": ""
+  },
+  {
+    "id": 140,
+    "name": "Kecap ABC Botol",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 141,
+    "name": "Kecap Panah",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 142,
+    "name": "Kertas Nasi",
+    "buy_price": 0,
+    "sell_price": 24000,
+    "stock": -2,
+    "category": "Kertas",
+    "barcode": ""
+  },
+  {
+    "id": 143,
+    "name": "KIT Ban",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "KIT",
+    "barcode": ""
+  },
+  {
+    "id": 144,
+    "name": "KIT Ban 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 34000,
+    "stock": 0,
+    "category": "KIT",
+    "barcode": ""
+  },
+  {
+    "id": 145,
+    "name": "KIT Body",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "KIT",
+    "barcode": ""
+  },
+  {
+    "id": 146,
+    "name": "KIT Body 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 28000,
+    "stock": 0,
+    "category": "KIT",
+    "barcode": ""
+  },
+  {
+    "id": 147,
+    "name": "Kobe Selera Ayam Goreng",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 148,
+    "name": "Kobe Selera Ayam Goreng 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 149,
+    "name": "Kobe Tempe Kriuk",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 150,
+    "name": "Kobe Tempe Kriuk 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 23000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 151,
     "name": "Konco Coklat (Kretek)",
     "buy_price": 0,
     "sell_price": 8000,
@@ -288,7 +1359,7 @@
     "barcode": ""
   },
   {
-    "id": 33,
+    "id": 152,
     "name": "Konco Ijo",
     "buy_price": 0,
     "sell_price": 16000,
@@ -297,7 +1368,7 @@
     "barcode": ""
   },
   {
-    "id": 34,
+    "id": 153,
     "name": "Kopi Aceh",
     "buy_price": 0,
     "sell_price": 5000,
@@ -306,7 +1377,7 @@
     "barcode": ""
   },
   {
-    "id": 35,
+    "id": 154,
     "name": "Kopi Aroma",
     "buy_price": 0,
     "sell_price": 10000,
@@ -315,7 +1386,7 @@
     "barcode": ""
   },
   {
-    "id": 36,
+    "id": 155,
     "name": "Kopi Jembatan",
     "buy_price": 0,
     "sell_price": 5000,
@@ -324,7 +1395,43 @@
     "barcode": ""
   },
   {
-    "id": 37,
+    "id": 156,
+    "name": "Kopi Jembatan 1 Pack",
+    "buy_price": 0,
+    "sell_price": 47000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 157,
+    "name": "Korek kayu",
+    "buy_price": 0,
+    "sell_price": 500,
+    "stock": 0,
+    "category": "Korek",
+    "barcode": ""
+  },
+  {
+    "id": 158,
+    "name": "Koyo",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 159,
+    "name": "Koyo cabe",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 160,
     "name": "Kraton (Kretek)",
     "buy_price": 0,
     "sell_price": 14000,
@@ -333,7 +1440,7 @@
     "barcode": ""
   },
   {
-    "id": 38,
+    "id": 161,
     "name": "Kuku Bima",
     "buy_price": 0,
     "sell_price": 7000,
@@ -342,7 +1449,7 @@
     "barcode": ""
   },
   {
-    "id": 39,
+    "id": 162,
     "name": "LA Bold Hitam",
     "buy_price": 0,
     "sell_price": 38000,
@@ -351,7 +1458,34 @@
     "barcode": ""
   },
   {
-    "id": 40,
+    "id": 163,
+    "name": "Ladaku",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 164,
+    "name": "Ladaku 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 10500,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 165,
+    "name": "Lem Setan",
+    "buy_price": 0,
+    "sell_price": 7000,
+    "stock": 0,
+    "category": "Lem",
+    "barcode": ""
+  },
+  {
+    "id": 166,
     "name": "Lilin Besar",
     "buy_price": 0,
     "sell_price": 10000,
@@ -360,7 +1494,7 @@
     "barcode": ""
   },
   {
-    "id": 41,
+    "id": 167,
     "name": "Lilin Kecil",
     "buy_price": 0,
     "sell_price": 3500,
@@ -369,7 +1503,52 @@
     "barcode": ""
   },
   {
-    "id": 42,
+    "id": 168,
+    "name": "Lorier Ping 1",
+    "buy_price": 0,
+    "sell_price": 1000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 169,
+    "name": "Lorier Ping 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 6500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 170,
+    "name": "Lorier Ping 1 Tas",
+    "buy_price": 0,
+    "sell_price": 25000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 171,
+    "name": "Lorier Ping 3",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 172,
+    "name": "Lorier Ping Tas",
+    "buy_price": 0,
+    "sell_price": 4500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 173,
     "name": "Lucky Strike",
     "buy_price": 0,
     "sell_price": 29000,
@@ -378,7 +1557,34 @@
     "barcode": ""
   },
   {
-    "id": 43,
+    "id": 174,
+    "name": "Luwak White Koffie",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 175,
+    "name": "Luwak White Koffie 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 15000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 176,
+    "name": "Madu rasa",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 177,
     "name": "Magnum Bintang",
     "buy_price": 0,
     "sell_price": 25000,
@@ -387,7 +1593,7 @@
     "barcode": ""
   },
   {
-    "id": 44,
+    "id": 178,
     "name": "Magnum Kretek",
     "buy_price": 0,
     "sell_price": 18000,
@@ -396,16 +1602,151 @@
     "barcode": ""
   },
   {
-    "id": 45,
+    "id": 179,
+    "name": "Maizena",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Tepung",
+    "barcode": ""
+  },
+  {
+    "id": 180,
+    "name": "Makuku L",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 181,
+    "name": "Makuku L 3 pcs",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 182,
+    "name": "Makuku M",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 183,
+    "name": "Makuku M 3 pcs",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 184,
+    "name": "Makuku XL",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 185,
+    "name": "Makuku XL 3 pcs",
+    "buy_price": 0,
+    "sell_price": 6000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 186,
+    "name": "Mamypoko L",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 187,
+    "name": "Mamypoko L 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 19000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 188,
+    "name": "Mamypoko M",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 189,
+    "name": "Mamypoko M 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 190,
+    "name": "Mamypoko S",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 191,
+    "name": "Mamypoko S 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 17000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 192,
+    "name": "Mamypoko XL",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 193,
+    "name": "Mamypoko XL 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 194,
     "name": "Mancis",
     "buy_price": 0,
     "sell_price": 2000,
-    "stock": -1,
+    "stock": 0,
     "category": "Korek",
     "barcode": ""
   },
   {
-    "id": 46,
+    "id": 195,
     "name": "Mancis Cricket",
     "buy_price": 0,
     "sell_price": 5000,
@@ -414,7 +1755,7 @@
     "barcode": ""
   },
   {
-    "id": 47,
+    "id": 196,
     "name": "Mancis Tokai",
     "buy_price": 0,
     "sell_price": 2500,
@@ -423,7 +1764,7 @@
     "barcode": ""
   },
   {
-    "id": 48,
+    "id": 197,
     "name": "Marcopolo",
     "buy_price": 0,
     "sell_price": 21000,
@@ -432,7 +1773,16 @@
     "barcode": ""
   },
   {
-    "id": 49,
+    "id": 198,
+    "name": "Marina 95 ml",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Bedak",
+    "barcode": ""
+  },
+  {
+    "id": 199,
     "name": "Marlboro Gold",
     "buy_price": 0,
     "sell_price": 48500,
@@ -441,7 +1791,7 @@
     "barcode": ""
   },
   {
-    "id": 50,
+    "id": 200,
     "name": "Marlboro Merah",
     "buy_price": 0,
     "sell_price": 48500,
@@ -450,7 +1800,7 @@
     "barcode": ""
   },
   {
-    "id": 51,
+    "id": 201,
     "name": "Marlong Besar",
     "buy_price": 0,
     "sell_price": 39000,
@@ -459,7 +1809,7 @@
     "barcode": ""
   },
   {
-    "id": 52,
+    "id": 202,
     "name": "Marlong Kecil",
     "buy_price": 0,
     "sell_price": 24000,
@@ -468,7 +1818,34 @@
     "barcode": ""
   },
   {
-    "id": 53,
+    "id": 203,
+    "name": "Maxtea",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 204,
+    "name": "Maxtea 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 23000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 205,
+    "name": "Menara 5",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 206,
     "name": "Menara Bold",
     "buy_price": 0,
     "sell_price": 17000,
@@ -477,7 +1854,7 @@
     "barcode": ""
   },
   {
-    "id": 54,
+    "id": 207,
     "name": "Menara Coklat",
     "buy_price": 0,
     "sell_price": 17000,
@@ -486,7 +1863,7 @@
     "barcode": ""
   },
   {
-    "id": 55,
+    "id": 208,
     "name": "Menara Kuning",
     "buy_price": 0,
     "sell_price": 9500,
@@ -495,7 +1872,7 @@
     "barcode": ""
   },
   {
-    "id": 56,
+    "id": 209,
     "name": "Menara Merah",
     "buy_price": 0,
     "sell_price": 17000,
@@ -504,7 +1881,61 @@
     "barcode": ""
   },
   {
-    "id": 57,
+    "id": 210,
+    "name": "Mie Lidi",
+    "buy_price": 0,
+    "sell_price": 6000,
+    "stock": -2,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 211,
+    "name": "Milo",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 212,
+    "name": "Milo 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 19500,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 213,
+    "name": "Minyak Al-syifa",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 214,
+    "name": "Minyak kayu putih 12 ml",
+    "buy_price": 0,
+    "sell_price": 7000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 215,
+    "name": "Minyak kayu putih 25 ml",
+    "buy_price": 0,
+    "sell_price": 14000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 216,
     "name": "Minyak Kita 1 L",
     "buy_price": 0,
     "sell_price": 16500,
@@ -513,7 +1944,7 @@
     "barcode": ""
   },
   {
-    "id": 58,
+    "id": 217,
     "name": "Minyak Kita 2 L",
     "buy_price": 0,
     "sell_price": 33500,
@@ -522,16 +1953,16 @@
     "barcode": ""
   },
   {
-    "id": 59,
+    "id": 218,
     "name": "Minyak Makan Curah 1 kg",
     "buy_price": 16300,
     "sell_price": 17500,
-    "stock": 0,
+    "stock": -2,
     "category": "Sembako",
     "barcode": ""
   },
   {
-    "id": 60,
+    "id": 219,
     "name": "Minyak Makan Curah Â½ kg",
     "buy_price": 16300,
     "sell_price": 9000,
@@ -540,7 +1971,25 @@
     "barcode": ""
   },
   {
-    "id": 61,
+    "id": 220,
+    "name": "Minyak rambut kemiri",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Minyak",
+    "barcode": ""
+  },
+  {
+    "id": 221,
+    "name": "Minyak telon my baby 90 ml",
+    "buy_price": 0,
+    "sell_price": 21000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 222,
     "name": "Mustang",
     "buy_price": 0,
     "sell_price": 16000,
@@ -549,7 +1998,25 @@
     "barcode": ""
   },
   {
-    "id": 62,
+    "id": 223,
+    "name": "My baby 50 gram",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Bedak",
+    "barcode": ""
+  },
+  {
+    "id": 224,
+    "name": "My baby 90 gram + 23 gram",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Bedak",
+    "barcode": ""
+  },
+  {
+    "id": 225,
     "name": "NATION BOLD",
     "buy_price": 0,
     "sell_price": 24000,
@@ -558,61 +2025,259 @@
     "barcode": ""
   },
   {
-    "id": 63,
-    "name": "Pasta Gigi Ciptaden 120g",
+    "id": 226,
+    "name": "Nomos hijau",
+    "buy_price": 0,
+    "sell_price": 4500,
+    "stock": 0,
+    "category": "Obat nyamuk",
+    "barcode": ""
+  },
+  {
+    "id": 227,
+    "name": "Nomos merah",
+    "buy_price": 0,
+    "sell_price": 4500,
+    "stock": 0,
+    "category": "Obat nyamuk",
+    "barcode": ""
+  },
+  {
+    "id": 228,
+    "name": "Nutrigel",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Agar-agar",
+    "barcode": ""
+  },
+  {
+    "id": 229,
+    "name": "Nutrigel coklat",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Agar-agar",
+    "barcode": ""
+  },
+  {
+    "id": 230,
+    "name": "Obat batuk komix",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 231,
+    "name": "Obat batuk komix herbal",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 232,
+    "name": "Pepsodent 190+15g",
+    "buy_price": 0,
+    "sell_price": 14000,
+    "stock": 0,
+    "category": "Pasta Gigi",
+    "barcode": ""
+  },
+  {
+    "id": 233,
+    "name": "Pisau Inggris London Bridge",
+    "buy_price": 0,
+    "sell_price": 40000,
+    "stock": 0,
+    "category": "Pisau",
+    "barcode": ""
+  },
+  {
+    "id": 234,
+    "name": "Plastik 1 Kg",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 235,
+    "name": "Plastik 10 Kg 1 ons",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 236,
+    "name": "Plastik 2 Kg",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 237,
+    "name": "Plastik 3 Kg",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 238,
+    "name": "Plastik 5 Kg 1 ons",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 239,
+    "name": "Plastik Kresek 1 Kg",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 240,
+    "name": "Plastik Kresek 10 Kg",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0,
-    "category": "Pasta Gigi",
+    "category": "Plastik",
     "barcode": ""
   },
   {
-    "id": 64,
-    "name": "Pasta Gigi Ciptaden 75g",
+    "id": 241,
+    "name": "Plastik Kresek 2 Kg",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0,
-    "category": "Pasta Gigi",
+    "category": "Plastik",
     "barcode": ""
   },
   {
-    "id": 65,
-    "name": "Pasta Gigi Formula 75g",
-    "buy_price": 0,
-    "sell_price": 5000,
-    "stock": 0,
-    "category": "Pasta Gigi",
-    "barcode": ""
-  },
-  {
-    "id": 66,
-    "name": "Pasta Gigi Formula Family 160g",
+    "id": 242,
+    "name": "Plastik Kresek 3 Kg",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0,
-    "category": "Pasta Gigi",
+    "category": "Plastik",
     "barcode": ""
   },
   {
-    "id": 67,
-    "name": "Pasta Gigi Formula Junior 45g",
+    "id": 243,
+    "name": "Plastik Kresek 5 Kg",
     "buy_price": 0,
     "sell_price": 0,
     "stock": 0,
-    "category": "Pasta Gigi",
+    "category": "Plastik",
     "barcode": ""
   },
   {
-    "id": 68,
-    "name": "Pasta Gigi Pepsodent 190+15g",
+    "id": 244,
+    "name": "Plastik Â¼",
     "buy_price": 0,
-    "sell_price": 0,
-    "stock": 0,
-    "category": "Pasta Gigi",
+    "sell_price": 9000,
+    "stock": -2,
+    "category": "Plastik",
     "barcode": ""
   },
   {
-    "id": 69,
+    "id": 245,
+    "name": "Plastik Â½",
+    "buy_price": 0,
+    "sell_price": 9000,
+    "stock": 0,
+    "category": "Plastik",
+    "barcode": ""
+  },
+  {
+    "id": 246,
+    "name": "Plossa",
+    "buy_price": 0,
+    "sell_price": 12000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 247,
+    "name": "Promina",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Bubur",
+    "barcode": ""
+  },
+  {
+    "id": 248,
+    "name": "Promina Coklat",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Bubur",
+    "barcode": ""
+  },
+  {
+    "id": 249,
+    "name": "Pulut Putih",
+    "buy_price": 0,
+    "sell_price": 16000,
+    "stock": -2,
+    "category": "Sembako",
+    "barcode": ""
+  },
+  {
+    "id": 250,
+    "name": "Racik Nasi Goreng",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 251,
+    "name": "Racik Nasi Goreng 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 252,
+    "name": "Racik Tahu & Tempe Goreng",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 253,
+    "name": "Racik Tahu & Tempe Goreng 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 19000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 254,
     "name": "RAZOR Kretek",
     "buy_price": 0,
     "sell_price": 13000,
@@ -621,16 +2286,16 @@
     "barcode": ""
   },
   {
-    "id": 70,
+    "id": 255,
     "name": "Sabun Citra",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 4000,
     "stock": 0,
     "category": "Sabun",
     "barcode": ""
   },
   {
-    "id": 71,
+    "id": 256,
     "name": "Sabun Claudia",
     "buy_price": 0,
     "sell_price": 4000,
@@ -639,7 +2304,7 @@
     "barcode": ""
   },
   {
-    "id": 72,
+    "id": 257,
     "name": "Sabun Dettol",
     "buy_price": 0,
     "sell_price": 5000,
@@ -648,7 +2313,7 @@
     "barcode": ""
   },
   {
-    "id": 73,
+    "id": 258,
     "name": "Sabun GIV",
     "buy_price": 0,
     "sell_price": 3000,
@@ -657,7 +2322,7 @@
     "barcode": ""
   },
   {
-    "id": 74,
+    "id": 259,
     "name": "Sabun Harmoni",
     "buy_price": 0,
     "sell_price": 3500,
@@ -666,16 +2331,16 @@
     "barcode": ""
   },
   {
-    "id": 75,
+    "id": 260,
     "name": "Sabun Natural",
     "buy_price": 0,
     "sell_price": 3000,
-    "stock": 0,
+    "stock": -1,
     "category": "Sabun",
     "barcode": ""
   },
   {
-    "id": 76,
+    "id": 261,
     "name": "Sabun Natural White",
     "buy_price": 0,
     "sell_price": 4000,
@@ -684,16 +2349,16 @@
     "barcode": ""
   },
   {
-    "id": 77,
+    "id": 262,
     "name": "Sabun Nuvo",
     "buy_price": 0,
-    "sell_price": 4000,
+    "sell_price": 5000,
     "stock": 0,
     "category": "Sabun",
     "barcode": ""
   },
   {
-    "id": 78,
+    "id": 263,
     "name": "Sabun Shinzui",
     "buy_price": 0,
     "sell_price": 5000,
@@ -702,7 +2367,61 @@
     "barcode": ""
   },
   {
-    "id": 79,
+    "id": 264,
+    "name": "Sajiku",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 265,
+    "name": "Sajiku 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 28000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 266,
+    "name": "Sajiku Nasi Goreng",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 267,
+    "name": "Sajiku Nasi Goreng 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 268,
+    "name": "Sajiku Pedas",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 269,
+    "name": "Sajiku Pedas 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 29000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 270,
     "name": "SALVO",
     "buy_price": 0,
     "sell_price": 10000,
@@ -711,7 +2430,7 @@
     "barcode": ""
   },
   {
-    "id": 80,
+    "id": 271,
     "name": "Samsu Kuning",
     "buy_price": 0,
     "sell_price": 20000,
@@ -720,7 +2439,7 @@
     "barcode": ""
   },
   {
-    "id": 81,
+    "id": 272,
     "name": "Samsu Refill (Black)",
     "buy_price": 0,
     "sell_price": 20000,
@@ -729,7 +2448,43 @@
     "barcode": ""
   },
   {
-    "id": 82,
+    "id": 273,
+    "name": "Sarden ABC Besar",
+    "buy_price": 0,
+    "sell_price": 21000,
+    "stock": 0,
+    "category": "Makanan kaleng",
+    "barcode": ""
+  },
+  {
+    "id": 274,
+    "name": "Sarden ABC Kecil",
+    "buy_price": 0,
+    "sell_price": 11000,
+    "stock": 0,
+    "category": "Makanan kaleng",
+    "barcode": ""
+  },
+  {
+    "id": 275,
+    "name": "Sarden gaga besar",
+    "buy_price": 0,
+    "sell_price": 20000,
+    "stock": 0,
+    "category": "Makanan kaleng",
+    "barcode": ""
+  },
+  {
+    "id": 276,
+    "name": "Sarden Gaga kecil",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Makanan kaleng",
+    "barcode": ""
+  },
+  {
+    "id": 277,
     "name": "Sari Asam",
     "buy_price": 0,
     "sell_price": 3000,
@@ -738,7 +2493,7 @@
     "barcode": ""
   },
   {
-    "id": 83,
+    "id": 278,
     "name": "Sari Gula",
     "buy_price": 0,
     "sell_price": 3000,
@@ -747,7 +2502,7 @@
     "barcode": ""
   },
   {
-    "id": 84,
+    "id": 279,
     "name": "Sarimurni (Kotak)",
     "buy_price": 0,
     "sell_price": 6500,
@@ -756,7 +2511,52 @@
     "barcode": ""
   },
   {
-    "id": 85,
+    "id": 280,
+    "name": "Sasa Serbaguna",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 281,
+    "name": "Sasa Serbaguna 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Bumbu Dapur",
+    "barcode": ""
+  },
+  {
+    "id": 282,
+    "name": "Saus ABC Pedas",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Saus",
+    "barcode": ""
+  },
+  {
+    "id": 283,
+    "name": "Sedap Manis",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 284,
+    "name": "Sedap Manis Besar",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Kecap",
+    "barcode": ""
+  },
+  {
+    "id": 285,
     "name": "Selera (Kretek)",
     "buy_price": 0,
     "sell_price": 16000,
@@ -765,7 +2565,7 @@
     "barcode": ""
   },
   {
-    "id": 86,
+    "id": 286,
     "name": "Sempurna Besar",
     "buy_price": 0,
     "sell_price": 34000,
@@ -774,7 +2574,7 @@
     "barcode": ""
   },
   {
-    "id": 87,
+    "id": 287,
     "name": "Sempurna Hijau",
     "buy_price": 0,
     "sell_price": 15000,
@@ -783,7 +2583,7 @@
     "barcode": ""
   },
   {
-    "id": 88,
+    "id": 288,
     "name": "Sempurna Kecil",
     "buy_price": 0,
     "sell_price": 25000,
@@ -792,7 +2592,7 @@
     "barcode": ""
   },
   {
-    "id": 89,
+    "id": 289,
     "name": "Sempurna Prima",
     "buy_price": 0,
     "sell_price": 16000,
@@ -801,7 +2601,7 @@
     "barcode": ""
   },
   {
-    "id": 90,
+    "id": 290,
     "name": "Sempurna Prima Go",
     "buy_price": 0,
     "sell_price": 14000,
@@ -810,7 +2610,7 @@
     "barcode": ""
   },
   {
-    "id": 91,
+    "id": 291,
     "name": "Sikat Gigi Brico",
     "buy_price": 0,
     "sell_price": 3500,
@@ -819,7 +2619,7 @@
     "barcode": ""
   },
   {
-    "id": 92,
+    "id": 292,
     "name": "Sikat Gigi Formula",
     "buy_price": 0,
     "sell_price": 3500,
@@ -828,7 +2628,97 @@
     "barcode": ""
   },
   {
-    "id": 93,
+    "id": 293,
+    "name": "Softex 29cm",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 294,
+    "name": "Softex 29cm 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 26000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 295,
+    "name": "Softex 36cm",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 296,
+    "name": "Softex 36cm 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 26000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 297,
+    "name": "Softex Daun Siri",
+    "buy_price": 0,
+    "sell_price": 500,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 298,
+    "name": "Softex Daun Siri 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "Pembalut",
+    "barcode": ""
+  },
+  {
+    "id": 299,
+    "name": "Soto Medan",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Mie",
+    "barcode": ""
+  },
+  {
+    "id": 300,
+    "name": "Soto Medan 1 Kotak",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 0,
+    "category": "Mie",
+    "barcode": ""
+  },
+  {
+    "id": 301,
+    "name": "Stipo",
+    "buy_price": 0,
+    "sell_price": 5000,
+    "stock": 0,
+    "category": "ATK",
+    "barcode": ""
+  },
+  {
+    "id": 302,
+    "name": "SUN Beras Merah",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Bubur",
+    "barcode": ""
+  },
+  {
+    "id": 303,
     "name": "Surya Besar",
     "buy_price": 0,
     "sell_price": 34500,
@@ -837,7 +2727,7 @@
     "barcode": ""
   },
   {
-    "id": 94,
+    "id": 304,
     "name": "Surya Besar (Merah)",
     "buy_price": 0,
     "sell_price": 32000,
@@ -846,7 +2736,7 @@
     "barcode": ""
   },
   {
-    "id": 95,
+    "id": 305,
     "name": "Surya Kecil",
     "buy_price": 0,
     "sell_price": 25000,
@@ -855,7 +2745,7 @@
     "barcode": ""
   },
   {
-    "id": 96,
+    "id": 306,
     "name": "Surya Nusantara Raya",
     "buy_price": 0,
     "sell_price": 0,
@@ -864,7 +2754,97 @@
     "barcode": ""
   },
   {
-    "id": 97,
+    "id": 307,
+    "name": "Sweety L",
+    "buy_price": 0,
+    "sell_price": 0,
+    "stock": 2000,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 308,
+    "name": "Sweety L 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 309,
+    "name": "Sweety M",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 310,
+    "name": "Sweety M 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 311,
+    "name": "Sweety S",
+    "buy_price": 0,
+    "sell_price": 2000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 312,
+    "name": "Sweety S 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 10000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 313,
+    "name": "Sweety XL",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 314,
+    "name": "Sweety XL 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 12000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 315,
+    "name": "Sweety XXL",
+    "buy_price": 0,
+    "sell_price": 3500,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 316,
+    "name": "Sweety XXL 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 14000,
+    "stock": 0,
+    "category": "Popok",
+    "barcode": ""
+  },
+  {
+    "id": 317,
     "name": "Teh Bendera (Kotak)",
     "buy_price": 0,
     "sell_price": 6500,
@@ -873,7 +2853,7 @@
     "barcode": ""
   },
   {
-    "id": 98,
+    "id": 318,
     "name": "Teh Prenjak (Kotak)",
     "buy_price": 0,
     "sell_price": 6500,
@@ -882,7 +2862,7 @@
     "barcode": ""
   },
   {
-    "id": 99,
+    "id": 319,
     "name": "Teh Sari Wangi Kotak",
     "buy_price": 0,
     "sell_price": 6500,
@@ -891,7 +2871,16 @@
     "barcode": ""
   },
   {
-    "id": 100,
+    "id": 320,
+    "name": "Telepon Colek Kecil",
+    "buy_price": 0,
+    "sell_price": 2500,
+    "stock": -4,
+    "category": "Sabun",
+    "barcode": ""
+  },
+  {
+    "id": 321,
     "name": "TEN",
     "buy_price": 0,
     "sell_price": 11000,
@@ -900,34 +2889,43 @@
     "barcode": ""
   },
   {
-    "id": 101,
+    "id": 322,
     "name": "Tepung Kanji 1 kg",
     "buy_price": 0,
     "sell_price": 10000,
-    "stock": 0,
+    "stock": -2,
     "category": "Sembako",
     "barcode": ""
   },
   {
-    "id": 102,
+    "id": 323,
     "name": "Tepung Roti 1 kg",
     "buy_price": 8000,
     "sell_price": 8000,
-    "stock": 0,
+    "stock": -2,
     "category": "Sembako",
     "barcode": ""
   },
   {
-    "id": 103,
+    "id": 324,
+    "name": "Tiga sapi Kaleng",
+    "buy_price": 0,
+    "sell_price": 13000,
+    "stock": 0,
+    "category": "Susu",
+    "barcode": ""
+  },
+  {
+    "id": 325,
     "name": "Tisu Gatsby",
     "buy_price": 0,
-    "sell_price": 0,
+    "sell_price": 2000,
     "stock": 0,
     "category": "Tisu",
     "barcode": ""
   },
   {
-    "id": 104,
+    "id": 326,
     "name": "Tisu Nice",
     "buy_price": 0,
     "sell_price": 7000,
@@ -936,7 +2934,7 @@
     "barcode": ""
   },
   {
-    "id": 105,
+    "id": 327,
     "name": "Tisu Paseo 3000",
     "buy_price": 0,
     "sell_price": 3000,
@@ -945,7 +2943,7 @@
     "barcode": ""
   },
   {
-    "id": 106,
+    "id": 328,
     "name": "Tisu Paseo 5500",
     "buy_price": 0,
     "sell_price": 5500,
@@ -954,7 +2952,7 @@
     "barcode": ""
   },
   {
-    "id": 107,
+    "id": 329,
     "name": "Tisu Paseo Basah",
     "buy_price": 0,
     "sell_price": 11000,
@@ -963,7 +2961,7 @@
     "barcode": ""
   },
   {
-    "id": 108,
+    "id": 330,
     "name": "Tisu Paseo Besar",
     "buy_price": 0,
     "sell_price": 11000,
@@ -972,7 +2970,7 @@
     "barcode": ""
   },
   {
-    "id": 109,
+    "id": 331,
     "name": "Tisu Paseo Kecil",
     "buy_price": 0,
     "sell_price": 1000,
@@ -981,7 +2979,7 @@
     "barcode": ""
   },
   {
-    "id": 110,
+    "id": 332,
     "name": "Tisu Selection",
     "buy_price": 0,
     "sell_price": 6000,
@@ -990,7 +2988,61 @@
     "barcode": ""
   },
   {
-    "id": 111,
+    "id": 333,
+    "name": "Tolak angin",
+    "buy_price": 0,
+    "sell_price": 4000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 334,
+    "name": "Tolak angin anak",
+    "buy_price": 0,
+    "sell_price": 3000,
+    "stock": 0,
+    "category": "Obat",
+    "barcode": ""
+  },
+  {
+    "id": 335,
+    "name": "TOP Cappucino",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 336,
+    "name": "TOP Cappucino 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 337,
+    "name": "TOP Gula Aren",
+    "buy_price": 0,
+    "sell_price": 1500,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 338,
+    "name": "TOP Gula Aren 1 Renteng",
+    "buy_price": 0,
+    "sell_price": 18000,
+    "stock": 0,
+    "category": "Kopi",
+    "barcode": ""
+  },
+  {
+    "id": 339,
     "name": "UNION",
     "buy_price": 0,
     "sell_price": 26500,
