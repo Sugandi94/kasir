@@ -84,6 +84,7 @@ function toggleUserForm() {
     }
 }
 
+
 function toggleProductForm() {
     const formContainer = document.getElementById('product-form-container');
     const toggleBtn = document.getElementById('toggle-product-form-btn');
@@ -94,6 +95,103 @@ function toggleProductForm() {
         formContainer.style.display = 'none';
         toggleBtn.innerText = 'Tambah Produk';
     }
+}
+
+let pelangganCurrentPage = 1;
+let pelangganPageSize = 10;
+let pelangganAllData = [];
+let pelangganFilteredData = null;
+let editingPelangganId = null;
+
+function renderPelangganTable() {
+    let data = pelangganFilteredData || pelangganAllData;
+    let startIdx = (pelangganCurrentPage - 1) * pelangganPageSize;
+    let pageData = data.slice(startIdx, startIdx + pelangganPageSize);
+
+    let html = '';
+    pageData.forEach((pel, i) => {
+        html += `
+            <tr>
+                <td>${startIdx + i + 1}</td>
+                <td>${pel.name}</td>
+                <td style="text-align:center;">
+                    <button class="btn-small edit" title="Edit" onclick="editPelanggan('${pel.id}', '${pel.name}')">&#9998;</button>
+                    <button class="btn-small del" title="Hapus" onclick="deletePelanggan('${pel.id}')">&#128465;</button>
+                </td>
+            </tr>
+        `;
+    });
+    document.querySelector('#pelanggan-table tbody').innerHTML = html;
+}
+
+function renderPelangganPagination() {
+    let data = pelangganFilteredData || pelangganAllData;
+    let total = data.length;
+    let pageCount = Math.ceil(total / pelangganPageSize);
+
+    // Remove old pagination if exists
+    document.getElementById('pelanggan-pagination')?.remove();
+
+    if (pageCount <= 1) return;
+
+    let html = `
+    <div id="pelanggan-pagination" style="display:flex; justify-content:center; align-items:center; gap:5px; margin-top: 15px;">
+        <button onclick="loadPelangganPage(1)" ${pelangganCurrentPage === 1 ? "disabled" : ""}>&laquo;</button>
+        <button onclick="loadPelangganPage(${pelangganCurrentPage-1})" ${pelangganCurrentPage === 1 ? "disabled" : ""}><</button>
+    `;
+
+    // Show max 5 page buttons
+    let start = Math.max(1, pelangganCurrentPage - 2);
+    let end = Math.min(pageCount, start + 4);
+    if (end - start < 4) start = Math.max(1, end - 4);
+
+    for (let i = start; i <= end; i++) {
+        html += `<button onclick="loadPelangganPage(${i})" ${pelangganCurrentPage === i ? 'class="active"' : ""}>${i}</button>`;
+    }
+
+    html += `
+        <button onclick="loadPelangganPage(${pelangganCurrentPage+1})" ${pelangganCurrentPage === pageCount ? "disabled" : ""}>></button>
+        <button onclick="loadPelangganPage(${pageCount})" ${pelangganCurrentPage === pageCount ? "disabled" : ""}>&raquo;</button>
+    </div>`;
+
+    document.getElementById('pelanggan-list').insertAdjacentHTML('afterend', html);
+}
+
+function loadPelangganPage(page) {
+    pelangganCurrentPage = page;
+    renderPelangganTable();
+    renderPelangganPagination();
+}
+
+function editPelanggan(id, name) {
+    editingPelangganId = id;
+    document.getElementById('pelanggan-name').value = name;
+    document.getElementById('pelanggan-save-btn').innerText = 'Update';
+    document.getElementById('pelanggan-cancel-btn').style.display = '';
+}
+
+function cancelEditPelanggan() {
+    resetPelangganForm();
+}
+
+function resetPelangganForm() {
+    editingPelangganId = null;
+    document.getElementById('pelanggan-name').value = '';
+    document.getElementById('pelanggan-save-btn').innerText = 'Simpan';
+    document.getElementById('pelanggan-cancel-btn').style.display = 'none';
+}
+
+function deletePelanggan(id) {
+    if (!confirm('Hapus pelanggan ini?')) return;
+    fetch(`/api/customers/${id}`, { method: 'DELETE' })
+    .then(r => r.json())
+    .then(res => {
+        if (res.success) {
+            loadPelanggan();
+        } else {
+            alert(res.message || 'Gagal menghapus pelanggan.');
+        }
+    });
 }
 
 function showDashboard() {
@@ -312,6 +410,7 @@ function showPage(page) {
     if(page === 'user') loadUsers();
     if(page === 'produk') loadProducts();
     if(page === 'kategori') loadCategories();
+    if(page === 'pelanggan') loadPelanggan();
     if(page === 'daftar') loadTrxList(1);
     if(page === 'transaksi') {
         loadTrxProducts();
@@ -333,6 +432,7 @@ function logout() {
 function showMenuByRole() {
     document.getElementById('nav-user').style.display = currentUser.role === 'admin' ? '' : 'none';
     document.getElementById('nav-produk').style.display = currentUser.role === 'admin' ? '' : 'none';
+    document.getElementById('nav-pelanggan').style.display = currentUser.role === 'admin' ? '' : 'none';
 }
 
 function showPage(page) {
@@ -341,11 +441,80 @@ function showPage(page) {
     if(page === 'user') loadUsers();
     if(page === 'produk') loadProducts();
     if(page === 'kategori') loadCategories();
+    if(page === 'pelanggan') loadPelanggan();
     if(page === 'daftar') loadTrxList(1);
     if(page === 'transaksi') {
         loadTrxProducts();
         renderTrxItems(); // Untuk tabel keranjang transaksi
         loadLastTrxList(); // --- Tampilkan 5 transaksi terakhir di bawah form transaksi
+    }
+}
+
+function togglePelangganForm() {
+    const formContainer = document.getElementById('pelanggan-form-container');
+    const toggleBtn = document.getElementById('toggle-pelanggan-form-btn');
+    if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        toggleBtn.innerText = 'Sembunyikan Form';
+    } else {
+        formContainer.style.display = 'none';
+        toggleBtn.innerText = 'Tambah Pelanggan Baru';
+    }
+}
+
+function loadPelanggan() {
+    fetch('/api/customers')
+    .then(r => r.json())
+    .then(data => {
+        pelangganAllData = data;
+        renderPelangganTable();
+        renderPelangganPagination();
+    })
+    .catch(() => {
+        document.getElementById('pelanggan-list').innerHTML = '<div style="color:red;">Gagal memuat data pelanggan.</div>';
+    });
+}
+
+function savePelanggan() {
+    const name = document.getElementById('pelanggan-name').value.trim();
+    if (!name) {
+        document.getElementById('pelanggan-msg').innerText = 'Nama pelanggan wajib diisi!';
+        return;
+    }
+    if (editingPelangganId) {
+        fetch(`/api/customers/${editingPelangganId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(r => r.json())
+        .then(res => {
+            document.getElementById('pelanggan-msg').innerText = res.success ? 'Pelanggan berhasil diupdate' : (res.message || 'Gagal update');
+            if (res.success) {
+                resetPelangganForm();
+                loadPelanggan();
+            }
+        })
+        .catch(() => {
+            document.getElementById('pelanggan-msg').innerText = 'Error update data.';
+        });
+    } else {
+        fetch('/api/customers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(r => r.json())
+        .then(res => {
+            document.getElementById('pelanggan-msg').innerText = res.success ? 'Pelanggan berhasil ditambah' : (res.message || 'Gagal menambah pelanggan');
+            if (res.success) {
+                resetPelangganForm();
+                loadPelanggan();
+            }
+        })
+        .catch(() => {
+            document.getElementById('pelanggan-msg').innerText = 'Gagal menghubungi server.';
+        });
     }
 }
 
@@ -365,12 +534,14 @@ function loadLastTrxList() {
                     <th style="width:140px;">Tanggal</th>
                     <th>Produk</th>
                     <th style="width:100px;">Total</th>
+                    <th style="width:100px;">Uang Diterima</th>
+                    <th style="width:100px;">Kembalian</th>
                 </tr>
             </thead>
             <tbody>
         `;
         if(trx.length === 0) {
-            html += `<tr><td colspan="4" style="text-align:center;color:#888;">Belum ada transaksi</td></tr>`;
+            html += `<tr><td colspan="6" style="text-align:center;color:#888;">Belum ada transaksi</td></tr>`;
         } else {
             trx.forEach((t, i) => {
                 let items = t.items.map(it =>
@@ -389,6 +560,8 @@ function loadLastTrxList() {
                         <td>${(new Date(t.date)).toLocaleString('id-ID')}</td>
                         <td>${items}</td>
                         <td style="font-weight:bold;color:#38761d;">Rp${t.total.toLocaleString('id-ID')}</td>
+                        <td style="font-weight:bold;color:#38761d;">Rp${(t.amount_paid || 0).toLocaleString('id-ID')}</td>
+                        <td style="font-weight:bold;color:#38761d;">Rp${(t.change || 0).toLocaleString('id-ID')}</td>
                     </tr>
                 `;
             });
@@ -843,12 +1016,12 @@ function renderProductTable() {
             if (col.key === 'no') {
                 html += `<td>${productPaginationEnabled ? ((productCurrentPage - 1) * productPageSize + i + 1) : (i + 1)}</td>`;
             } else if (col.key === 'actions') {
-                html += `<td style="text-align:center;">
-                    <div class="product-row-actions">
-                        <button class="btn-small edit" title="Edit" onclick="editProduct('${row.id}', \`${row.name.replace(/`/g, '\\`')}\`, '${row.buy_price}', '${row.sell_price}', '${row.stock}', '${row.category || ''}')">&#9998;</button>
-                        <button class="btn-small del" title="Hapus" onclick="deleteProduct('${row.id}')">&#128465;</button>
-                    </div>
-                </td>`;
+html += `<td style="text-align:center;">
+    <div class="product-row-actions">
+        <button class="btn-small edit" title="Edit" onclick="editProduct('${row.id}', \`${row.name.replace(/`/g, '\\`')}\`, '${row.buy_price}', '${row.sell_price}', '${row.stock}', '${row.category || ''}', '${row.barcode || ''}')">&#9998;</button>
+        <button class="btn-small del" title="Hapus" onclick="deleteProduct('${row.id}')">&#128465;</button>
+    </div>
+</td>`;
             } else {
                 let cell = row[col.key];
                 if (col.format) {
@@ -1202,6 +1375,17 @@ function editProduct(id, name, buy_price, sell_price, stock, category = '', barc
     document.getElementById('product-form-title').innerText = 'Edit Produk';
     document.getElementById('product-save-btn').innerText = 'Update';
     document.getElementById('product-cancel-btn').style.display = '';
+
+    // Ensure the product form is visible when editing
+    const formContainer = document.getElementById('product-form-container');
+    const toggleBtn = document.getElementById('toggle-product-form-btn');
+    if (formContainer && (formContainer.style.display === 'none' || formContainer.style.display === '')) {
+        formContainer.style.display = 'block';
+        if (toggleBtn) {
+            toggleBtn.innerText = 'Sembunyikan Form';
+        }
+    }
+
     loadProducts(); // Reload product table after loading product to edit
 }
 
@@ -1211,6 +1395,7 @@ function resetProductForm() {
     document.getElementById('prodbuy').value = '';
     document.getElementById('prodsell').value = '';
     document.getElementById('prodstock').value = '';
+    document.getElementById('prodbarcode').value = ''; // Clear barcode input
     document.getElementById('prodcategory').value = '';
     document.getElementById('product-form-title').innerText = 'Tambah Produk';
     document.getElementById('product-save-btn').innerText = 'Tambah';
@@ -1448,6 +1633,56 @@ function createProductAutocomplete() {
     });
 }
 
+function setupCustomerAutocomplete() {
+    const input = document.getElementById('trx-customer-name');
+    const list = document.getElementById('trx-customer-name-list');
+    let customers = [];
+
+    // Load customers from API
+    fetch('/api/customers')
+        .then(r => r.json())
+        .then(data => {
+            customers = data;
+        })
+        .catch(() => {
+            customers = [];
+        });
+
+    input.addEventListener('input', () => {
+        const val = input.value.trim().toLowerCase();
+        list.innerHTML = '';
+        if (!val) {
+            list.style.display = 'none';
+            return;
+        }
+        const filtered = customers.filter(c => c.name.toLowerCase().includes(val));
+        if (filtered.length === 0) {
+            list.style.display = 'none';
+            return;
+        }
+        filtered.forEach(c => {
+            const item = document.createElement('div');
+            item.textContent = c.name;
+            item.style.padding = '6px';
+            item.style.cursor = 'pointer';
+            item.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Prevent losing focus
+                input.value = c.name;
+                list.style.display = 'none';
+            });
+            list.appendChild(item);
+        });
+        list.style.display = 'block';
+    });
+
+    // Hide list when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!input.contains(e.target) && !list.contains(e.target)) {
+            list.style.display = 'none';
+        }
+    });
+}
+
 // Transaksi
 function loadTrxProducts() {
     fetch('/api/products').then(r => r.json()).then(products => {
@@ -1538,6 +1773,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (priceInput) {
         priceInput.addEventListener('input', () => {
             userEditedPrice = true;
+        });
+    }
+
+    // Add event listener to amount-paid input to update change display on input
+    const amountPaidInput = document.getElementById('amount-paid');
+    if (amountPaidInput) {
+        amountPaidInput.addEventListener('input', () => {
+            calculateChange();
         });
     }
 });
@@ -1664,6 +1907,40 @@ function renderTrxItems() {
     `;
   });
   document.getElementById('trx-total').innerText = 'Rp' + total.toLocaleString('id-ID');
+
+  calculateChange(); // Panggil ini setelah total dihitung dan ditampilkan
+}
+
+// TAMBAHAN UNTUK UANG TRANSAKSI
+function calculateChange() {
+    const amountPaidInput = document.getElementById('amount-paid');
+    const changeDisplay = document.getElementById('change-display');
+    const totalAmountElement = document.getElementById('trx-total'); // Ganti ke 'trx-total'
+
+    const amountPaid = parseFloat(amountPaidInput.value) || 0;
+
+    // Ambil teks dari elemen 'trx-total' (contoh: "Rp1.500.000")
+    let totalAmountText = totalAmountElement.innerText;
+    // Hapus 'Rp' dan titik (.) sebagai pemisah ribuan
+    totalAmountText = totalAmountText.replace('Rp', '').replace(/\./g, '');
+    const totalAmount = parseFloat(totalAmountText) || 0;
+
+    // If cart is empty or total is 0, reset change to 0
+    if (trxItems.length === 0 || totalAmount === 0) {
+        changeDisplay.style.color = 'green';
+        changeDisplay.innerText = 'Rp0';
+        return;
+    }
+
+    let change = amountPaid - totalAmount;
+
+    if (change < 0) {
+        changeDisplay.style.color = 'red';
+        changeDisplay.innerText = 'Rp' + change.toLocaleString('id-ID');
+    } else {
+        changeDisplay.style.color = 'green';
+        changeDisplay.innerText = 'Rp' + change.toLocaleString('id-ID');
+    }
 }
 
 // Handler untuk update harga per item di transaksi (nama unik: trxEditPrice)
@@ -1697,16 +1974,29 @@ function submitTrx() {
         document.getElementById('trx-msg').innerText = 'Tidak ada item transaksi!';
         return;
     }
+    const amountPaidInput = document.getElementById('amount-paid');
+    const amountPaid = parseFloat(amountPaidInput.value) || 0;
+    const customerNameInput = document.getElementById('trx-customer-name');
+    const customerName = customerNameInput ? customerNameInput.value.trim() : '';
+
+    if (amountPaid <= 0) {
+        document.getElementById('trx-msg').innerText = 'Uang diterima harus diinput dan lebih besar dari 0!';
+        amountPaidInput.focus();
+        return;
+    }
+
     fetch('/api/transactions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+            customer_name: customerName,
             items: trxItems.map(i => ({
                 product_id: i.product_id,
                 qty: i.qty,
                 price: i.price, // harga yang sudah diedit user
                 subtotal: i.price * i.qty // subtotal per item
-            }))
+            })),
+            amount_paid: amountPaid // Kirim jumlah uang diterima ke backend
         })
     })
     .then(r => r.json()).then(res => {
@@ -1726,6 +2016,10 @@ function submitTrx() {
             trxItems = [];
             saveCartToStorage();
             renderTrxItems();
+            amountPaidInput.value = '';  // Clear amount paid input after success
+            if (customerNameInput) {
+                customerNameInput.value = ''; // Clear customer name input after success
+            }
             loadTrxList(1); // reload daftar transaksi ke halaman pertama
             loadProducts();
             loadTrxProducts();
@@ -1767,6 +2061,7 @@ function renderTrxTable() {
     const columns = [
         { key: 'no', label: 'No' },
         { key: 'date', label: 'Tanggal', format: (val) => (new Date(val)).toLocaleString('id-ID') },
+        { key: 'customer_name', label: 'Nama Pelanggan' },
         { key: 'items', label: 'Produk', format: (val) => {
             return val.map(it => `
                 <table style="width:100%; border-collapse: collapse; font-size: 13px; margin-bottom: 4px;">
@@ -1780,6 +2075,8 @@ function renderTrxTable() {
             `).join('');
         }},
         { key: 'total', label: 'Total', format: (val) => `Rp${val.toLocaleString('id-ID')}` },
+        { key: 'amount_paid', label: 'Uang Diterima', format: (val) => `Rp${(val || 0).toLocaleString('id-ID')}` },
+        { key: 'change', label: 'Kembalian', format: (val) => `Rp${(val || 0).toLocaleString('id-ID')}` },
         { key: 'actions', label: 'Aksi', style: 'text-align:center;' }
     ];
 
@@ -1867,10 +2164,88 @@ function loadTrxList(page = 1) {
 // ... (kode lain tetap sama)
 
 function printTransaction(trxId) {
-  // Cari transaksi berdasarkan id dari semua data transaksi yang sudah di-load
-  const trx = trxAllData.find(t => String(t.id) === String(trxId));
-  if (!trx) return alert('Transaksi tidak ditemukan!');
-  // ... existing printTransaction code ...
+    const trx = trxAllData.find(t => String(t.id) === String(trxId));
+    if (!trx) return alert('Transaksi tidak ditemukan!');
+
+    function toProperCase(str) {
+        return str.replace(/\w\S*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
+    let html = `
+    <html>
+    <head>
+      <title>Print Transaksi #${trx.id}</title>
+      <style>
+        body { font-family: Arial, sans-serif; margin:24px; color:#222; }
+        .struk-container { max-width: 380px; margin: 0 auto; }
+        h2 { text-align: center; margin-bottom: 16px; }
+        .info { margin-bottom: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+        th, td { padding: 5px 8px; border: 1px solid #ccc; font-size: 14px; }
+        th { background: #f4f4f4; }
+        .right { text-align: right; }
+        tfoot th { background: #fff; font-size: 16px; }
+        .footer { text-align: center; font-size: 13px; margin-top: 20px; color: #555; }
+        @media print {
+          button { display: none; }
+          body { margin: 0; }
+        }
+      </style>
+    </head>
+    <body>
+    <div class="struk-container">
+      <h2>Struk Transaksi</h2>
+      <div class="info">
+        <b>ID:</b> ${trx.id}<br>
+        <b>Nama Pelanggan:</b> ${trx.customer_name || '-'}<br>
+        <b>Tanggal:</b> ${(new Date(trx.date)).toLocaleString('id-ID')}<br>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Produk</th>
+            <th>Qty</th>
+            <th>Harga</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+    trx.items.forEach(it => {
+        html += `<tr>
+      <td>${toProperCase(it.name)}</td>
+      <td class="right">${it.qty}</td>
+      <td class="right">Rp${it.price.toLocaleString('id-ID')}</td>
+      <td class="right">Rp${(it.subtotal || it.qty * it.price).toLocaleString('id-ID')}</td>
+    </tr>`;
+    });
+    html += `
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" class="right">Total</th>
+            <th class="right">Rp${trx.total.toLocaleString('id-ID')}</th>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="info" style="margin-top: 12px;">
+        <b>Jumlah Uang Diterima:</b> Rp${(trx.amount_paid || 0).toLocaleString('id-ID')}<br>
+        <b>Kembalian:</b> Rp${(trx.change || 0).toLocaleString('id-ID')}
+      </div>
+      <button onclick="window.print()">Print</button>
+      <div class="footer">
+        Terima kasih telah berbelanja!<br>
+        <span style="font-size:12px;">POS Kasirku &copy; 2025</span>
+      </div>
+    </div>
+    </body>
+    </html>
+  `;
+    let win = window.open('', '_blank', 'width=400,height=600');
+    win.document.write(html);
+    win.document.close();
 }
 
 // New function to load transaction items back to cart for editing
@@ -1897,6 +2272,11 @@ function loadTransactionToCart(trxId) {
     });
     saveCartToStorage();
     renderTrxItems();
+    // Set customer name input value when loading transaction for editing
+    const customerNameInput = document.getElementById('trx-customer-name');
+    if (customerNameInput) {
+        customerNameInput.value = trx.customer_name || '';
+    }
     showPage('transaksi');
 }
 
@@ -1937,7 +2317,8 @@ function printTransaction(trxId) {
       <h2>Struk Transaksi</h2>
       <div class="info">
         <b>ID:</b> ${trx.id}<br>
-        <b>Tanggal:</b> ${(new Date(trx.date)).toLocaleString('id-ID')}
+        <b>Nama Pelanggan:</b> ${trx.customer_name || '-'}<br>
+        <b>Tanggal:</b> ${(new Date(trx.date)).toLocaleString('id-ID')}<br>
       </div>
       <table>
         <thead>
@@ -1967,6 +2348,10 @@ function printTransaction(trxId) {
           </tr>
         </tfoot>
       </table>
+      <div class="info" style="margin-top: 12px;">
+        <b>Jumlah Uang Diterima:</b> Rp${(trx.amount_paid || 0).toLocaleString('id-ID')}<br>
+        <b>Kembalian:</b> Rp${(trx.change || 0).toLocaleString('id-ID')}
+      </div>
       <button onclick="window.print()">Print</button>
       <div class="footer">
         Terima kasih telah berbelanja!<br>
@@ -2021,6 +2406,9 @@ window.onload = function() {
     const session = loadSession();
     if (session && session.username && session.role) {
         currentUser = session;
+
+        setupCustomerAutocomplete();
+
         showDashboard();
         // Load cart from localStorage and render
         trxItems = loadCartFromStorage();
