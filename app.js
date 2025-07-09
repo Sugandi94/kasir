@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -189,34 +189,41 @@ app.get('/api/transactions', (req, res) => {
 });
 
 // Tambah transaksi (LOGIKA BARU: harga edit atau database)
+// Tambah transaksi (LOGIKA BARU: harga edit atau database)
 app.post('/api/transactions', (req, res) => {
     let products = readDB('./db/products.json');
     let transactions = [];
     try {
         transactions = readDB('./db/transactions.json');
-    } catch (e) {}
+    } catch (e) {
+        // Jika file belum ada, inisialisasi dengan array kosong
+        transactions = [];
+    }
 
-    const { items } = req.body;
+    // --- BARU: Ambil total dan amount_paid dari body request ---
+    const { customer_name, items, total, amount_paid } = req.body; // Sekarang menerima customer_name juga
+    // --- AKHIR BARU ---
+
     if (!Array.isArray(items) || items.length === 0) {
         return res.json({ success: false, message: 'Item transaksi tidak boleh kosong.' });
     }
 
     // Validasi stok & hitung total
-    let total = 0;
+    // Catatan: Karena Anda mengirim 'total' dari frontend,
+    // Anda bisa memilih untuk menggunakan total dari frontend atau menghitung ulang di backend.
+    // Menghitung ulang di backend lebih aman untuk integritas data.
+    let calculatedTotal = 0; // Menggunakan nama berbeda agar tidak bentrok dengan 'total' dari req.body
     let detail = [];
     for (let item of items) {
         const prod = products.find(p => String(p.id) === String(item.product_id));
         if (!prod) return res.json({ success: false, message: `Produk dengan id ${item.product_id} tidak ditemukan.` });
-        // Hapus validasi stok agar transaksi tetap bisa disimpan walau stok kurang
-        // if (prod.stock < item.qty) return res.json({ success: false, message: `Stok produk ${prod.name} kurang.` });
 
-        // LOGIKA: Pakai harga keranjang jika berbeda dari database, jika tidak pakai harga database
         let finalPrice = parseInt(prod.sell_price);
         if (item.price !== undefined && parseInt(item.price) !== parseInt(prod.sell_price)) {
             finalPrice = parseInt(item.price);
         }
         const subtotal = finalPrice * item.qty;
-        total += subtotal;
+        calculatedTotal += subtotal; // Hitung total di backend
         detail.push({
             product_id: item.product_id,
             name: prod.name,
@@ -224,27 +231,105 @@ app.post('/api/transactions', (req, res) => {
             price: finalPrice,
             subtotal
         });
-    }
 
-    // Update stok
-    for (let item of items) {
-        const prod = products.find(p => String(p.id) === String(item.product_id));
+        // Kurangi stok produk
         prod.stock -= item.qty;
     }
+
+    // --- BARU: Tambahkan validasi jika total dari frontend tidak sesuai dengan perhitungan backend (opsional) ---
+    if (Math.abs(calculatedTotal - total) > 0.01) { // Toleransi kecil untuk floating point
+        console.warn(`Peringatan: Total dari frontend (${total}) tidak cocok dengan perhitungan backend (${calculatedTotal}). Menggunakan perhitungan backend.`);
+        // return res.json({ success: false, message: 'Total transaksi tidak valid.' }); // Bisa diaktifkan jika ingin strict
+    }
+    // --- AKHIR BARU ---
+
+    // Buat objek transaksi baru
+    const newTransaction = {
+        id: Date.now(), // ID unik berdasarkan timestamp
+        date: new Date().toISOString(),
+        customer_name: customer_name || '', // Simpan nama pelanggan
+        total: calculatedTotal, // Gunakan total yang dihitung di backend
+        amount_paid: amount_paid, // --- BARU: Simpan uang yang diterima ---
+        change: amount_paid - calculatedTotal, // --- BARU: Hitung dan simpan kembalian ---
+        items: detail
+    };
+
+    transactions.push(newTransaction);
+    writeDB('./db/transactions.json', transactions); // Simpan kembali ke file JSON
+
+    // Perbarui stok produk di products.json
     writeDB('./db/products.json', products);
 
-    // Simpan transaksi
-    const newId = transactions.length > 0 ? Math.max(...transactions.map(t=>t.id)) + 1 : 1;
-    const trx = {
-        id: newId,
-        date: new Date().toISOString(),
-        items: detail,
-        total
-    };
-    transactions.push(trx);
-    writeDB('./db/transactions.json', transactions);
-    res.json({ success: true, transaction: trx });
+    res.json({ success: true, message: 'Transaksi berhasil disimpan!', transaction: newTransaction });
 });
+
+// Anda juga perlu memastikan ada fungsi writeDB yang menyimpan data ke file JSON
+function writeDB(filePath, data) {
+    const fs = require('fs'); // Pastikan Anda mengimpor 'fs' jika ini adalah file server Node.js
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+}
+
+// Dan fungsi readDB
+function readDB(filePath) {
+    const fs = require('fs'); // Pastikan Anda mengimpor 'fs'
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+// app.post('/api/transactions', (req, res) => {
+//     let products = readDB('./db/products.json');
+//     let transactions = [];
+//     try {
+//         transactions = readDB('./db/transactions.json');
+//     } catch (e) {}
+
+//     const { items } = req.body;
+//     if (!Array.isArray(items) || items.length === 0) {
+//         return res.json({ success: false, message: 'Item transaksi tidak boleh kosong.' });
+//     }
+
+//     // Validasi stok & hitung total
+//     let total = 0;
+//     let detail = [];
+//     for (let item of items) {
+//         const prod = products.find(p => String(p.id) === String(item.product_id));
+//         if (!prod) return res.json({ success: false, message: `Produk dengan id ${item.product_id} tidak ditemukan.` });
+//         // Hapus validasi stok agar transaksi tetap bisa disimpan walau stok kurang
+//         // if (prod.stock < item.qty) return res.json({ success: false, message: `Stok produk ${prod.name} kurang.` });
+
+//         // LOGIKA: Pakai harga keranjang jika berbeda dari database, jika tidak pakai harga database
+//         let finalPrice = parseInt(prod.sell_price);
+//         if (item.price !== undefined && parseInt(item.price) !== parseInt(prod.sell_price)) {
+//             finalPrice = parseInt(item.price);
+//         }
+//         const subtotal = finalPrice * item.qty;
+//         total += subtotal;
+//         detail.push({
+//             product_id: item.product_id,
+//             name: prod.name,
+//             qty: item.qty,
+//             price: finalPrice,
+//             subtotal
+//         });
+//     }
+
+//     // Update stok
+//     for (let item of items) {
+//         const prod = products.find(p => String(p.id) === String(item.product_id));
+//         prod.stock -= item.qty;
+//     }
+//     writeDB('./db/products.json', products);
+
+//     // Simpan transaksi
+//     const newId = transactions.length > 0 ? Math.max(...transactions.map(t=>t.id)) + 1 : 1;
+//     const trx = {
+//         id: newId,
+//         date: new Date().toISOString(),
+//         items: detail,
+//         total
+//     };
+//     transactions.push(trx);
+//     writeDB('./db/transactions.json', transactions);
+//     res.json({ success: true, transaction: trx });
+// });
 
 // Hapus satu transaksi
 app.delete('/api/transactions/:id', (req, res) => {
@@ -374,9 +459,106 @@ app.delete('/api/categories/:id', (req, res) => {
     }
 });
 
+// Pelanggan API
+
+// Ambil semua pelanggan
+app.get('/api/customers', (req, res) => {
+    let customers = [];
+    try {
+        customers = readDB('./db/customers.json');
+    } catch (e) {}
+    res.json(customers);
+});
+
+// Tambah pelanggan
+app.post('/api/customers', (req, res) => {
+    let customers = [];
+    try {
+        customers = readDB('./db/customers.json');
+    } catch (e) {}
+
+    const { name } = req.body;
+    if (typeof name !== 'string' || name.trim() === '') {
+        return res.json({ success: false, message: 'Nama pelanggan wajib diisi.' });
+    }
+
+    let newId = 1;
+    if (customers.length > 0) {
+        newId = Math.max(...customers.map(c => Number(c.id))) + 1;
+    }
+
+    const newCustomer = {
+        id: newId,
+        name: name.trim()
+    };
+
+    customers.push(newCustomer);
+
+    try {
+        writeDB('./db/customers.json', customers);
+        res.json({ success: true, customer: newCustomer });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menyimpan pelanggan.' });
+    }
+});
+
+// Update pelanggan
+app.put('/api/customers/:id', (req, res) => {
+    let customers = [];
+    try {
+        customers = readDB('./db/customers.json');
+    } catch (e) {
+        return res.status(500).json({ success: false, message: 'Gagal membaca database pelanggan.' });
+    }
+
+    const idx = customers.findIndex(c => String(c.id) === String(req.params.id));
+    if (idx === -1) {
+        return res.json({ success: false, message: 'Pelanggan tidak ditemukan' });
+    }
+
+    const { name } = req.body;
+    if (typeof name !== 'string' || name.trim() === '') {
+        return res.json({ success: false, message: 'Nama pelanggan wajib diisi.' });
+    }
+
+    customers[idx].name = name.trim();
+
+    try {
+        writeDB('./db/customers.json', customers);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menyimpan perubahan pelanggan.' });
+    }
+});
+
+// Hapus pelanggan
+app.delete('/api/customers/:id', (req, res) => {
+    let customers = [];
+    try {
+        customers = readDB('./db/customers.json');
+    } catch (e) {
+        return res.status(500).json({ success: false, message: 'Gagal membaca database pelanggan.' });
+    }
+    const index = customers.findIndex(c => String(c.id) === String(req.params.id));
+    if (index === -1) {
+        return res.json({ success: false, message: 'Pelanggan tidak ditemukan' });
+    }
+    customers.splice(index, 1);
+    try {
+        writeDB('./db/customers.json', customers);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(500).json({ success: false, message: 'Gagal menghapus pelanggan.' });
+    }
+});
+
 // Serve frontend
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+app.get('/barcode-scanner.html', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../public/barcode-scanner.html'));
 });
 
 app.listen(PORT, () => {
