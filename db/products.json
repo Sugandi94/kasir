@@ -4,9 +4,9 @@
     "name": "153",
     "buy_price": 0,
     "sell_price": 15000,
-    "stock": -18,
+    "stock": -5,
     "category": "Rokok",
-    "barcode": ""
+    "barcode": "100"
   },
   {
     "id": 2,
